@@ -3,24 +3,42 @@
 }
 
 .header-navbar {
-  height: 34px;
-  background-color: $brand-success;
+  // height: 34px;
+  height: 60px;
+  // background-color: $brand-success;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .header-navbar .navbar-inner {
-  height: 34px;
-  line-height: 34px;
-  font-size: 14px;
-  color: #ffffff;
-  background-color: $brand-success;
+  width: 1170px;
+  margin: 0 auto;
+  height: 60px;
+  line-height: 60px;
+  // color: #333;
+  // background-color: $brand-success;
+  background-color: #ffffff;
 
-  a { color: #ffffff; }
+  a { color: #333; }
 }
 
 .navbar-inner {
   .main-nav {
-    padding-left: 20px;
     float: left;
+  }
+
+  .nav-logo {
+    float: left;
+    margin-right: 20px;
+
+    a {
+      display: inline-block;
+      padding-top: 12px;
+    }
+
+    img {
+      height: 30px;
+    }
   }
 
   .sub-nav {
@@ -29,22 +47,35 @@
 
   .nav-list {
     display: block;
+    font-size: 15px;
   }
 }
 
 .nav-list li {
   list-style: none;
-  font-size: 13px;
   font-weight: 500;
-  margin-right: 20px;
+  // margin-right: 20px;
   white-space: nowrap;
+
   a {
+    display: inline-block;
+    text-align: center;
     color: #fff;
 
     &:hover {
       color: darken($brand-success, 20%);
     }
   }
+}
+
+.main-nav .nav-list li a {
+  // width: 50px;
+  padding: 0 15px;
+}
+
+.main-nav .nav-list li.active a {
+  color: #000;
+  border-bottom: 2px solid $brand-success;
 }
 
 li.more-node {
@@ -82,7 +113,7 @@ li.more-node {
 
 .sub-nav .nav-list li {
   padding-left: 20px;
-  border-left: 1px solid darken($brand-success, 10%);
+  // border-left: 1px solid darken($brand-success, 10%);
 }
 
 .header-breadcrumb {

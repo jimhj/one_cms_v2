@@ -2,15 +2,15 @@
 = stylesheet_link_tag 'tt/views/index'
 
 .main.clearfix
-  = render 'site/share/node_bar'
+  / = render 'site/share/node_bar'
 
   .f-left.index-main
-    .carousel-focus.slideBox style="width:600px;height:300px;"
+    .carousel-focus.slideBox style="width:780px;height:300px;"
       ul.items
         - @focus.each_with_index do |a, ind|
           li
             a href="#{article_path(a)}" title="#{a.title}"
-              = image_tag a.thumb.url(:large), size: '660x300', alt: a.title, title: a.title
+              = image_tag a.thumb.url(:large), size: '780x300', alt: a.title, title: a.title
     .articles-section.m-top10
       = render partial: 'site/application/index_article', collection: @articles, as: :article
       .loading-box

@@ -5,17 +5,13 @@
   - SiteAd.rightsidemiddle.actived.each do |ad|
     .r-side-ad.index-right-ad= raw ad.value
 
-  .hot-news.news-list
+  .text-list.news-list
     .list-head 24小时热文
     ul.news-content
-      - Article.photo_news.order('id DESC').limit(100).sample(4).each do |article|
+      - Article.photo_news.order('id DESC').limit(10).each do |article|
         - picture_url = article.pictures.first
         li
-          a.clearfix href="#{article_path(article)}"
-            .news-pic
-              img src="#{picture_url}" width=60 height=60 alt="#{article.title}"
-            .news-inner
-              p.news-title= article.title
+          a href="#{article_path(article)}"= article.title
 
   .hot-pics.news-list
     .list-head 精彩图文

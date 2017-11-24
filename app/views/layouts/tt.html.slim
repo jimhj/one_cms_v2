@@ -20,21 +20,24 @@ html
     .header
       .header-navbar
         .navbar-inner.clearfix
+          .nav-logo
+            a href="#{root_path}"= image_tag 'site/n_logo.png'
+
           .main-nav
-            - if action_name == 'index'
-              a href="#{root_url}" title="网站首页"
-                span= "#{SiteConfig.actived.site_name} · #{SiteConfig.actived.site_slogan}"
-            - else
-              ul.nav-list.clearfix
-                - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
-                  li.f-left
-                    a href="#{articles_path(node.slug)}"= node.short_name
-                li.f-left.more-node
-                  a href="javascript:;" 更多 >
-                  ul.h-dropdown.clearfix
-                    - Node.roots.where(is_nav: false).order('sortrank DESC').each_with_index do |node, i|
-                      li.dropdown-item
-                        a href="#{articles_path(node.slug)}"= node.short_name
+            / - if action_name == 'index'
+            /   a href="#{root_url}" title="网站首页"
+            /     span= "#{SiteConfig.actived.site_name} · #{SiteConfig.actived.site_slogan}"
+            / - else
+
+            ul.nav-list.clearfix
+              li.f-left class=('active' if params[:slug].blank?)
+                a href="#{root_path}" 首页
+
+              - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
+                - klass = 'f-left'
+                - klass << ' active' if params[:slug] == node.slug
+                li class=(klass)
+                  a href="#{articles_path(node.slug)}"= node.short_name
                                            
           .sub-nav
             ul.nav-list.clearfix
@@ -42,8 +45,8 @@ html
                 a href="#{channels_path}" title="热门专题" 专题
               li.f-left
                 a href="#{tags_path}" title="热门标签" 标签
-              li.f-left
-                a href="#{feed_path(format: 'xml')}" title="feed" RSS
+              / li.f-left
+              /   a href="#{feed_path(format: 'xml')}" title="feed" RSS
     = yield
 
     / script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=#{Setting.changyan.id}"

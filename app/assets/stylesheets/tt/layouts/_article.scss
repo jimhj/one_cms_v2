@@ -1,5 +1,5 @@
 .article-box {
-  width: 660px;
+  width: 780px;
 }
 
 .article-box .article-inner {
@@ -81,36 +81,34 @@
   }
 }
 
-.r-main-box {
+.recd-box {
   margin-top: 30px;
 
-  .cut-line {
-    height: 4px;
-    background-color: #3f404c;
-  }
-
-  h2 {
-    text-align: center;
+  h2 { 
+    border-bottom: 1px solid #f0f0f0; 
+    .h-tab {
+      color: #333333;
+      padding-bottom: 15px;
+      border-bottom: 2px solid $brand-success;
+    }
   }
 }
 
 .article-right {
-  width: 300px;
+  width: 340px;
   min-height: 800px;  
 }
 
 .nodes {
-  height: 40px;
-  width: 660px;
+  width: 780px;
   z-index: 50;
-  margin-bottom: 16px;  
 }
 
 .nodes ul.node-list {
   width: 100%;
   background: #fff;
-  height: 38px;
-  border-bottom: 2px solid #f2f2f2; 
+  height: 30px;
+  border-bottom: 1px solid #f0f0f0; 
   position: relative;
 
   & > li {
@@ -120,11 +118,10 @@
     float: left;
 
     a { 
-      line-height: 38px;
-      font-size: 16px;
+      line-height: 30px;
+      font-size: 12px;
       display: inline-block;
       color: #444;
-      border-bottom: 2px solid #f2f2f2; 
     }
     
     &.active a {

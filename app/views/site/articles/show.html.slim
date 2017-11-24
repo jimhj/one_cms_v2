@@ -1,90 +1,68 @@
-.header-breadcrumb
-  .b-inner.clearfix
-    .f-left.logo-box.detail-logo
-      a.logo href="#{root_path}"
-        = image_tag SiteConfig.actived.logo.url
-    .f-left.b-links
-      a href="#{root_path}" 首页
-      = " / "
-      - @nodes.each do |node|
-        a href="#{articles_path(node.slug)}" title="#{node.name}"= node.name
-        = " / "
-      span 正文
-    .f-right
-      = form_tag url_for, method: 'GET' do
-        .search-form.article-page
-          .input-box.clearfix
-            .f-left
-              input name="keyword" type="search" placeholder="输入关键字"
-            .f-right.search-btn
-              button type="submit"
-                i.icon.icon-search
+/ .header-breadcrumb
+/   .b-inner.clearfix
+/     .f-left.logo-box.detail-logo
+/       a.logo href="#{root_path}"
+/         = image_tag SiteConfig.actived.logo.url
+/     .f-left.b-links
+/       a href="#{root_path}" 首页
+/       = " / "
+/       - @nodes.each do |node|
+/         a href="#{articles_path(node.slug)}" title="#{node.name}"= node.name
+/         = " / "
+/       span 正文
+/     .f-right
+/       = form_tag url_for, method: 'GET' do
+/         .search-form.article-page
+/           .input-box.clearfix
+/             .f-left
+/               input name="keyword" type="search" placeholder="输入关键字"
+/             .f-right.search-btn
+/               button type="submit"
+/                 i.icon.icon-search
 
 .main.article-main
-  .f-left.a-main
-    .a-main-box.clearfix
-      .f-left.share-bar
-        .s-inner
-          a.s-comment
-            i.s-ico.comment
-            span.cy_cmt_count id="sourceId::#{@article.id}" 0 
+  .f-left.a-main.article-box
+    .article-inner
+      h1= @article.title
+      .a-info
+        span.tag.tag-gray= @article.node.name
+        span= @article.source
+        span= @article.created_at.strftime('%F %T')
+      .a-content
+        - SiteAd.leftsidearticletop.actived.each do |ad|
+          .a-content-ad
+            = raw ad.value
+        = article_format @article.body_html
 
-          .s-hr
+        - if HotArticle.hot.any?
+          ul.hot-list.m-top20
+            - HotArticle.hot.each do |a|
+              li
+                a href="#{a.link}"= a.title
 
-          a.s-box
-            i.s-ico.weibo
-            span.text 微博
+        - SiteAd.leftsidearticlebottom.actived.each do |ad|
+          .a-content-ad.m-top20
+            = raw ad.value
 
-          a.s-box
-            i.s-ico.weixin
-            span.text 微信
+      .a-action
+        span.tags
+        ul.tag-list
+          - @article.tags.each do |tag|
+            li
+              a href="#{tag_path(tag.slug)}"= tag.name
 
-          a.s-box
-            i.s-ico.qzone
-            span.text Qzone
-      .f-left.article-box
-        .article-inner
-          h1= @article.title
-          .a-info
-            span.tag.tag-gray= @article.node.name
-            span= @article.source
-            span= @article.created_at.strftime('%F %T')
-          .a-content
-            - SiteAd.leftsidearticletop.actived.each do |ad|
-              .a-content-ad
-                = raw ad.value
-            = article_format @article.body_html
+    .recd-box.clearfix
+      / .f-left.node-sidebar-box
+      /   .node-sidebar.clearfix
+      /     h2 相关推荐
 
-            - if HotArticle.hot.any?
-              ul.hot-list.m-top20
-                - HotArticle.hot.each do |a|
-                  li
-                    a href="#{a.link}"= a.title
-
-            - SiteAd.leftsidearticlebottom.actived.each do |ad|
-              .a-content-ad.m-top20
-                = raw ad.value
-          .a-action
-            span.tags
-            ul.tag-list
-              - @article.tags.each do |tag|
-                li
-                  a href="#{tag_path(tag.slug)}"= tag.name
-
-        / .comment-box#commentBox
-        /   = render 'site/share/changyan'
-
-    .r-main-box.clearfix
-      .f-left.node-sidebar-box
-        .node-sidebar.clearfix
-          h2 相关推荐
-
-          ul.sidebar-list
-            - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
-              li class=('active' if i.zero?)
-                a title="#{node.name}" href="#{articles_path(node.slug)}"= node.short_name
-
-      .f-left.articles-section
+      /     ul.sidebar-list
+      /       - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
+      /         li class=('active' if i.zero?)
+      /           a title="#{node.name}" href="#{articles_path(node.slug)}"= node.short_name
+      h2.clearfix 
+        .h-tab.f-left 相关推荐
+      .articles-section
         - SiteAd.leftsidemiddle.actived.each do |ad|
           .a-content-ad
             = raw ad.value
@@ -120,8 +98,3 @@
     - SiteAd.rightsidebottom.actived.each do |ad|
       .r-side-ad.ad-fixed
         .r-side-ad-inner= raw ad.value
-
-javascript:
-  $(function () {
-    $(".share-bar").stick_in_parent({parent: '.a-main-box', offset_top: 16});
-  });
