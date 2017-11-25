@@ -34,7 +34,7 @@
               img src="#{picture_url}" width=144 height=84 alt="#{article.title}"
             p= article.title
 
-- if @links.any?
+- if @links.present? && @links.any?
   .friend-links.news-list
     .list-head 友情链接
     ul.news-content.clearfix
