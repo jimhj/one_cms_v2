@@ -2,7 +2,7 @@
 .news-list {
   width: 100%;
   border-top: 2px solid $brand-success;
-  background-color: #f9f9f9;
+  background-color: #fbfbfb;
   margin-bottom: 16px;
 }
 
@@ -142,6 +142,7 @@
       content: '';
       width: 4px;
       height: 4px;
+      border-radius: 2px;
       background: #999;
       left: 0;
       top: 10px;
