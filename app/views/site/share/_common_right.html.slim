@@ -1,8 +1,8 @@
-  - SiteAd.rightsidetop.actived.each do |ad|
-    .r-side-ad.index-right-ad= raw ad.value
+- SiteAd.rightsidetop.actived.each do |ad|
+  .r-side-ad.index-right-ad= raw ad.value
 
-  - SiteAd.rightsidemiddle.actived.each do |ad|
-    .r-side-ad.index-right-ad= raw ad.value
+- SiteAd.rightsidemiddle.actived.each do |ad|
+  .r-side-ad.index-right-ad= raw ad.value
 
 - cache([Node.order('id DESC').first, 'index-r-n']) do
   - if @node.present? && action_name == 'index'
