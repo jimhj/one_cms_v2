@@ -9,7 +9,7 @@
     .nodes
       ul.node-list.clearfix
         - nodes = (@node.children.presence || @node.parent.try(:children) || [@node])
-        - main_nodes = nodes.first(6)
+        - main_nodes = nodes.first(10)
         - main_nodes.each_with_index do |node, i|
           - klass = []
           - klass << 'active' if node.slug == params[:slug]
@@ -19,7 +19,7 @@
         - more_nodes = nodes - main_nodes
         - if more_nodes.any?
           li.dropdown
-            a href="javascript:;" 更多
+            a.dropdown-toggle href="javascript:;" 更多
             ul.node-dropdown
               - more_nodes.each do |node|
                 li

@@ -139,6 +139,14 @@
       z-index: 999;
     }
 
+    &.dropdown .dropdown-toggle {
+      text-align: right;
+    }
+
+    &.dropdown.open .dropdown-toggle {
+      text-align: center;
+    }
+
     &.dropdown a {
       width: 120px;
       text-align: center;
