@@ -4,16 +4,15 @@
 - SiteAd.rightsidemiddle.actived.each do |ad|
   .r-side-ad.index-right-ad= raw ad.value
 
-- cache([Node.order('id DESC').first, 'index-r-n']) do
-  - if @node.present? && action_name == 'index'
-    .text-list.news-list
-      .list-head= @node.name
-      - unless @node.seo_description.blank?
-        .list-desc= @node.seo_description
-      ul.news-content
-        - @node.articles.last(5).each do |article|
-          li
-            a href="#{article_path(article)}"= article.title
+- if @node.present? && action_name == 'index'
+  .text-list.news-list
+    .list-head= @node.name
+    - unless @node.seo_description.blank?
+      .list-desc= @node.seo_description
+    ul.news-content
+      - @node.articles.last(5).each do |article|
+        li
+          a href="#{article_path(article)}"= article.title
 
 - cache([Article.order('id DESC').first, 'index-r']) do
   .text-list.news-list
