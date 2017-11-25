@@ -8,10 +8,9 @@ $(document).ready ->
   $(".header").stick_in_parent(parent: 'body').on "sticky_kit:stick", (e) ->
     $(e.target).addClass('active')
   .on "sticky_kit:unstick", (e) ->
-    console.log 222
     $(e.target).removeClass('active')
 
-  $('.ad-fixed').stick_in_parent(parent: 'html', offset_top: 16)
+  # $('.ad-fixed').stick_in_parent(parent: 'html', offset_top: 16)
 
   # $('.more-node').mouseenter ->
   #   $('.h-dropdown').show()
