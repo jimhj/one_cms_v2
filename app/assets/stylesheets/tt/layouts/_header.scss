@@ -1,10 +1,11 @@
 .header {
   width: 100%;
+  z-index: 9999;
 }
 
 .header-navbar {
   // height: 34px;
-  height: 60px;
+  // height: 60px;
   // background-color: $brand-success;
   background-color: #ffffff;
   border-bottom: 1px solid #f0f0f0;
@@ -18,15 +19,13 @@
   // color: #333;
   // background-color: $brand-success;
   background-color: #ffffff;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
 
   a { color: #333; }
 }
 
 .navbar-inner {
-  .main-nav {
-    float: left;
-  }
-
   .nav-logo {
     float: left;
     margin-right: 20px;
@@ -36,18 +35,32 @@
       padding-top: 12px;
     }
 
-    img {
-      height: 30px;
-    }
+    img { height: 30px; }
   }
 
-  .sub-nav {
-    float: right;
-  }
+  .main-nav { float: left; }
+
+  .sub-nav { float: right; }
 
   .nav-list {
     display: block;
     font-size: 15px;
+  }
+}
+
+.header.active {
+  .navbar-inner {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .navbar-inner .nav-list {
+    font-size: 14px;
+  }
+
+  .navbar-inner .nav-logo {
+    a { padding-top: 7px; }
+    img { height: 20px; }
   }
 }
 
