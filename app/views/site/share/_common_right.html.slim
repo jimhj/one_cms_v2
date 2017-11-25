@@ -1,10 +1,10 @@
-- cache([Article.hot.first, Article.photo_news.first, 'index-r']) do
   - SiteAd.rightsidetop.actived.each do |ad|
     .r-side-ad.index-right-ad= raw ad.value
 
   - SiteAd.rightsidemiddle.actived.each do |ad|
     .r-side-ad.index-right-ad= raw ad.value
 
+- cache([Node.order('id DESC').first, 'index-r-n']) do
   - if @node.present? && action_name == 'index'
     .text-list.news-list
       .list-head= @node.name
@@ -15,6 +15,7 @@
           li
             a href="#{article_path(article)}"= article.title
 
+- cache([Article.order('id DESC').first, 'index-r']) do
   .text-list.news-list
     .list-head 24小时热文
     ul.news-content
