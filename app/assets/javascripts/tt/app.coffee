@@ -5,7 +5,7 @@
 $(document).ready ->
   # $('.node-sidebar').sticky({ topSpacing: 16 })
   # $('.ad-fixed').sticky({ topSpacing: 16 })
-  $(".header").stick_in_parent(parent: 'body').on "sticky_kit:stick", (e) ->
+  $(".header").stick_in_parent(parent: 'html').on "sticky_kit:stick", (e) ->
     $(e.target).addClass('active')
   .on "sticky_kit:unstick", (e) ->
     $(e.target).removeClass('active')
