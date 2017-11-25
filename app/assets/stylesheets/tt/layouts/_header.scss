@@ -95,44 +95,7 @@
   border-bottom: 2px solid $brand-success;
 }
 
-li.more-node {
-  position: relative;
-  margin-right: 0px;
-  padding-right: 40px;
-}
-
-.h-dropdown {
-  position: absolute;
-  top: 33px;
-  left: -37px;
-  list-style: none;
-  background-color: $brand-success;
-  width: 300px;
-  z-index: 999999;
-  display: none;
-}
-
-.h-dropdown li {
-  margin: 0;
-  padding: 0;
-  margin-right: 0;
-  float: left;
-}
-
-.h-dropdown li a {
-  display: block;
-  text-align: center;
-  width: 100px;
-  &:hover {
-    background-color: #FFFFFF;
-  }
-}
-
 .sub-nav .nav-list li {
   padding-left: 20px;
   // border-left: 1px solid darken($brand-success, 10%);
-}
-
-.header-breadcrumb {
-  
 }

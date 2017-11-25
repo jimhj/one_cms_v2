@@ -73,28 +73,4 @@
             = raw ad.value
 
   .f-right.article-right
-    - SiteAd.rightsidetop.actived.each do |ad|
-      .r-side-ad= raw ad.value
-
-    - SiteAd.rightsidemiddle.actived.each do |ad|
-      .r-side-ad= raw ad.value
-
-    .text-list.news-list
-      .list-head= @article.node.name
-      - unless @article.node.seo_description.blank?
-        .list-desc= @article.node.seo_description
-      ul.news-content
-        - @node.articles.last(4).each do |article|
-          li
-            a href="#{article_path(article)}"= article.title
-
-    .text-list.news-list
-      .list-head 最新文章
-      ul.news-content
-        - @node.articles.last(10).each do |article|
-          li
-            a href="#{article_path(article)}"= article.title
-
-    - SiteAd.rightsidebottom.actived.each do |ad|
-      .r-side-ad.ad-fixed
-        .r-side-ad-inner= raw ad.value
+    = render 'site/share/common_right'

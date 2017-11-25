@@ -102,13 +102,14 @@
 .nodes {
   width: 780px;
   z-index: 50;
+  margin-top: -13px;
 }
 
 .nodes ul.node-list {
   width: 100%;
   background: #fff;
   height: 30px;
-  border-bottom: 1px solid #f0f0f0; 
+  border-bottom: 2px solid #f0f0f0; 
   position: relative;
 
   & > li {
@@ -121,7 +122,7 @@
       line-height: 30px;
       font-size: 12px;
       display: inline-block;
-      color: #444;
+      color: #666;
     }
     
     &.active a {
