@@ -19,8 +19,8 @@
   // color: #333;
   // background-color: $brand-success;
   background-color: #ffffff;
-  -webkit-transition: all .5s ease-out;
-  transition: all .5s ease-out;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
 
   a { color: #333; }
 }
@@ -35,7 +35,11 @@
       padding-top: 12px;
     }
 
-    img { height: 30px; }
+    img { 
+      height: 30px; 
+      -webkit-transition: all .3s ease-out;
+      transition: all .3s ease-out;
+    }
   }
 
   .main-nav { float: left; }
