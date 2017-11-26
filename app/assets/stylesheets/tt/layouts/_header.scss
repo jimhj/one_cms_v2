@@ -61,6 +61,10 @@
     font-size: 14px;
   }
 
+  .nav-list > li > a {
+    height: 40px;
+  }
+
   .nav-logo {
     a { padding-top: 7px; }
     img { height: 20px; }
@@ -113,9 +117,6 @@
 }
 
 .main-nav .nav-list > .nav-dropdown-toggle.open {
-  & > a {
-  }
-
   .nav-dropdown {
     display: block;
   }
