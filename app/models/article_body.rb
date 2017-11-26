@@ -6,6 +6,12 @@ class ArticleBody < ActiveRecord::Base
   belongs_to :article
   validates_presence_of :body
 
+  before_update do
+    if changed_attributes.keys.include?('body')
+      self.body_html = self.body
+    end
+  end
+
   before_create do
     self.body = strip_links(self.body)
   end
