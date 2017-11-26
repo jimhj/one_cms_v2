@@ -22,7 +22,7 @@ html
       .header-navbar
         .navbar-inner.clearfix
           .nav-logo
-            a href="#{root_path}" alt="#{SiteConfig.actived.site_name}" = image_tag SiteConfig.actived.logo.url
+            a href="#{root_path}" title="#{SiteConfig.actived.site_name}"= image_tag SiteConfig.actived.logo.url, alt: SiteConfig.actived.site_name
 
           .main-nav.f-left
             ul.nav-list.clearfix
