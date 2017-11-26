@@ -30,7 +30,7 @@
         span= @article.created_at.strftime('%F %T')
 
         - if not @article.article_body.redirect_url.blank?
-          a href="#{@article.article_body.redirect_url}" target="blank" 阅读原文
+          a href="#{@article.article_body.redirect_url}" rel="nofollow" target="blank" 阅读原文
 
       .a-content
         - SiteAd.leftsidearticletop.actived.each do |ad|
