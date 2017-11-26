@@ -8,6 +8,7 @@ class ArticleBody < ActiveRecord::Base
 
   before_update do
     if changed_attributes.keys.include?('body')
+      self.cached_keyword_id = 0
       self.body_html = self.body
     end
   end

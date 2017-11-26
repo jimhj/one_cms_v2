@@ -34,7 +34,6 @@ class Admin::ArticlesController < Admin::ApplicationController
 
   def update
     @article = Article.find params[:id]
-    article_params[:article_body_attributes][:cached_keyword_id] = 0
     
     if @article.update_attributes(article_params)
       redirect_to admin_articles_path(page: params[:page], node_id: params[:node_id])
