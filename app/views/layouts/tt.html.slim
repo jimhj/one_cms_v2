@@ -12,6 +12,7 @@ html
     meta content="pc,mobile" name="applicable-device"
     meta name="MobileOptimized" content="width"
     meta name="HandheldFriendly" content="true"
+    = yield :header
 
     /[if lt IE 9]
         = javascript_include_tag 'html5shiv'
@@ -23,12 +24,7 @@ html
           .nav-logo
             a href="#{root_path}"= image_tag 'site/n_logo.png'
 
-          .main-nav
-            / - if action_name == 'index'
-            /   a href="#{root_url}" title="网站首页"
-            /     span= "#{SiteConfig.actived.site_name} · #{SiteConfig.actived.site_slogan}"
-            / - else
-
+          .main-nav.f-left
             ul.nav-list.clearfix
               li.f-left class=('active' if params[:slug].blank?)
                 a href="#{root_path}" 首页
@@ -36,10 +32,17 @@ html
               - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
                 - klass = 'f-left'
                 - klass << ' active' if params[:slug] == node.slug
-                li class=(klass)
+                - nodes = (node.children.presence || node.parent.try(:children) || [node])
+                li.nav-dropdown-toggle class=(klass)
                   a href="#{articles_path(node.slug)}"= node.short_name
-                                           
-          .sub-nav
+                  - if nodes && nodes.any?
+                    .nav-dropdown
+                      ul.nav-dropdown-list.clearfix
+                        - nodes.each do |n|
+                          li
+                            a href="#{articles_path(n.slug)}"= n.short_name
+
+          .sub-nav.f-right
             ul.nav-list.clearfix
               li.f-left
                 a href="#{channels_path}" title="热门专题" 专题

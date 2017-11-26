@@ -1,5 +1,6 @@
-= javascript_include_tag 'tt/index'
-= stylesheet_link_tag 'tt/views/index'
+- content_for :header do
+  = javascript_include_tag 'tt/index'
+  = stylesheet_link_tag 'tt/views/index'
 
 .main.clearfix
   / = render 'site/share/node_bar'

@@ -1,5 +1,9 @@
 .articles-section {
   width: 780px;
+
+  .article-item:first-child {
+    padding-top: 0px;
+  }
 }
 
 .article-item {

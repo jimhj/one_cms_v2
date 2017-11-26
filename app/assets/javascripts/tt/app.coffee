@@ -16,3 +16,8 @@ $(document).ready ->
   #   $('.h-dropdown').show()
   # .mouseleave ->
   #   $('.h-dropdown').hide()
+
+  $('.nav-dropdown-toggle').mouseenter ->
+    $(this).addClass('open')
+  .mouseleave ->
+    $(this).removeClass('open')
