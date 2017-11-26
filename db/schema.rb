@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161228121946) do
+ActiveRecord::Schema.define(version: 20171126031000) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "login",           limit: 30,  null: false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20161228121946) do
   add_index "article_bodies", ["article_id"], name: "index_article_bodies_on_article_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4,   default: 0
     t.integer  "node_id",         limit: 4,                   null: false
     t.string   "title",           limit: 200,                 null: false
     t.string   "short_title",     limit: 80
@@ -50,7 +51,7 @@ ActiveRecord::Schema.define(version: 20161228121946) do
     t.boolean  "focus",                       default: false
     t.boolean  "hot",                         default: false
     t.boolean  "recommend",                   default: false
-    t.integer  "status",          limit: 4,   default: 0
+    t.boolean  "approved",                    default: false
     t.boolean  "linked",                      default: false
     t.string   "link_word",       limit: 255
     t.integer  "pictures_count",  limit: 4,   default: -1
@@ -86,21 +87,6 @@ ActiveRecord::Schema.define(version: 20161228121946) do
   end
 
   add_index "channels", ["slug"], name: "index_channels_on_slug", using: :btree
-
-  create_table "dede_arctype", force: :cascade do |t|
-    t.integer "reid",        limit: 2,   default: 0,  null: false
-    t.integer "topid",       limit: 2,   default: 0,  null: false
-    t.integer "sortrank",    limit: 2,   default: 50, null: false
-    t.string  "typename",    limit: 30,  default: "", null: false
-    t.string  "typedir",     limit: 60,  default: "", null: false
-    t.string  "description", limit: 150, default: "", null: false
-    t.string  "keywords",    limit: 60,  default: "", null: false
-    t.string  "seotitle",    limit: 80,  default: "", null: false
-    t.integer "newid",       limit: 4
-  end
-
-  add_index "dede_arctype", ["reid", "topid", "typename"], name: "reid", using: :btree
-  add_index "dede_arctype", ["sortrank"], name: "sortrank", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   limit: 4,     default: 0, null: false
@@ -155,21 +141,23 @@ ActiveRecord::Schema.define(version: 20161228121946) do
   add_index "links", ["linkable_type", "linkable_id"], name: "index_links_on_linkable_type_and_linkable_id", using: :btree
 
   create_table "nodes", force: :cascade do |t|
-    t.string   "name",            limit: 30,                  null: false
-    t.string   "slug",            limit: 30,                  null: false
+    t.string   "name",            limit: 30,                    null: false
+    t.string   "slug",            limit: 30,                    null: false
     t.integer  "parent_id",       limit: 4
-    t.integer  "lft",             limit: 4,   default: 0
-    t.integer  "rgt",             limit: 4,   default: 0
-    t.integer  "depth",           limit: 4,   default: 0
-    t.integer  "children_count",  limit: 4,   default: 0
+    t.integer  "lft",             limit: 4,     default: 0
+    t.integer  "rgt",             limit: 4,     default: 0
+    t.integer  "depth",           limit: 4,     default: 0
+    t.integer  "children_count",  limit: 4,     default: 0
     t.string   "seo_title",       limit: 255
     t.string   "seo_keywords",    limit: 255
     t.string   "seo_description", limit: 255
-    t.integer  "sortrank",        limit: 4,   default: 1000
-    t.boolean  "is_nav",                      default: false
+    t.integer  "sortrank",        limit: 4,     default: 1000
+    t.boolean  "is_nav",                        default: false
     t.string   "nav_name",        limit: 255
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.string   "nav_color",       limit: 255
+    t.text     "extras",          limit: 65535
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "nodes", ["depth"], name: "index_nodes_on_depth", using: :btree
@@ -192,6 +180,7 @@ ActiveRecord::Schema.define(version: 20161228121946) do
 
   add_index "redactor_assets", ["assetable_type", "assetable_id"], name: "idx_redactor_assetable", using: :btree
   add_index "redactor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_redactor_assetable_type", using: :btree
+  add_index "redactor_assets", ["data_file_name"], name: "index_redactor_assets_on_data_file_name", using: :btree
 
   create_table "site_ads", force: :cascade do |t|
     t.string   "key",        limit: 255,                  null: false
@@ -241,5 +230,28 @@ ActiveRecord::Schema.define(version: 20161228121946) do
 
   add_index "tags", ["slug"], name: "index_tags_on_slug", using: :btree
   add_index "tags", ["taggings_count"], name: "index_tags_on_taggings_count", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",               limit: 255,                 null: false
+    t.string   "company",            limit: 255
+    t.string   "description",        limit: 255
+    t.string   "website",            limit: 255
+    t.string   "password_digest",    limit: 255,                 null: false
+    t.string   "email",              limit: 255,                 null: false
+    t.string   "mobile",             limit: 255, default: ""
+    t.string   "logo",               limit: 255
+    t.integer  "sign_in_count",      limit: 4,   default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip", limit: 255
+    t.string   "last_sign_in_ip",    limit: 255
+    t.datetime "locked_at"
+    t.boolean  "activated",                      default: false
+    t.integer  "articles_count",     limit: 4,   default: 0
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
 end

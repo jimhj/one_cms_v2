@@ -7,6 +7,8 @@ class Node < ActiveRecord::Base
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
 
+  store :extras
+
   def self.rest
     roots.where(is_nav: false)
   end

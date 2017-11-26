@@ -27,6 +27,10 @@
       .form-group.form-group-bordered
         label 导航名称
         = f.text_field :nav_name, class: 'form-control', placeholder: '导航名称'
+      .form-group.form-group-bordered
+        label 导航颜色
+        = f.text_field :nav_color, class: 'form-control', placeholder: '例如: #000000'
+
       .checkbox
         label
           = f.check_box :is_nav, class: 'checkbox'
