@@ -41,7 +41,7 @@ html
                         - nodes.each do |n|
                           li
                             - if not n.nav_color.blank?
-                              a href="#{articles_path(n.slug)}" style="color: #{n.nav_color};"= n.short_name
+                              a href="#{articles_path(n.slug)}" style="#{n.nav_color}"= n.short_name
                             - else
                               a href="#{articles_path(n.slug)}"= n.short_name
 
