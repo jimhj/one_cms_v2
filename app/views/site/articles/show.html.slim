@@ -28,6 +28,10 @@
         span.tag.tag-gray= @article.node.name
         span= @article.source
         span= @article.created_at.strftime('%F %T')
+
+        - if not @article.article_body.redirect_url.blank?
+          a href="#{@article.article_body.redirect_url}" target="blank" 阅读原文
+
       .a-content
         - SiteAd.leftsidearticletop.actived.each do |ad|
           .a-content-ad
