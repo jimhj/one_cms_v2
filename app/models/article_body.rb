@@ -8,9 +8,7 @@ class ArticleBody < ActiveRecord::Base
 
   after_update do
     if changed_attributes.keys.include?('body')
-      self.cached_keyword_id = 0
-      self.body_html = self.body
-      self.save!
+      update_columns(cached_keyword_id: 0, body_html: self.body)
       self.delay.replace_keywords
     end
   end
