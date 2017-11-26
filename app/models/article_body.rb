@@ -9,7 +9,7 @@ class ArticleBody < ActiveRecord::Base
   after_update do
     if changed_attributes.keys.include?('body')
       update_columns(cached_keyword_id: 0, body_html: self.body)
-      self.delay.replace_keywords
+      self.delay.replace_keywords rescue nil
     end
   end
 
@@ -20,7 +20,7 @@ class ArticleBody < ActiveRecord::Base
   after_create do
     restore_remote_images
     article.delay.analyze_keywords
-    self.delay.replace_keywords
+    # self.delay.replace_keywords
 
     if article.seo_description.blank?
       article.set_description
