@@ -6,10 +6,12 @@ class ArticleBody < ActiveRecord::Base
   belongs_to :article
   validates_presence_of :body
 
-  before_update do
+  after_update do
     if changed_attributes.keys.include?('body')
       self.cached_keyword_id = 0
       self.body_html = self.body
+      self.save!
+      self.delay.replace_keywords
     end
   end
 
