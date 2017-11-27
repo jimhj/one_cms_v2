@@ -11,25 +11,22 @@
   margin-top: 16px;
 }
 
-.main.article-main {
-  // width: 1120px;
-  margin-top: 30px;
+.main.article-main { margin-top: 30px; }
+
+body.welcome {
+  background-color: #f0f0f0;
+
+  .main {
+    background-color: #ffffff;
+    min-height: 600px;
+  }
 }
 
-.main.index-main {
-  // width: 780px;
-}
-
-.a-content-ad {
-  // margin-bottom: 20px;
-  text-align: center;
-}
+.a-content-ad { text-align: center; }
 
 .r-side-ad {
   margin-bottom: 16px;
   text-align: center;
 }
 
-.about-section {
-  margin-bottom: 16px;
-}
+.about-section { margin-bottom: 16px; }

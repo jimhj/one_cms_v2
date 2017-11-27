@@ -1,25 +1,3 @@
-/ .header-breadcrumb
-/   .b-inner.clearfix
-/     .f-left.logo-box.detail-logo
-/       a.logo href="#{root_path}"
-/         = image_tag SiteConfig.actived.logo.url
-/     .f-left.b-links
-/       a href="#{root_path}" 首页
-/       = " / "
-/       - @nodes.each do |node|
-/         a href="#{articles_path(node.slug)}" title="#{node.name}"= node.name
-/         = " / "
-/       span 正文
-/     .f-right
-/       = form_tag url_for, method: 'GET' do
-/         .search-form.article-page
-/           .input-box.clearfix
-/             .f-left
-/               input name="keyword" type="search" placeholder="输入关键字"
-/             .f-right.search-btn
-/               button type="submit"
-/                 i.icon.icon-search
-
 .main.article-main
   .f-left.a-main.article-box
     .article-inner

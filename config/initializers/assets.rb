@@ -16,6 +16,7 @@ Rails.application.config.assets.precompile += %w(
   swiper.css
   tt/app.css
   tt/views/index.css
+  tt/views/user.css
   tt/app.js
   tt/index.js
   tt_mobile/app.css

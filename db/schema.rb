@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126031000) do
+ActiveRecord::Schema.define(version: 20171127124038) do
+
+  create_table "active_tokens", force: :cascade do |t|
+    t.string   "receiver",   limit: 255,               null: false
+    t.string   "token",      limit: 255,               null: false
+    t.integer  "state",      limit: 4,     default: 0
+    t.text     "extras",     limit: 65535
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "login",           limit: 30,  null: false
@@ -232,26 +241,19 @@ ActiveRecord::Schema.define(version: 20171126031000) do
   add_index "tags", ["taggings_count"], name: "index_tags_on_taggings_count", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",               limit: 255,                 null: false
-    t.string   "company",            limit: 255
-    t.string   "description",        limit: 255
-    t.string   "website",            limit: 255
-    t.string   "password_digest",    limit: 255,                 null: false
-    t.string   "email",              limit: 255,                 null: false
-    t.string   "mobile",             limit: 255, default: ""
-    t.string   "logo",               limit: 255
-    t.integer  "sign_in_count",      limit: 4,   default: 0
+    t.string   "email",               limit: 255,             null: false
+    t.string   "username",            limit: 255,             null: false
+    t.string   "password_digest",     limit: 255,             null: false
+    t.string   "private_token",       limit: 255
+    t.datetime "remember_created_at"
+    t.integer  "state",               limit: 4,   default: 0
+    t.integer  "sign_in_count",       limit: 4,   default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip", limit: 255
-    t.string   "last_sign_in_ip",    limit: 255
-    t.datetime "locked_at"
-    t.boolean  "activated",                      default: false
-    t.integer  "articles_count",     limit: 4,   default: 0
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.string   "current_sign_in_ip",  limit: 255
+    t.string   "last_sign_in_ip",     limit: 255
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
 end

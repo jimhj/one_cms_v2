@@ -1,4 +1,6 @@
 class Site::ArticlesController < Site::ApplicationController
+  before_action :login_required, only: [:new, :create]
+  
   caches_action :feed, expires_in: 2.hours
   
   self.page_cache_directory = -> { Rails.root.join("public", 'cached_pages') }
@@ -46,6 +48,12 @@ class Site::ArticlesController < Site::ApplicationController
                   keywords: @article.seo_keywords
 
     fresh_when(etag: [@article, Keyword.recent], template: false) 
+  end
+
+  def new
+  end
+
+  def create
   end
 
   def search

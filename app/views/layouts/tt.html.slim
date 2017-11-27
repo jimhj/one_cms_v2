@@ -26,7 +26,7 @@ html
 
           .main-nav.f-left
             ul.nav-list.clearfix
-              li.f-left class=('active' if params[:slug].blank?)
+              li.f-left class=('active' if controller_name == 'application' && action_name == 'index')
                 a href="#{root_path}" 首页
 
               - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
@@ -48,14 +48,12 @@ html
           .sub-nav.f-right
             ul.nav-list.clearfix
               li.f-left
-                a href="#{channels_path}" title="热门专题" 专题
+                a href="#{sign_up_path}" title="注册" 注册
               li.f-left
-                a href="#{tags_path}" title="热门标签" 标签
+                a href="#{sign_in_path}" title="登录" 登录
               / li.f-left
               /   a href="#{feed_path(format: 'xml')}" title="feed" RSS
     = yield
-
-    / script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=#{Setting.changyan.id}"
 
     - SiteAd.global.each do |ad|
       = raw ad.value

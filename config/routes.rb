@@ -67,11 +67,18 @@ Rails.application.routes.draw do
   scope module: :site do
     root 'application#index'
     get 'more',         to: 'application#more'
-    resources :tags,  only: [:index, :show],    trailing_slash: true    
+
+    match 'sign_up',    to: 'welcome#sign_up', as: :sign_up, via: [:get, :post]
+    match 'sign_in',    to: 'welcome#sign_in', as: :sign_in, via: [:get, :post]
+    delete :sign_out,   to: 'welcome#sign_out', as: :sign_out
+
+    resources :tags,  only: [:index, :show],    trailing_slash: true
     get 'feed',         to: 'articles#feed',    as: :feed
     get 'search',       to: 'articles#search',  as: :search
     get 'z',            to: 'channels#index',   as: :channels, trailing_slash: true
     get 'z/:slug',      to: 'channels#show',    as: :channel, trailing_slash: true
+    get 'articles/new', to: 'articles#new',     as: :new_article
+    post 'articles',    to: 'articles#create',  as: :create_article
     get ':slug/:id',    to: 'articles#show',    as: :article
     get ':slug',        to: 'articles#index',   as: :articles, trailing_slash: true
   end

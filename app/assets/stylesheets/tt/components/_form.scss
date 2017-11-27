@@ -1,0 +1,81 @@
+.common-form {
+  width: 400px;
+  margin: 20px auto;
+}
+
+.cf-group {
+  margin-bottom: 20px;
+
+  &.error .cf-field {
+    border: 1px solid #ddd;
+  }
+}
+
+.cf-field {
+  width: 100%;
+  padding: 0px 10px;
+  height: 48px;
+  width: 378px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+
+  &:focus {
+    border: 1px solid $brand-success;
+    box-shadow: 0px 0px 2px 0px $brand-success;
+  }
+}
+
+input::-webkit-input-placeholder {
+  color: #999;
+}
+
+.cf-label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cf-btn {
+  display: inline-block;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 4px;
+
+  &.cf-btn-lg {
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+
+  &.cf-btn-block {
+    width: 100%;
+  }
+}
+
+.cf-btn.cf-btn-primary {
+  background-color: $brand-success;
+  color: #fff;
+}
+
+.cf-btn.cf-btn-default {
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #f0f0f0;
+}
+
+.cf-alert {
+  padding: 15px 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.cf-alert.error {
+  background-color: #f2dede;
+  border-left: 4px solid #ff4600;
+  color: #a94442;
+}
+
+.cf-alert.info {
+  background-color: #d9edf7;
+  border-left: 4px solid #5bc0de;
+  color: #31708f;
+}
