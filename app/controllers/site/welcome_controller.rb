@@ -11,6 +11,10 @@ class Site::WelcomeController < Site::ApplicationController
     if request.post?
       @user = User.new(user_params)
       if @user.valid?
+        @user.save!
+
+        flash[:info] = "已注册成功，请注意查收注册验证邮件"
+        redirect_to sign_in_path
       else
         render :sign_up
       end

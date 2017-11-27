@@ -51,4 +51,15 @@ module ApplicationHelper
                       separator: '-',
                       reverse: reverse
   end
+
+ def site_notice_message
+    flash_messages = []
+
+    flash.each do |type, message|
+      text = content_tag(:div, message, class: "cf-alert #{type}")
+      flash_messages << text if message
+    end
+
+    flash_messages.join("\n").html_safe
+  end
 end
