@@ -16,9 +16,9 @@
 
 - cache([Article.order('id DESC').first, 'index-r']) do
   .text-list.news-list
-    .list-head 24小时热文
+    .list-head 头版头条
     ul.news-content
-      - Article.order('id DESC').limit(10).each do |article|
+      - Article.hot.each do |article|
         li
           a href="#{article_path(article)}"= article.title
 
@@ -36,7 +36,7 @@
 
 - if @links.present? && @links.any?
   .friend-links.news-list
-    .list-head 友情链接
+    .list-head 合作伙伴
     ul.news-content.clearfix
       - (@links || []).each do |link|
         li

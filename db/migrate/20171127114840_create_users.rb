@@ -19,6 +19,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
+      t.string   :allowed_node_ids
+      t.boolean :review_later, default: true
+      t.text :extras
+
       t.timestamps null: false
     end
   end

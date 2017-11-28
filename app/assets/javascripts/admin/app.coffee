@@ -4,7 +4,6 @@
 # = require twbs-admin/sb-admin-2
 # = require twbs-admin/menu
 # = require redactor-rails
-# = require redactor-rails/config
 # = require bootstrap-select
 
 $(document).ready ->

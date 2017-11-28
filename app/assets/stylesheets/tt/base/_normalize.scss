@@ -223,7 +223,7 @@ select {
 /* Remove the default button styling in all browsers */
 button,
 input,
-select,
+// select,
 textarea {
   background-color: transparent;
   border-style: none;
@@ -231,18 +231,18 @@ textarea {
 }
 
 /* Style select like a standard input */
-select {
-  -moz-appearance: none; /* Firefox 36+ */
-  -webkit-appearance: none; /* Chrome 41+ */
-}
+// select {
+//   -moz-appearance: none; /* Firefox 36+ */
+//   -webkit-appearance: none; /* Chrome 41+ */
+// }
 
-select::-ms-expand {
-  display: none; /* Internet Explorer 11+ */
-}
+// select::-ms-expand {
+//   display: none; /* Internet Explorer 11+ */
+// }
 
-select::-ms-value {
-  color: currentColor; /* Internet Explorer 11+ */
-}
+// select::-ms-value {
+//   color: currentColor; /* Internet Explorer 11+ */
+// }
 
 legend {
   border: 0; /* Correct `color` not being inherited in IE 8/9/10/11 */

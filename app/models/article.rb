@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   
+  belongs_to :user
   belongs_to :node
   has_one :article_body, dependent: :destroy
   has_many :taggings
@@ -15,7 +16,7 @@ class Article < ActiveRecord::Base
 
   scope :recent, -> { where(recommend: false).order('id DESC').limit(6) }
   scope :focus, -> { where(focus: true).order('id DESC').limit(8) }
-  scope :hot, -> { with_photo.where(hot: true).order('id DESC').limit(8) }
+  scope :hot, -> { where(hot: true).order('id DESC').limit(10) }
 
   scope :with_photo, -> {
     where('pictures_count > 0')

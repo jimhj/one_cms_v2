@@ -21,3 +21,8 @@ $(document).ready ->
     $(this).addClass('open')
   .mouseleave ->
     $(this).removeClass('open')
+
+  $('.nav-menu-li').mouseenter ->
+    $(this).addClass('open')
+  .mouseleave ->
+    $(this).removeClass('open')

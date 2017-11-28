@@ -13,7 +13,10 @@
 
 .main.article-main { margin-top: 30px; }
 
-body.welcome {
+body.welcome-sign_in,
+body.welcome-sign_up,
+body.articles-new,
+body.articles-create {
   background-color: #f0f0f0;
 
   .main {

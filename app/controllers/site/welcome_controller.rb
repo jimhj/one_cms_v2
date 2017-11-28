@@ -3,6 +3,17 @@ class Site::WelcomeController < Site::ApplicationController
   before_action :login_required, only: [:sign_out]
 
   def sign_in
+    if request.post?
+      @user = User.find_by(email: params[:email])
+      if @user && @user.authenticate(params[:password])
+        login_as @user
+        remember_me if params[:remember_me] == '1'
+        redirect_back_or_default root_url
+      else
+        flash[:error] = "错误的账号或者密码"
+        redirect_to :back
+      end
+    end
   end
 
   def sign_up
@@ -22,6 +33,8 @@ class Site::WelcomeController < Site::ApplicationController
   end
 
   def sign_out
+    logout
+    redirect_to root_url
   end
 
   private

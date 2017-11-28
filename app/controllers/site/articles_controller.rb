@@ -51,9 +51,18 @@ class Site::ArticlesController < Site::ApplicationController
   end
 
   def new
+    @article = current_user.articles.new
+    @article.build_article_body
   end
 
   def create
+    @article = current_user.articles.new(article_params)
+    @article.source = current_user.username
+    if @article.save
+      redirect_to admin_articles_path
+    else
+      render action: :new
+    end
   end
 
   def search
@@ -64,5 +73,15 @@ class Site::ArticlesController < Site::ApplicationController
   def feed
     @articles = Article.includes(:article_body, :node).order('id DESC').limit(200)
     render layout: false
-  end   
+  end 
+
+  private
+
+  def article_params
+    params.require(:article).permit(:node_id, :title, :short_title, :thumb, :source, :writer, :seo_title, :seo_keywords, :seo_description, :hot, :focus, :recommend, :linked, :link_word, :article_body_attributes => [:id, :body, :cached_keyword_id, :redirect_url])
+  end
+
+  def paginate_params
+    { page: params[:page], per_page: 40 }
+  end  
 end

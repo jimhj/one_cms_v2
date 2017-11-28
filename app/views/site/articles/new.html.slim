@@ -1,0 +1,40 @@
+- content_for :header do
+  = javascript_include_tag 'tt/article'
+  = stylesheet_link_tag 'tt/views/article'
+
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2.active 发表文章
+        h2 我的文章
+    .box-body
+      - if current_user.allowed_nodes.blank?
+        .cf-alert.error.text-center style="margin-top:100px;" 暂时还没有获得发文权限，请联系网站客服开通
+      - else
+        = form_for @article, url: create_article_path, html: { class: 'common-form common-form-lg' } do |f|
+          - if @article.errors.any?
+            .cf-alert.error= @article.errors.full_messages.first
+
+          .cf-group
+            label.cf-label 文章标题 *
+            = f.text_field :title, class: 'cf-field', required: true
+          .cf-group
+            label.cf-label 发布节点 *
+            = f.select :node_id, options_for_select(current_user.allowed_nodes.pluck(:name, :id)), required: true
+
+          .cf-group
+            label.cf-label 文章题图
+            = f.file_field :thumb
+
+          = f.fields_for :article_body do |body_field|
+            .cf-group
+              label.cf-label 原文链接
+              = body_field.text_field :redirect_url, class: 'cf-field'
+
+            .cf-group
+              label.cf-label 文章内容 *
+              = body_field.text_area :body, class: 'redactor-editor', required: true
+
+          .cf-group
+            button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 确认发布

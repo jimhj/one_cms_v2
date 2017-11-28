@@ -12,7 +12,6 @@
 }
 
 .cf-field {
-  width: 100%;
   padding: 0px 10px;
   height: 48px;
   width: 378px;
@@ -22,6 +21,34 @@
   &:focus {
     border: 1px solid $brand-success;
     box-shadow: 0px 0px 2px 0px $brand-success;
+  }
+}
+
+textarea.cf-field {
+  padding: 0 0;
+  width: 398px;
+}
+
+.common-form.common-form-lg {
+  width: 800px;
+
+  .cf-group {
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #f0f0f0;
+  }
+
+  .cf-group:last-child {
+    border-bottom: none;
+  }
+
+  .cf-field {
+    width: 778px;
+    height: 30px;
+  }
+
+  textarea.cf-field {
+    width: 798px;
+    height: 120px;
   }
 }
 

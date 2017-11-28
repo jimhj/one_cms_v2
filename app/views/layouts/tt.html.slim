@@ -17,7 +17,7 @@ html
     /[if lt IE 9]
         = javascript_include_tag 'html5shiv'
 
-  body class="#{controller_name}"
+  body class="#{controller_name}-#{action_name}"
     .header
       .header-navbar
         .navbar-inner.clearfix
@@ -47,12 +47,25 @@ html
 
           .sub-nav.f-right
             ul.nav-list.clearfix
-              li.f-left
-                a href="#{sign_up_path}" title="注册" 注册
-              li.f-left
-                a href="#{sign_in_path}" title="登录" 登录
-              / li.f-left
-              /   a href="#{feed_path(format: 'xml')}" title="feed" RSS
+              - if login?
+                li.f-left.nav-menu-li
+                  .nav-menu.transition
+                    a href="#" 修改密码
+                    a href="#{new_article_path}" 发表文章
+                    a href="#" 我的文章
+                    a href="#{sign_out_path}" data-method="delete" 退出登录
+
+                  a href="javascript:;"
+                    span= current_user.username 
+                    span.caret
+                / li.f-left
+                /   a.cf-btn.cf-btn-primary 投稿
+              - else
+                li.f-left
+                  a href="#{sign_up_path}" title="注册" 注册
+                li.f-left
+                  a href="#{sign_in_path}" title="登录" 登录
+
     = yield
 
     - SiteAd.global.each do |ad|

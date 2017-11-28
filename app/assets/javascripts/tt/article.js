@@ -1,3 +1,5 @@
+#= require redactor-rails
+
 window.init_redactor = function(){
   var csrf_token = $('meta[name=csrf-token]').attr('content');
   var csrf_param = $('meta[name=csrf-param]').attr('content');
@@ -11,13 +13,12 @@ window.init_redactor = function(){
         // application.js and application.css files and uncomment the line below:
         // "plugins": ['fontsize', 'fontcolor', 'fontfamily', 'fullscreen', 'textdirection', 'clips'],
         // "buttons": ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'image', 'file', 'link', 'alignment', 'horizontalrule'],
-        "buttonSource": true,
         "imageUpload":"/redactor_rails/pictures?" + params,
         "imageGetJson":"/redactor_rails/pictures",
-        "fileUpload":"/redactor_rails/documents?" + params,
-        "fileGetJson":"/redactor_rails/documents",
         "path":"/assets/redactor-rails",
-        "css":"style.css"
+        "css":"style.css",
+        "minHeight": 400,
+        "maxHeight": 800
       });
 }
 

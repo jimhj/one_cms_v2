@@ -16,10 +16,11 @@ Rails.application.config.assets.precompile += %w(
   swiper.css
   tt/app.css
   tt/views/index.css
-  tt/views/user.css
   tt/app.js
   tt/index.js
+  tt/article.js
   tt_mobile/app.css
+  tt/views/article.css
   jquery.slideBox.js
   jquery.slideBox.css
 )

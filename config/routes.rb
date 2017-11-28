@@ -43,6 +43,8 @@ Rails.application.routes.draw do
       post :restart
     end
 
+    resources :users
+
     get :mip, to: 'site_config#mip', as: :mip
   end
 
@@ -68,9 +70,9 @@ Rails.application.routes.draw do
     root 'application#index'
     get 'more',         to: 'application#more'
 
-    match 'sign_up',    to: 'welcome#sign_up', as: :sign_up, via: [:get, :post]
-    match 'sign_in',    to: 'welcome#sign_in', as: :sign_in, via: [:get, :post]
-    delete :sign_out,   to: 'welcome#sign_out', as: :sign_out
+    match 'sign_up',    to: 'welcome#sign_up', as: :sign_up,   via: [:get, :post]
+    match 'sign_in',    to: 'welcome#sign_in', as: :sign_in,   via: [:get, :post]
+    match 'sign_out',   to: 'welcome#sign_out', as: :sign_out, via: [:delete]
 
     resources :tags,  only: [:index, :show],    trailing_slash: true
     get 'feed',         to: 'articles#feed',    as: :feed
