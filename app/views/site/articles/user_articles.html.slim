@@ -24,3 +24,6 @@
               td style="width: 120px;"= article.created_at.strftime('%F %T')
               td style="width: 120px;"
                 a.text-success.text-underline 编辑
+
+      .box-pagination
+        = will_paginate @articles, inner_window: 1, class: 'pagination'

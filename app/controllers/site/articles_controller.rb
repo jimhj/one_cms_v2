@@ -54,9 +54,12 @@ class Site::ArticlesController < Site::ApplicationController
   def new
     @article = current_user.articles.new
     @article.build_article_body
+    set_meta_tags title: "发表文章"
   end
 
   def create
+    set_meta_tags title: "发表文章"
+
     @article = current_user.articles.new(article_params)
     @article.source = current_user.username
     @article.approved = current_user.review_later?
@@ -70,6 +73,7 @@ class Site::ArticlesController < Site::ApplicationController
 
   def user_articles
     @articles = current_user.articles.order('id DESC').paginate(paginate_params)
+    set_meta_tags title: "我的文章"
   end
 
   def search
