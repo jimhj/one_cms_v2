@@ -93,6 +93,6 @@ class Site::ArticlesController < Site::ApplicationController
   end
 
   def paginate_params
-    { page: params[:page], per_page: 40 }
+    { page: params[:page], per_page: 10 }
   end  
 end

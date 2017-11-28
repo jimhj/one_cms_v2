@@ -14,6 +14,7 @@
             td 栏目
             td 标题
             td 创建时间
+            td 状态
             td 操作
           - @articles.each do |article|
             tr
@@ -22,7 +23,8 @@
               td
                 a.text-success.text-underline href="#{article_path(article)}"= article.title
               td style="width: 120px;"= article.created_at.strftime('%F %T')
-              td style="width: 120px;"
+              td style="width: 100px;"= article.approved? ? '审核通过' : '审核中'
+              td style="width: 100px;"
                 a.text-success.text-underline 编辑
 
       .box-pagination
