@@ -1,0 +1,26 @@
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2
+          a href="#{new_article_path}" 发表文章
+        h2.active 
+          a href="#{user_articles_path}" 我的文章
+    .box-body
+      table.cf-table.cf-table-center
+        tbody
+          tr
+            td ID
+            td 栏目
+            td 标题
+            td 创建时间
+            td 操作
+          - @articles.each do |article|
+            tr
+              td style="width: 120px;"= article.id
+              td= article.node.name
+              td
+                a.text-success.text-underline href="#{article_path(article)}"= article.title
+              td style="width: 120px;"= article.created_at.strftime('%F %T')
+              td style="width: 120px;"
+                a.text-success.text-underline 编辑

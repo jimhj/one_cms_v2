@@ -1,5 +1,5 @@
 class Site::ArticlesController < Site::ApplicationController
-  before_action :login_required, only: [:new, :create]
+  before_action :login_required, only: [:new, :create, :user_articles]
   
   caches_action :feed, expires_in: 2.hours
   
@@ -12,7 +12,8 @@ class Site::ArticlesController < Site::ApplicationController
   def index
     @node = Node.find_by!(slug: params[:slug])
     @nodes = @node.root.self_and_descendants
-    @articles = Article.where(node_id: @node.self_and_descendants.pluck(:id)).order('id DESC')
+    @articles = Article.where(node_id: @node.self_and_descendants.pluck(:id))
+                       .order('id DESC')
                        .paginate(page: params[:page], per_page: 20, total_entries: 1000000)
     @links = @node.links.pc
     @channel_keywords = @node.seo_keywords
@@ -58,11 +59,17 @@ class Site::ArticlesController < Site::ApplicationController
   def create
     @article = current_user.articles.new(article_params)
     @article.source = current_user.username
+    @article.approved = current_user.review_later?
+
     if @article.save
       redirect_to admin_articles_path
     else
       render action: :new
     end
+  end
+
+  def user_articles
+    @articles = current_user.articles.order('id DESC').paginate(paginate_params)
   end
 
   def search

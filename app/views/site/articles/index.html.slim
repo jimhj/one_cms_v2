@@ -3,29 +3,7 @@
   = stylesheet_link_tag 'tt/views/index'
 
 .main.clearfix
-
-  / = render 'site/share/node_bar'
-
   .f-left.index-main
-    / .nodes
-    /   ul.node-list.clearfix
-    /     - nodes = (@node.children.presence || @node.parent.try(:children) || [@node])
-    /     - main_nodes = nodes.first(10)
-    /     - main_nodes.each_with_index do |node, i|
-    /       - klass = []
-    /       - klass << 'active' if node.slug == params[:slug]
-    /       - klass << 'nml' if i.zero?
-    /       li class=(klass.join(' '))
-    /         a href="#{articles_path(node.slug)}"= node.name
-    /     - more_nodes = nodes - main_nodes
-    /     - if more_nodes.any?
-    /       li.dropdown
-    /         a.dropdown-toggle href="javascript:;" 更多
-    /         ul.node-dropdown
-    /           - more_nodes.each do |node|
-    /             li
-    /               a href="#{articles_path(node.slug)}"= node.name
-
     .articles-section
       = render partial: 'site/application/index_article', collection: @articles, as: :article
 

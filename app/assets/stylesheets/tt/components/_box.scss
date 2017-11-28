@@ -13,9 +13,9 @@
   h2 {
     float: left;
     padding: 0px 10px 10px 10px;
-    // padding-bottom: 10px;
     border-bottom: 2px solid transparent;
     margin-right: 10px;
+    &, a { color: #333; }
   }
 
   h2.active {

@@ -44,7 +44,6 @@ Rails.application.routes.draw do
     end
 
     resources :users
-
     get :mip, to: 'site_config#mip', as: :mip
   end
 
@@ -80,6 +79,7 @@ Rails.application.routes.draw do
     get 'z',            to: 'channels#index',   as: :channels, trailing_slash: true
     get 'z/:slug',      to: 'channels#show',    as: :channel, trailing_slash: true
     get 'articles/new', to: 'articles#new',     as: :new_article
+    get 'articles',     to: 'articles#user_articles',  as: :user_articles
     post 'articles',    to: 'articles#create',  as: :create_article
     get ':slug/:id',    to: 'articles#show',    as: :article
     get ':slug',        to: 'articles#index',   as: :articles, trailing_slash: true
