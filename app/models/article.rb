@@ -7,7 +7,8 @@ class Article < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :picture_assets, -> { where('height >= 100 and width >= 100').order('created_at DESC') }, as: :assetable, class_name: 'RedactorRails::Picture'
-
+  has_many :comments
+  
   mount_uploader :thumb, ThumbUploader
   accepts_nested_attributes_for :article_body, allow_destroy: true
 

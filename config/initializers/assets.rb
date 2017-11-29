@@ -19,6 +19,7 @@ Rails.application.config.assets.precompile += %w(
   tt/app.js
   tt/index.js
   tt/article.js
+  tt/comment.js
   tt_mobile/app.css
   tt/views/article.css
   jquery.slideBox.js

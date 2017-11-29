@@ -68,6 +68,10 @@ input::-webkit-input-placeholder {
   font-size: 14px;
   border-radius: 4px;
 
+  &.disabled {
+    cursor: not-allowed;
+  }
+
   &.cf-btn-lg {
     font-size: 16px;
     padding: 15px 20px;
@@ -81,12 +85,20 @@ input::-webkit-input-placeholder {
 .cf-btn.cf-btn-primary {
   background-color: $brand-success;
   color: #fff;
+
+  &.disabled {
+    background-color: lighten($brand-success, 20%);
+  }
 }
 
 .cf-btn.cf-btn-default {
   background-color: #fff;
   color: #666;
   border: 1px solid #f0f0f0;
+
+  &.disabled {
+    background-color: #ddd;
+  }
 }
 
 .cf-alert {

@@ -1,6 +1,8 @@
 class Site::WelcomeController < Site::ApplicationController
   before_action :no_login_required, only: [:sign_in, :sign_up]
   before_action :login_required, only: [:sign_out]
+  skip_before_action :no_login_required, only: [:check_login]
+  skip_before_action :login_required, only: [:check_login]
 
   def sign_in
     if request.post?
@@ -35,6 +37,12 @@ class Site::WelcomeController < Site::ApplicationController
   def sign_out
     logout
     redirect_to root_url
+  end
+
+  def check_login
+    login_html = render_to_string(partial: 'site/welcome/login_state')
+    post_box = render_to_string(partial: 'site/comments/post_box')
+    render json: { login: login?, login_html: login_html, post_box: post_box }
   end
 
   private

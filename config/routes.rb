@@ -72,7 +72,9 @@ Rails.application.routes.draw do
     match 'sign_up',    to: 'welcome#sign_up', as: :sign_up,   via: [:get, :post]
     match 'sign_in',    to: 'welcome#sign_in', as: :sign_in,   via: [:get, :post]
     match 'sign_out',   to: 'welcome#sign_out', as: :sign_out, via: [:delete]
+    get 'check_login',  to: 'welcome#check_login', as: :check_login
 
+    resources :comments
     resources :tags,  only: [:index, :show],    trailing_slash: true
     get 'feed',         to: 'articles#feed',    as: :feed
     get 'search',       to: 'articles#search',  as: :search

@@ -1,0 +1,9 @@
+.comment.clearfix
+  .comment-avatar
+    = image_tag comment.user.avatar_url(:small), size: '40x40', alt: comment.user.username
+  .comment-body
+    .comment-user
+      span.text-success= comment.user.username
+      span.text-muted • 
+      span.text-muted= comment.created_at.strftime('%F %T')
+    .comment-content= comment.content

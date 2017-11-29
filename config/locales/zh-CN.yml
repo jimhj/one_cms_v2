@@ -5,6 +5,8 @@ zh-CN:
         title: 文章标题
       article_body:
         body: 文章内容
+      comment:
+        content: 评论内容
 
   errors:
     messages:

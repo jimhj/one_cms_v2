@@ -3,26 +3,22 @@
 # = require jquery.sticky-kit
 
 $(document).ready ->
-  # $('.node-sidebar').sticky({ topSpacing: 16 })
-  # $('.ad-fixed').sticky({ topSpacing: 16 })
+  $.get '/check_login', (rsp) ->
+    $('.login-state').empty().append(rsp.login_html)
+    $('.post-comment-box').empty().append(rsp.post_box)
+  , 'json'
+
   $(".header").stick_in_parent(parent: 'html').on "sticky_kit:stick", (e) ->
     $(e.target).addClass('active')
   .on "sticky_kit:unstick", (e) ->
     $(e.target).removeClass('active')
 
-  # $('.ad-fixed').stick_in_parent(parent: 'html', offset_top: 16)
-
-  # $('.more-node').mouseenter ->
-  #   $('.h-dropdown').show()
-  # .mouseleave ->
-  #   $('.h-dropdown').hide()
-
-  $('.nav-dropdown-toggle').mouseenter ->
+  $('body').on 'mouseenter', '.nav-dropdown-toggle', ->
     $(this).addClass('open')
-  .mouseleave ->
+  .on 'mouseleave', '.nav-dropdown-toggle', ->
     $(this).removeClass('open')
 
-  $('.nav-menu-li').mouseenter ->
+  $('body').on 'mouseenter', '.nav-menu-li', ->
     $(this).addClass('open')
-  .mouseleave ->
+  .on 'mouseleave', '.nav-menu-li', ->
     $(this).removeClass('open')

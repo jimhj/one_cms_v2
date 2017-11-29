@@ -45,26 +45,12 @@ html
                             - else
                               a href="#{articles_path(n.slug)}"= n.short_name
 
-          .sub-nav.f-right
+          .sub-nav.f-right.login-state
             ul.nav-list.clearfix
-              - if login?
-                li.f-left.nav-menu-li
-                  .nav-menu.transition
-                    a href="#" 修改密码
-                    a href="#{new_article_path}" 发表文章
-                    a href="#{user_articles_path}" 我的文章
-                    a href="#{sign_out_path}" data-method="delete" 退出登录
-
-                  a href="javascript:;"
-                    span= current_user.username 
-                    span.caret
-                / li.f-left
-                /   a.cf-btn.cf-btn-primary 投稿
-              - else
-                li.f-left
-                  a href="#{sign_up_path}" title="注册" 注册
-                li.f-left
-                  a href="#{sign_in_path}" title="登录" 登录
+              li.f-left
+                a href="#{sign_up_path}" title="注册" 注册
+              li.f-left
+                a href="#{sign_in_path}" title="登录" 登录
 
     = yield
 

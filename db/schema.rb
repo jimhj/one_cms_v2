@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127124038) do
+ActiveRecord::Schema.define(version: 20171129141502) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -96,6 +96,21 @@ ActiveRecord::Schema.define(version: 20171127124038) do
   end
 
   add_index "channels", ["slug"], name: "index_channels_on_slug", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "article_id",  limit: 4
+    t.integer  "to_user_id",  limit: 4
+    t.integer  "reply_to_id", limit: 4
+    t.text     "content",     limit: 65535
+    t.boolean  "approved",                  default: true
+    t.text     "extras",      limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   limit: 4,     default: 0, null: false
@@ -241,19 +256,23 @@ ActiveRecord::Schema.define(version: 20171127124038) do
   add_index "tags", ["taggings_count"], name: "index_tags_on_taggings_count", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",               limit: 255,             null: false
-    t.string   "username",            limit: 255,             null: false
-    t.string   "password_digest",     limit: 255,             null: false
+    t.string   "email",               limit: 255,                  null: false
+    t.string   "username",            limit: 255,                  null: false
+    t.string   "password_digest",     limit: 255,                  null: false
     t.string   "private_token",       limit: 255
     t.datetime "remember_created_at"
-    t.integer  "state",               limit: 4,   default: 0
-    t.integer  "sign_in_count",       limit: 4,   default: 0
+    t.integer  "state",               limit: 4,     default: 0
+    t.integer  "sign_in_count",       limit: 4,     default: 0
+    t.boolean  "review_later",                      default: true
+    t.string   "allowed_node_ids",    limit: 255
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",  limit: 255
     t.string   "last_sign_in_ip",     limit: 255
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.text     "extras",              limit: 65535
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.string   "avatar",              limit: 255
   end
 
 end
