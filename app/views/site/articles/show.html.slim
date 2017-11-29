@@ -1,3 +1,6 @@
+- content_for :header do
+  = stylesheet_link_tag 'tt/views/article'
+
 .main.article-main
   .f-left.a-main.article-box
     .article-inner
@@ -34,14 +37,36 @@
               a href="#{tag_path(tag.slug)}"= tag.name
 
     .recd-box.clearfix
-      / .f-left.node-sidebar-box
-      /   .node-sidebar.clearfix
-      /     h2 相关推荐
+      h2.clearfix 
+        .h-tab.f-left 参与讨论
+      .comment-section
+        .post-comment-box
+          - if login?
+            .post-box
+              textarea.post-field placeholder="说点什么吧..."
+            .post-action
+              button.cf-btn.cf-btn-primary 提交评论
+          - else
+            .post-disabled
+              a.cf-btn.cf-btn-primary 登录
+              a.cf-btn.cf-btn-default 注册
 
-      /     ul.sidebar-list
-      /       - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
-      /         li class=('active' if i.zero?)
-      /           a title="#{node.name}" href="#{articles_path(node.slug)}"= node.short_name
+        .comments-list
+          - 10.times do
+            .comment.clearfix
+              .comment-avatar
+                = image_tag current_user.avatar_url(:small), size: '40x40', alt: current_user.username
+              .comment-body
+                .comment-user
+                  span.text-success= current_user.username
+                  span.text-muted • 
+                  span.text-muted 23分钟前
+                .comment-content 赞, 这是非常好的文章
+          .load-more
+            a.cf-btn.cf-btn-default 加载更多
+
+
+    .recd-box.clearfix
       h2.clearfix 
         .h-tab.f-left 相关推荐
       .articles-section

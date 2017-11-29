@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :username, null: false
       t.string :password_digest, null: false
       t.string :private_token
+      t.string :avatar
 
       t.datetime :remember_created_at
 

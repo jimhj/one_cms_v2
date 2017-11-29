@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_secure_password
   
   has_many :articles
+
+  mount_uploader :avatar, AvatarUploader
   
   validates :email, presence: true, uniqueness: true, on: :create
   validates :username, presence: { case_sensitive: false }, format: { with: /\A[\p{Word}\w\s-]*\z/ }, length: { in: 3..20 }

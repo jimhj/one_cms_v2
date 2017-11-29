@@ -7,7 +7,7 @@
   margin-bottom: 20px;
 
   &.error .cf-field {
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
   }
 }
 
@@ -16,7 +16,7 @@
   height: 48px;
   width: 378px;
   font-size: 14px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
 
   &:focus {
     border: 1px solid $brand-success;
@@ -34,7 +34,7 @@ textarea.cf-field {
 
   .cf-group {
     padding-bottom: 20px;
-    border-bottom: 1px dotted #f0f0f0;
+    border-bottom: 1px dotted #ddd;
   }
 
   .cf-group:last-child {
