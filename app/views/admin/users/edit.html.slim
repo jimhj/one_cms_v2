@@ -16,7 +16,7 @@
       .form-group.form-group-bordered
         label 可发帖栏目 *
         .clearfix
-          = select_tag :allowed_node_ids, options_for_select(nested_set_options(Node) { |i| '─' * i.level + i.name }, @user.allowed_node_ids.split('|')), multiple: true, style: "width: 200px;height: 400px;"
+          = select_tag :allowed_node_ids, options_for_select(nested_set_options(Node) { |i| '─' * i.level + i.name }, (@user.allowed_node_ids.presence || '').split('|')), multiple: true, style: "width: 200px;height: 400px;"
 
       .form-group.form-group-bordered
         .checkbox

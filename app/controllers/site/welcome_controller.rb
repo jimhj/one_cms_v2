@@ -1,16 +1,21 @@
 class Site::WelcomeController < Site::ApplicationController
   before_action :no_login_required, only: [:sign_in, :sign_up]
   before_action :login_required, only: [:sign_out, :password, :profile]
-  skip_before_action :no_login_required, only: [:check_login]
-  skip_before_action :login_required, only: [:check_login]
+  skip_before_action :no_login_required, only: [:check_login, :activation]
+  skip_before_action :login_required, only: [:check_login, :activation]
 
   def sign_in
     if request.post?
       @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
-        login_as @user
-        remember_me if params[:remember_me] == '1'
-        redirect_back_or_default root_url
+        if @user.actived?
+          login_as @user
+          remember_me if params[:remember_me] == '1'
+          redirect_back_or_default root_url
+        else
+          flash[:error] = "账号尚未激活，请检查注册邮件并激活账号"
+          redirect_to :back
+        end
       else
         flash[:error] = "错误的账号或者密码"
         redirect_to :back
@@ -64,6 +69,22 @@ class Site::WelcomeController < Site::ApplicationController
         flash.now[:error] = current_user.errors.full_messages.first
       end
     end
+  end
+
+  def activation
+    t = ActiveToken.check(params[:token])
+    if t
+      User.transaction do
+        user = User.find_by!(email: t.receiver)
+        user.actived!
+        t.actived! 
+        flash[:info] = "您的账号已激活，请登录"
+      end
+    else
+      flash[:error] = "激活链接无效或已失效"
+    end
+
+    redirect_to sign_in_path
   end
 
   def check_login

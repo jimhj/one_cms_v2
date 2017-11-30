@@ -75,6 +75,7 @@ Rails.application.routes.draw do
     match 'profile',    to: 'welcome#profile', as: :profile,   via: [:get, :post]
     match 'password',    to: 'welcome#password', as: :password,   via: [:get, :post]
     get 'check_login',  to: 'welcome#check_login', as: :check_login
+    get 'active/:token', to: 'welcome#activation', as: :active_user
 
     resources :comments
     resources :tags,  only: [:index, :show],    trailing_slash: true

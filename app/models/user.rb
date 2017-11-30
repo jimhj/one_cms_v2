@@ -27,4 +27,17 @@ class User < ActiveRecord::Base
 
     Node.where(id: node_ids)
   end
+
+  after_create do
+    t = g_active_token
+    UserMailer.delay(queue: 'mailing').activation_email(t)
+  end
+
+  def g_active_token
+    t = ActiveToken.new
+    t.receiver = self.email
+    t.token = SecureRandom.urlsafe_base64(32)
+    t.save
+    t
+  end
 end
