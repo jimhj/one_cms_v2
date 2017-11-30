@@ -1,7 +1,5 @@
 class CreateUsers < ActiveRecord::Migration
-  def change
-    drop_table(:users)
-    
+  def change    
     create_table :users do |t|
       t.string :email, unique: true, null: false
       t.string :username, null: false
