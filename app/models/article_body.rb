@@ -39,25 +39,29 @@ class ArticleBody < ActiveRecord::Base
     end
     
     keywords.to_a.sort { |a, b| b.name.size <=> a.name.size }.each do |keyword|
-      doc = Nokogiri::HTML(self.body_html.presence || self.body)
+      begin
+        doc = Nokogiri::HTML(self.body_html.presence || self.body)
 
-      # doc.search("//br/preceding-sibling::text()|//br/following-sibling::text()").each do |node|
-      #   node.replace(Nokogiri.make("<p>#{node.to_html}</p>"))
-      # end      
+        # doc.search("//br/preceding-sibling::text()|//br/following-sibling::text()").each do |node|
+        #   node.replace(Nokogiri.make("<p>#{node.to_html}</p>"))
+        # end      
 
-      ele = doc.xpath("//text()[not(ancestor::a)][contains(., '#{keyword.name}')]").first
-      next if ele.nil?
+        ele = doc.xpath("//text()[not(ancestor::a)][contains(., '#{keyword.name}')]").first
+        next if ele.nil?
 
-      link = Nokogiri::XML::Node.new "a", doc
-      link.set_attribute(:href, keyword.url)
-      link.set_attribute(:class, 'hot-link')
-      link.set_attribute(:target, '_blank')
-      link.set_attribute(:title, keyword.name)
-      link.content = keyword.name
+        link = Nokogiri::XML::Node.new "a", doc
+        link.set_attribute(:href, keyword.url)
+        link.set_attribute(:class, 'hot-link')
+        link.set_attribute(:target, '_blank')
+        link.set_attribute(:title, keyword.name)
+        link.content = keyword.name
 
-      ele.replace ele.content.sub(/#{keyword.name}/, link.to_html)
+        ele.replace ele.content.sub(/#{keyword.name}/, link.to_html)
 
-      self.body_html = doc.to_html
+        self.body_html = doc.to_html
+      rescue => e
+        next
+      end
     end
 
     update_columns(cached_keyword_id: keywords.last.try(:id) || 0, body_html: self.body_html)
