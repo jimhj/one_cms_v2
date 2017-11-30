@@ -11,16 +11,22 @@ class Site::CommentsController < Site::ApplicationController
   def create
     @comment = @article.comments.build
     @comment.user = current_user
+    @comment.to_user_id = params[:to_user_id]
+    @comment.reply_to_id = params[:reply_to_id]
     @comment.content = params[:content]
 
-    if @comment.save
-      html = render_to_string(partial: 'site/comments/comment', locals: { comment: @comment })
-      ret = { success: true, html: html }
-    else
-      ret = { success: false, error: @comment.errors.full_messages.first }
-    end
+    begin
+      if @comment.save
+        html = render_to_string(partial: 'site/comments/comment', locals: { comment: @comment })
+        ret = { success: true, html: html }
+      else
+        ret = { success: false, error: @comment.errors.full_messages.first }
+      end
 
-    render json: ret
+      render json: ret
+    rescue ActiveRecord::StatementInvalid => e
+      render json: { success: false, error: '暂不支持表情符号等特殊符号评论' }
+    end 
   end
 
   private

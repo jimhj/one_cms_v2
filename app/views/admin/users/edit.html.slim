@@ -1,0 +1,28 @@
+.row.article-form.pt-30
+  .col-lg-12
+    = render "admin/shared/errors", target: @user
+    = form_for @user, url: admin_user_path(@user), class: 'form' do |f|
+      .form-group.form-group-bordered
+        label 用户名 *
+        = f.text_field :username, class: 'form-control', required: true
+      .form-group.form-group-bordered
+        label 用户邮箱 *
+        = f.email_field :email, class: 'form-control', required: true
+      .form-group.form-group-bordered
+        label 激活状态 *
+        .text
+          = f.select :state, options_for_select(['pending', 'actived'], @user.state)
+
+      .form-group.form-group-bordered
+        label 可发帖栏目 *
+        .clearfix
+          = select_tag :allowed_node_ids, options_for_select(nested_set_options(Node) { |i| '─' * i.level + i.name }, @user.allowed_node_ids.split('|')), multiple: true, style: "width: 200px;height: 400px;"
+
+      .form-group.form-group-bordered
+        .checkbox
+          label
+            = f.check_box :review_later, class: 'checkbox'
+            | 先发后审
+
+      .form-group
+        button.btn.btn-primary.btn-lg 确认修改

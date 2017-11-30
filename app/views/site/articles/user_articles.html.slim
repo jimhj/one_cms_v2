@@ -7,6 +7,8 @@
         h2.active 
           a href="#{user_articles_path}" 我的文章
     .box-body
+      = site_notice_message
+
       table.cf-table.cf-table-center
         tbody
           tr
@@ -25,7 +27,10 @@
               td style="width: 120px;"= article.created_at.strftime('%F %T')
               td style="width: 100px;"= article.approved? ? '审核通过' : '审核中'
               td style="width: 100px;"
-                a.text-success.text-underline 编辑
+                - if article.approved?
+                  span.text-muted 已发布
+                - else
+                  a.text-success.text-underline href="#{edit_article_path(article.id)}" 编辑
 
       .box-pagination
         = will_paginate @articles, inner_window: 1, class: 'pagination'

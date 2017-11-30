@@ -1,5 +1,5 @@
 class Site::ArticlesController < Site::ApplicationController
-  before_action :login_required, only: [:new, :create, :user_articles]
+  before_action :login_required, only: [:new, :create, :user_articles, :edit, :update]
   
   caches_action :feed, expires_in: 2.hours
   
@@ -13,6 +13,7 @@ class Site::ArticlesController < Site::ApplicationController
     @node = Node.find_by!(slug: params[:slug])
     @nodes = @node.root.self_and_descendants
     @articles = Article.where(node_id: @node.self_and_descendants.pluck(:id))
+                       .where(approved: true)
                        .order('id DESC')
                        .paginate(page: params[:page], per_page: 20, total_entries: 1000000)
     @links = @node.links.pc
@@ -27,6 +28,12 @@ class Site::ArticlesController < Site::ApplicationController
   def show
     @node = Node.find_by!(slug: params[:slug])
     @article = @node.articles.find(params[:id])
+
+    unless @article.approved?
+      render :file => 'public/404.html', status: 404, layout: false
+      return
+    end
+
     @nodes = @node.self_and_ancestors
 
     tag_ids = @article.taggings.pluck(:tag_id)
@@ -74,6 +81,21 @@ class Site::ArticlesController < Site::ApplicationController
   def user_articles
     @articles = current_user.articles.order('id DESC').paginate(paginate_params)
     set_meta_tags title: "我的文章"
+  end
+
+  def edit
+    @article = current_user.articles.find params[:id]
+  end
+
+  def update
+    @article = current_user.articles.find params[:id]
+
+    if @article.update_attributes(article_params)
+      flash[:info] = "修改文章成功"
+      redirect_to user_articles_path
+    else
+      render action: :edit
+    end
   end
 
   def search

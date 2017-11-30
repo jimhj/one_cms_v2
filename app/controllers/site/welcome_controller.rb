@@ -1,6 +1,6 @@
 class Site::WelcomeController < Site::ApplicationController
   before_action :no_login_required, only: [:sign_in, :sign_up]
-  before_action :login_required, only: [:sign_out]
+  before_action :login_required, only: [:sign_out, :password, :profile]
   skip_before_action :no_login_required, only: [:check_login]
   skip_before_action :login_required, only: [:check_login]
 
@@ -37,6 +37,33 @@ class Site::WelcomeController < Site::ApplicationController
   def sign_out
     logout
     redirect_to root_url
+  end
+
+  def password
+    if request.post?
+      if current_user.authenticate(params[:password])
+        current_user.password = params[:new_password]
+        current_user.password_confirmation = params[:new_password_confirmation]
+        if current_user.save(context: :reset_password)
+          flash.now[:info] = "密码重置成功"
+        else
+          flash.now[:error] = current_user.errors.full_messages.first
+        end
+      else
+        flash.now[:error] = "当前密码输入不正确"
+      end
+    end
+  end
+
+  def profile
+    if request.post?
+      current_user.avatar = params[:avatar]
+      if current_user.save
+        flash.now[:info] = "头像更新成功"
+      else
+        flash.now[:error] = current_user.errors.full_messages.first
+      end
+    end
   end
 
   def check_login

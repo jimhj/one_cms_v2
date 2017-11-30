@@ -1,0 +1,18 @@
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2
+          a href="#{password_path}" 修改密码
+        h2.active  
+          a href="#{url_for}" 上传头像
+    .box-body
+      = form_tag profile_path, class: 'common-form', multipart: true do
+        = site_notice_message
+        .cf-group.clearfix
+          .f-left
+            = image_tag current_user.avatar_url(:middle)
+          .f-left.m-left10
+            = file_field_tag :avatar, accept: 'image/png,image/gif,image/jpeg', required: true
+        .cf-group
+          button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 上传新头像

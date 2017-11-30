@@ -6,4 +6,7 @@
       span.text-success= comment.user.username
       span.text-muted • 
       span.text-muted= comment.created_at.strftime('%F %T')
-    .comment-content= comment.content
+    .comment-content.clearfix
+      .f-left= comment.content
+      .f-right
+        a.reply-btn.text-success data-reply_to_id="#{comment.id}" data-to_user_id="#{comment.user.id}" data-username="#{comment.user.username}" href="javascript:;" 回复

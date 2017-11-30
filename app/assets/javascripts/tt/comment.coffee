@@ -15,7 +15,15 @@ $(document).ready ->
       alert('请输入评论内容哦')
       rturn false
 
-    params = { article_id, content: content }
+    to_user_id = $btn.data('to_user_id')
+    reply_to_id = $btn.data('reply_to_id')
+
+    params = { 
+      article_id: article_id, 
+      content: content, 
+      to_user_id: to_user_id, 
+      reply_to_id: reply_to_id 
+    }
 
     $btn.addClass('disabled')
     $('.comment-loading').show()
@@ -23,9 +31,20 @@ $(document).ready ->
       if rsp.success
         $('textarea.post-field').val('')
         $('.comments-list').prepend rsp.html
+        $btn.data('to_user_id', '')
+        $btn.data('reply_to_id', '')
       else
         alert rsp.error
 
       $('.comment-loading').hide()
       $btn.removeClass('disabled')
     , 'json'
+
+  $('body').on 'click', '.reply-btn', ->
+    $btn = $(this)
+    to_user_id = $btn.data('to_user_id')
+    reply_to_id = $btn.data('reply_to_id')
+    username = $btn.data("username")
+    $('.submitComment').data('to_user_id', to_user_id)
+    $('.submitComment').data('reply_to_id', reply_to_id)
+    $('textarea.post-field').val("回复 #{username}: ").focus()

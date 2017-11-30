@@ -88,6 +88,20 @@
 
 .comment-body .comment-content {
   margin-top: 8px;
+
+  .f-left {
+    // width: 500px;
+  }
+
+  a.reply-btn {
+    display: none;
+  }
+}
+
+.comment:hover .comment-body .comment-content {
+  a.reply-btn {
+    display: block;
+  }
 }
 
 .post-disabled {

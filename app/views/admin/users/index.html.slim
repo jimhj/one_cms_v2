@@ -3,11 +3,26 @@
     table.table.table-striped.table-hover.table-bordered.table-condensed
       tbody
         tr
-          td.text-center ID
-          td.text-center 用户名
-          td.text-center 邮箱
-          td.text-center 状态
-          td.text-center 注册时间          
-          td.text-center 投稿需要审核
+          td.w5.text-center ID
+          td.w10.text-center 用户名
+          td.w15.text-center 邮箱
+          td.w10.w15.text-center 状态
+          td.w10.text-center 注册时间          
+          td.w10.text-center 先发后审
           td.text-center 允许投稿板块
-          td.text-center 操作
+          td.w5.text-center 操作
+        - @users.each do |user|
+          tr
+            td.text-center= user.id
+            td.text-center= user.username
+            td.text-center= user.email
+            td.text-center= user.state
+            td.text-center= user.created_at.strftime('%F %T')
+            td.text-center= user.review_later? ? '是' : '否'
+            td.text-center
+              = raw user.allowed_nodes.map(&:name).join(' | ')
+            td.text-center
+              a href="#{edit_admin_user_path(user)}"
+                i.fa.fa-pencil-square
+
+    = will_paginate @users, renderer: BootstrapPagination::Rails

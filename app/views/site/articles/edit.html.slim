@@ -1,0 +1,42 @@
+- content_for :header do
+  = javascript_include_tag 'tt/article'
+  = stylesheet_link_tag 'tt/views/article'
+
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2.active 
+          a href="#{url_for}" 编辑文字
+        h2 
+          a href="#{user_articles_path}" 我的文章
+    .box-body
+      = form_for @article, url: update_article_path(@article.id), html: { class: 'common-form common-form-lg' }, multipart: true, method: 'put' do |f|
+        - if @article.errors.any?
+          .cf-alert.error= @article.errors.full_messages.first
+
+        .cf-group
+          label.cf-label 文章标题 *
+          = f.text_field :title, class: 'cf-field', required: true
+        .cf-group
+          label.cf-label 发布节点 *
+          = f.select :node_id, options_for_select(current_user.allowed_nodes.pluck(:name, :id)), required: true
+
+        .cf-group
+          label.cf-label 文章题图
+          = f.file_field :thumb
+          - if not @article.read_attribute(:thumb).blank?
+            .m-top10
+              = image_tag @article.thumb_url(:middle)
+
+        = f.fields_for :article_body do |body_field|
+          .cf-group
+            label.cf-label 原文链接
+            = body_field.text_field :redirect_url, class: 'cf-field'
+
+          .cf-group
+            label.cf-label 文章内容 *
+            = body_field.text_area :body, class: 'redactor-editor', required: true
+
+        .cf-group
+          button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 确认修改

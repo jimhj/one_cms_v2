@@ -10,6 +10,7 @@ class Mobile::ArticlesController < Mobile::ApplicationController
     @nodes = @node.root.self_and_descendants
 
     @articles = Article.where(node_id: @node.self_and_descendants.pluck(:id)).order('id DESC')
+                       .where(approved: true)
                        .paginate(page: params[:page], per_page: 20, total_entries: 10000)
 
     # @links = @node.links.mobile
@@ -22,6 +23,12 @@ class Mobile::ArticlesController < Mobile::ApplicationController
 
   def show
     @article = Article.find params[:id]
+    
+    unless @article.approved?
+      render :file => 'public/404.html', status: 404, layout: false
+      return
+    end
+
     @node = Node.find_by!(slug: params[:slug])
     @nodes = @node.self_and_ancestors
     

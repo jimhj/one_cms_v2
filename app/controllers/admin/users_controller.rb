@@ -1,6 +1,20 @@
 class Admin::UsersController < Admin::ApplicationController
+  before_action :find_user, only: [:edit, :update]
+
   def index
     @users = User.order('id DESC').paginate(paginate_params)
+  end
+
+  def edit
+  end
+
+  def update
+    @user.allowed_node_ids = (params[:allowed_node_ids].presence || []).join('|')
+    if @user.update_attributes(user_params)
+      redirect_to admin_users_path
+    else
+      render :edit
+    end
   end
 
   private
@@ -9,8 +23,8 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.find params[:id]
   end
 
-  def link_params
-    params.require(:link).permit(:name, :url, :title, :qq, :sortrank, :device, :linkable_type, :linkable_id)
+  def user_params
+    params.require(:user).permit(:username, :email, :state, :review_later)
   end
 
   def paginate_params

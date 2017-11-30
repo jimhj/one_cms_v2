@@ -72,6 +72,8 @@ Rails.application.routes.draw do
     match 'sign_up',    to: 'welcome#sign_up', as: :sign_up,   via: [:get, :post]
     match 'sign_in',    to: 'welcome#sign_in', as: :sign_in,   via: [:get, :post]
     match 'sign_out',   to: 'welcome#sign_out', as: :sign_out, via: [:delete]
+    match 'profile',    to: 'welcome#profile', as: :profile,   via: [:get, :post]
+    match 'password',    to: 'welcome#password', as: :password,   via: [:get, :post]
     get 'check_login',  to: 'welcome#check_login', as: :check_login
 
     resources :comments
@@ -83,6 +85,8 @@ Rails.application.routes.draw do
     get 'articles/new', to: 'articles#new',     as: :new_article
     get 'articles',     to: 'articles#user_articles',  as: :user_articles
     post 'articles',    to: 'articles#create',  as: :create_article
+    get 'articles/:id/edit',     to: 'articles#edit',  as: :edit_article
+    put 'articles/:id',     to: 'articles#update',  as: :update_article
     get ':slug/:id',    to: 'articles#show',    as: :article
     get ':slug',        to: 'articles#index',   as: :articles, trailing_slash: true
   end
