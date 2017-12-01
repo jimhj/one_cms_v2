@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     post 'articles',    to: 'articles#create',  as: :create_article
     get 'articles/:id/edit',     to: 'articles#edit',  as: :edit_article
     put 'articles/:id',     to: 'articles#update',  as: :update_article
+    delete 'articles/:id',     to: 'articles#destroy',  as: :delete_article
     get ':slug/:id',    to: 'articles#show',    as: :article
     get ':slug',        to: 'articles#index',   as: :articles, trailing_slash: true
   end

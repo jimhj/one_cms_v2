@@ -1,5 +1,6 @@
 class Site::ArticlesController < Site::ApplicationController
-  before_action :login_required, only: [:new, :create, :user_articles, :edit, :update]
+  before_action :login_required, only: [:new, :create, :user_articles, :edit, :update, :destroy]
+  before_action :find_article, only: [:edit, :update, :destroy]
   
   caches_action :feed, expires_in: 2.hours
   
@@ -84,18 +85,21 @@ class Site::ArticlesController < Site::ApplicationController
   end
 
   def edit
-    @article = current_user.articles.find params[:id]
   end
 
   def update
-    @article = current_user.articles.find params[:id]
-
     if @article.update_attributes(article_params)
       flash[:info] = "修改文章成功"
       redirect_to user_articles_path
     else
       render action: :edit
     end
+  end
+
+  def destroy
+    @article.destroy
+    flash[:info] = "删除文章成功"
+    redirect_to user_articles_path
   end
 
   def search
@@ -112,6 +116,10 @@ class Site::ArticlesController < Site::ApplicationController
 
   def article_params
     params.require(:article).permit(:node_id, :title, :short_title, :thumb, :source, :writer, :seo_title, :seo_keywords, :seo_description, :hot, :focus, :recommend, :linked, :link_word, :article_body_attributes => [:id, :body, :cached_keyword_id, :redirect_url])
+  end
+
+  def find_article
+    @article = current_user.articles.find params[:id]
   end
 
   def paginate_params
