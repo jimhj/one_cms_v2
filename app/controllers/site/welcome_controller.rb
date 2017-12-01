@@ -1,4 +1,5 @@
 class Site::WelcomeController < Site::ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:sign_out]
   before_action :no_login_required, only: [:sign_in, :sign_up]
   before_action :login_required, only: [:sign_out, :password, :profile]
   skip_before_action :no_login_required, only: [:check_login, :activation]
