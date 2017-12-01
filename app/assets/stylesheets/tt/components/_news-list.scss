@@ -1,20 +1,22 @@
 // 小图文
 .news-list {
   width: 100%;
-  border-top: 2px solid $brand-success;
+  // border-top: 2px solid $brand-success;
+  padding-top: 30px;
   background-color: #fbfbfb;
   margin-bottom: 16px;
 }
 
 .news-list .list-head {
   color: #222;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   text-align: center;
-  border-bottom: 1px dashed #eaeaea;
+  border-left: 4px solid $brand-success;
+  // border-bottom: 1px dashed #eaeaea;
 }
 
 .news-list .news-content {
@@ -72,8 +74,8 @@
 
 // 大图文
 .hot-pics .list-head {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+  // padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .hot-pics ul.news-content {

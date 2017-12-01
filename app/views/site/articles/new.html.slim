@@ -39,4 +39,13 @@
               = body_field.text_area :body, class: 'redactor-editor', required: true
 
           .cf-group
+            label
+              = f.check_box :hot
+              | &nbsp; 头条
+            | &nbsp;&nbsp;&nbsp;&nbsp;
+            label
+              = f.check_box :recommend
+              | &nbsp; 首页推荐   
+
+          .cf-group
             button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 确认发布

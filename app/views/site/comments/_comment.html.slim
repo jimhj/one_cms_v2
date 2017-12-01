@@ -9,7 +9,18 @@
         span.text-muted= comment.created_at.strftime('%F %T')
       .f-right
         span.text-muted ##{comment.floor_number}
-    .comment-content.clearfix
-      .f-left= comment.content
-      .f-right
-        a.reply-btn.text-success data-reply_to_id="#{comment.id}" data-to_user_id="#{comment.user.id}" data-username="#{comment.user.username}" href="javascript:;" 回复
+    .comment-content
+      .content-body.clearfix
+        .f-left
+          = comment.content
+        .f-right
+          a.reply-btn.text-success data-reply_to_id="#{comment.id}" data-to_user_id="#{comment.user.id}" data-username="#{comment.user.username}" href="javascript:;" 回复
+
+      - if comment.reply_comment.present?
+        .parent_comment.clearfix
+          .parent_comment-user
+            = image_tag comment.reply_user.avatar_url(:small), size: '15x15'
+            span.text-success= comment.reply_user.username
+            span.text-muted ##{comment.reply_comment.floor_number}
+          .parent_comment_content
+            = comment.reply_comment.content

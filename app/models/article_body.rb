@@ -40,11 +40,7 @@ class ArticleBody < ActiveRecord::Base
     
     keywords.to_a.sort { |a, b| b.name.size <=> a.name.size }.each do |keyword|
       begin
-        doc = Nokogiri::HTML(self.body_html.presence || self.body)
-
-        # doc.search("//br/preceding-sibling::text()|//br/following-sibling::text()").each do |node|
-        #   node.replace(Nokogiri.make("<p>#{node.to_html}</p>"))
-        # end      
+        doc = Nokogiri::HTML(self.body_html.presence || self.body)   
 
         ele = doc.xpath("//text()[not(ancestor::a)][contains(., '#{keyword.name}')]").first
         next if ele.nil?
