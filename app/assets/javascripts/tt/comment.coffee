@@ -30,7 +30,7 @@ $(document).ready ->
     $.post '/comments', params, (rsp) ->
       if rsp.success
         $('textarea.post-field').val('')
-        $('.comments-list').prepend rsp.html
+        $('.comments-list').append rsp.html
         $btn.data('to_user_id', '')
         $btn.data('reply_to_id', '')
       else

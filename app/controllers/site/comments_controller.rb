@@ -4,7 +4,7 @@ class Site::CommentsController < Site::ApplicationController
   before_action :find_article
 
   def index
-    @comments = @article.comments.where(approved: true).order('id DESC')
+    @comments = @article.comments.where(approved: true).order('id ASC')
     html = render_to_string(partial: 'site/comments/comment_list', locals: { comments: @comments })
     render json: { html: html }
   end
