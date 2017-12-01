@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129141502) do
+ActiveRecord::Schema.define(version: 20171201040627) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20171129141502) do
     t.boolean  "focus",                       default: false
     t.boolean  "hot",                         default: false
     t.boolean  "recommend",                   default: false
-    t.boolean  "approved",                    default: false
+    t.boolean  "approved",                    default: true
     t.boolean  "linked",                      default: false
     t.string   "link_word",       limit: 255
     t.integer  "pictures_count",  limit: 4,   default: -1
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20171129141502) do
   add_index "articles", ["pictures_count"], name: "index_articles_on_pictures_count", using: :btree
   add_index "articles", ["thumb"], name: "index_articles_on_thumb", using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "channel_articles", force: :cascade do |t|
     t.integer  "channel_id", limit: 4
