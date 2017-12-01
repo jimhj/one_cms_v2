@@ -182,6 +182,7 @@ class Article < ActiveRecord::Base
     html = article_body.body_html.presence || article_body.body
     article_body.delay.replace_keywords rescue nil
     # add_watermark_to_html_images(html)
+    html
   end
 
   def keywords
