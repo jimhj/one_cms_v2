@@ -18,7 +18,7 @@ class ArticleBody < ActiveRecord::Base
   end
 
   after_create do
-    restore_remote_images
+    self.dalay.restore_remote_images
     article.delay.analyze_keywords
     # self.delay.replace_keywords
 
