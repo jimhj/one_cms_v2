@@ -22,7 +22,7 @@
             label.cf-label 文章标题 *
             = f.text_field :title, class: 'cf-field', required: true
           .cf-group
-            label.cf-label 发布节点 *
+            label.cf-label 发布栏目 *
             = f.select :node_id, options_for_select(current_user.allowed_nodes.pluck(:name, :id)), required: true
 
           .cf-group

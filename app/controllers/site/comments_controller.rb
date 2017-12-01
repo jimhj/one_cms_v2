@@ -1,4 +1,5 @@
 class Site::CommentsController < Site::ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :login_required, except: [:index]
   before_action :find_article
 

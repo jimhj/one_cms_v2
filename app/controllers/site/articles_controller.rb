@@ -72,7 +72,7 @@ class Site::ArticlesController < Site::ApplicationController
     @article.approved = current_user.review_later?
 
     if @article.save
-      redirect_to admin_articles_path
+      redirect_to user_articles_path
     else
       render action: :new
     end
