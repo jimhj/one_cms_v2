@@ -3,7 +3,9 @@
 # = require jquery.sticky-kit
 
 $(document).ready ->
-  $.get '/check_login', (rsp) ->
+  return_to = window.location.href
+
+  $.get '/check_login', { return_to: return_to }, (rsp) ->
     $('.login-state').empty().append(rsp.login_html)
     $('.post-comment-box').empty().append(rsp.post_box)
   , 'json'

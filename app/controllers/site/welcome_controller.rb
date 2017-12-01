@@ -6,6 +6,10 @@ class Site::WelcomeController < Site::ApplicationController
   skip_before_action :login_required, only: [:check_login, :activation]
 
   def sign_in
+    if request.get?
+      store_location params[:return_to]
+    end
+
     if request.post?
       @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
@@ -41,8 +45,9 @@ class Site::WelcomeController < Site::ApplicationController
   end
 
   def sign_out
+    url = request.referer
     logout
-    redirect_to root_path
+    redirect_to url
   end
 
   def password
@@ -89,7 +94,14 @@ class Site::WelcomeController < Site::ApplicationController
   end
 
   def check_login
-    login_html = render_to_string(partial: 'site/welcome/login_state')
+    ret = params[:return_to].presence || ''
+    return_to = if ret.include?('sign_up') or ret.include?('sign_in')
+      nil
+    else
+      params[:return_to]
+    end
+
+    login_html = render_to_string(partial: 'site/welcome/login_state', locals: { return_to: return_to })
     post_box = render_to_string(partial: 'site/comments/post_box')
     render json: { login: login?, login_html: login_html, post_box: post_box }
   end

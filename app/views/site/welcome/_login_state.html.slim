@@ -15,6 +15,7 @@ ul.nav-list.clearfix
         span.caret
   - else
     li.f-left
-      a href="#{sign_in_path}" title="登录" 登录
+      - arg = { return_to: return_to }
+      a href="#{sign_in_path(arg)}" title="登录" 登录
     li.f-left
       a href="#{sign_up_path}" title="注册" 注册
