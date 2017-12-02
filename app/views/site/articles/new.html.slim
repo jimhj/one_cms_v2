@@ -25,10 +25,6 @@
             label.cf-label 发布栏目 *
             = f.select :node_id, options_for_select(current_user.allowed_nodes.pluck(:name, :id)), required: true
 
-          .cf-group
-            label.cf-label 文章题图
-            = f.file_field :thumb
-
           = f.fields_for :article_body do |body_field|
             .cf-group
               label.cf-label 原文链接
