@@ -60,6 +60,15 @@ html
                     a href="#{new_admin_article_path}" 添加文章
               li
                 a href="javascript:;"
+                  i.fa.fa-comment.fa-fw
+                  | 评论管理
+                  span.fa.arrow 
+                ul.nav.nav-second-level.collapse
+                  li
+                    a href="#{admin_comments_path}" 评论列表
+
+              li
+                a href="javascript:;"
                   i.fa.fa-link.fa-fw
                   | 热点文章
                   span.fa.arrow
