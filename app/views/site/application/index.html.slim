@@ -12,7 +12,7 @@
         ul.items
           - @focus.each_with_index do |a, ind|
             li
-              a href="#{article_path(a)}" title="#{a.title.truncate(24)}"
+              a href="#{article_path(a)}" title="#{a.title.truncate(30)}"
                 = image_tag a.thumb.url, size: '500x300', alt: a.title, title: a.title
       .f-left.right-focus-list
         - @secondary_focus.each_with_index do |a, ind|
