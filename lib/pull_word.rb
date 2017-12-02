@@ -2,7 +2,7 @@ class PullWord
   def self.analyze(text)
     params = {
       source: text,
-      param1: 3,
+      param1: 0,
       param2: 0
     }
     rsp = RestClient.post "http://api.pullword.com/post.php", params
