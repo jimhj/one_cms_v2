@@ -40,7 +40,7 @@
     ul.news-content.clearfix
       - (@links || []).each do |link|
         li
-          a href="#{link.url}" target="_blank" title="#{link.title}" rel="no-follow"= link.name
+          a href="#{link.url}" target="_blank" title="#{link.title}" rel="nofollow"= link.name
 
 - if controller_name == 'application' && action_name == 'index'
   .about-section
