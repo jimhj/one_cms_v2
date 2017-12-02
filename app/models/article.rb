@@ -74,8 +74,12 @@ class Article < ActiveRecord::Base
 
   def analyze_keywords
     begin
-      rsp = DiscuzKeyword.analyze(title, article_body.body)
-      keywords = rsp['total_response']['keyword']['result']['item'].collect{ |h| h.values }.flatten rescue []
+      # rsp = DiscuzKeyword.analyze(title, article_body.body)
+      # keywords = rsp['total_response']['keyword']['result']['item'].collect{ |h| h.values }.flatten rescue []
+      text =  title + ActionView::Base.full_sanitizer.sanitize(article_body.body).first(400)
+      keywords = PullWord.analyze(text)
+      keywords = keywords.sort_by { |w| w.length }.last(5) || []
+      p keywords
 
       self.tags = keywords.collect do |tag|        
         t = ::Tag.find_or_initialize_by(name: tag)
