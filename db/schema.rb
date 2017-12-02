@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201040627) do
+ActiveRecord::Schema.define(version: 20171202140345) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171201040627) do
     t.string   "seo_keywords",    limit: 255
     t.string   "seo_description", limit: 255
     t.boolean  "focus",                       default: false
+    t.boolean  "secondary_focus",             default: false
     t.boolean  "hot",                         default: false
     t.boolean  "recommend",                   default: false
     t.boolean  "approved",                    default: true
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 20171201040627) do
   add_index "articles", ["hot"], name: "index_articles_on_hot", using: :btree
   add_index "articles", ["node_id"], name: "index_articles_on_node_id", using: :btree
   add_index "articles", ["pictures_count"], name: "index_articles_on_pictures_count", using: :btree
+  add_index "articles", ["secondary_focus"], name: "index_articles_on_secondary_focus", using: :btree
   add_index "articles", ["thumb"], name: "index_articles_on_thumb", using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree

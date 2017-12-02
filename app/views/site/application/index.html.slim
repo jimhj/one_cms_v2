@@ -6,12 +6,22 @@
   / = render 'site/share/node_bar'
 
   .f-left.index-main
-    .carousel-focus.slideBox style="width:780px;height:300px;"
-      ul.items
-        - @focus.each_with_index do |a, ind|
-          li
-            a href="#{article_path(a)}" title="#{a.title}"
-              = image_tag a.thumb.url(:large), size: '780x300', alt: a.title, title: a.title
+    .index-top.clearfix
+      / .f-left.carousel-focus.slideBox style="width:780px;height:300px;"
+      .f-left.carousel-focus.slideBox style="width:500px;height:300px;"
+        ul.items
+          - @focus.each_with_index do |a, ind|
+            li
+              a href="#{article_path(a)}" title="#{a.title}"
+                = image_tag a.thumb.url(:large), size: '500x300', alt: a.title, title: a.title
+      .f-left.right-focus-list
+        - @secondary_focus.each_with_index do |a, ind|
+          - img = a.read_attribute(:thumb).blank? ? a.pictures.first : a.thumb.urls
+          .focus-item
+            .rf-img= image_tag img, alt: a.title, title: a.title
+            .rf-tip
+              a.rf-tip-title href="#{article_path(a)}" title="#{a.title}"= a.title.truncate(34)
+
     .articles-section.m-top10
       = render partial: 'site/application/index_article', collection: @articles, as: :article
       .loading-box

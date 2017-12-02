@@ -17,6 +17,7 @@ class Article < ActiveRecord::Base
 
   scope :recent, -> { where(recommend: false).order('id DESC').limit(6) }
   scope :focus, -> { where(focus: true).order('id DESC').limit(8) }
+  scope :secondary_focus, -> { where(secondary_focus: true).order('id DESC').limit(2) }
   scope :hot, -> { where(hot: true).order('id DESC').limit(10) }
 
   scope :with_photo, -> {
