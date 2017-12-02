@@ -64,6 +64,11 @@
     | &nbsp;&nbsp;
     label
       = f.check_box :recommend, class: 'checkbox'
-      | 首页推荐                 
+      | 首页推荐   
+
+  .checkbox
+    label
+      = f.check_box :approved, class: 'checkbox'
+      | 审核通过            
   .form-group
     button.btn.btn-primary.btn-lg 提交文章

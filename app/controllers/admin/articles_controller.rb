@@ -1,12 +1,18 @@
 class Admin::ArticlesController < Admin::ApplicationController
   def index
     if params[:node_id].blank?
-      @articles = Article.order('id DESC').limit(20000).paginate(paginate_params)
+      @articles = Article.order('id DESC').limit(20000)
     else
       @node = Node.find params[:node_id]
       node_ids = @node.self_and_descendants.pluck(:id)
-      @articles = Article.where(node_id: node_ids).joins(:node).paginate(paginate_params).order('id DESC')
+      @articles = Article.where(node_id: node_ids).joins(:node).order('articles.id DESC')
     end
+
+    unless params[:user_id].blank?
+      @articles = @articles.where(user_id: params[:user_id])
+    end
+
+    @articles = @articles.paginate(paginate_params)
   end
 
   def search
@@ -56,7 +62,7 @@ class Admin::ArticlesController < Admin::ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:node_id, :title, :short_title, :thumb, :source, :writer, :seo_title, :seo_keywords, :seo_description, :hot, :focus, :recommend, :linked, :link_word, :article_body_attributes => [:id, :body, :cached_keyword_id, :redirect_url])
+    params.require(:article).permit(:node_id, :approved, :title, :short_title, :thumb, :source, :writer, :seo_title, :seo_keywords, :seo_description, :hot, :focus, :recommend, :linked, :link_word, :article_body_attributes => [:id, :body, :cached_keyword_id, :redirect_url])
   end
 
   def paginate_params
