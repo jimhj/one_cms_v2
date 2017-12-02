@@ -28,6 +28,8 @@ class Article < ActiveRecord::Base
   }
 
   after_create do
+    self.analyze_keywords
+    
     if self.linked?
       self.delay.create_keyword
     end
@@ -35,10 +37,26 @@ class Article < ActiveRecord::Base
     self.delay.notify_baidu_spider
   end
 
+  before_save do
+    self.seo_keywords = (self.seo_keywords.presence || '').split(/,|，/).join(',')
+  end
+
+  def analyze_keywords
+    words = (self.seo_keywords.presence || '').split(/,|，/)
+    self.tags = words.collect do |tag|        
+      t = ::Tag.find_or_initialize_by(name: tag)
+      t.name = tag
+      t.save!
+      t
+    end 
+  end
+
   after_update do
     if (changed_attributes.keys.include?('linked') or changed_attributes.keys.include?('link_word')) && self.linked?
       self.delay.create_keyword
     end
+
+    self.analyze_keywords
   end
 
   def notify_baidu_spider
@@ -72,28 +90,27 @@ class Article < ActiveRecord::Base
     hot[1..-1]
   end
 
-  def analyze_keywords
-    begin
-      # rsp = DiscuzKeyword.analyze(title, article_body.body)
-      # keywords = rsp['total_response']['keyword']['result']['item'].collect{ |h| h.values }.flatten rescue []
-      text =  title
-      keywords = PullWord.analyze(text)
-      keywords = keywords.sort_by { |w| w.length }.last(5) || []
-      p keywords
+  # def analyze_keywords
+  #   begin
+  #     # rsp = DiscuzKeyword.analyze(title, article_body.body)
+  #     # keywords = rsp['total_response']['keyword']['result']['item'].collect{ |h| h.values }.flatten rescue []
+  #     text =  title
+  #     keywords = PullWord.analyze(text)
+  #     keywords = keywords.sort_by { |w| w.length }.last(5) || []
+  #     p keywords
 
-      self.tags = keywords.collect do |tag|        
-        t = ::Tag.find_or_initialize_by(name: tag)
-        t.name = tag
-        t.save!
-        t
-      end
+  #     self.tags = keywords.collect do |tag|        
+  #       t = ::Tag.find_or_initialize_by(name: tag)
+  #       t.name = tag
+  #       t.save!
+  #       t
+  #     end
 
-      update_attribute :seo_keywords, keywords.join(',')
-    rescue
-      true
-    end
-  end
-
+  #     update_attribute :seo_keywords, keywords.join(',')
+  #   rescue
+  #     true
+  #   end
+  # end
 
   def pictures
     pictures = self.picture_assets

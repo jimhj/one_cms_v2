@@ -1,4 +1,6 @@
-#= require redactor-rails
+//= require jquery-ui.min
+//= require tagit
+//= require redactor-rails
 
 window.init_redactor = function(){
   var csrf_token = $('meta[name=csrf-token]').attr('content');
@@ -23,3 +25,7 @@ window.init_redactor = function(){
 }
 
 $(document).on( 'ready page:load', window.init_redactor );
+
+$(document).ready(function () {
+  $("#article_seo_keywords").tagit();
+});
