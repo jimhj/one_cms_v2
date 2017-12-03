@@ -32,8 +32,8 @@
 
             .cf-group
               label.cf-label 文章内容 *
-              = body_field.text_area :body, class: 'redactor-editor', required: true
-
+              = body_field.text_area :body, class: 'redactor-editor'
+              
           .cf-group
             label.cf-label 文章标签 (输入后按回车添加标签)
             = f.text_field :seo_keywords, class: 'cf-field'

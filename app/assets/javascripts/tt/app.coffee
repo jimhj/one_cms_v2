@@ -2,9 +2,6 @@
 # = require jquery_ujs
 # = require jquery.sticky-kit
 
-jQuery.curCSS = (element, prop, val) ->
-  return jQuery(element).css(prop, val)
-
 $(document).ready ->
   return_to = window.location.href
 

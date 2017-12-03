@@ -2,6 +2,12 @@
 //= require tagit
 //= require redactor-rails
 
+(function($) {
+  if (!$.curCSS) {
+   $.curCSS = $.css;
+  }
+})(jQuery);
+
 window.init_redactor = function(){
   var csrf_token = $('meta[name=csrf-token]').attr('content');
   var csrf_param = $('meta[name=csrf-param]').attr('content');
