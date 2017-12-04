@@ -140,6 +140,6 @@ end
 # end
 
 after 'deploy:publishing', 'deploy:restart'
-after 'deploy:restart', 'sitemap:refresh'
+# after 'deploy:restart', 'sitemap:refresh'
 
 
