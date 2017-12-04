@@ -1,7 +1,7 @@
 RestClient.log = Rails.logger
 
 def mip_domain
-  Setting.mobile_domain.gsub('http://', '')
+  Setting.mobile_domain.gsub('http://', '').gsub('https://', '')
 end
 
 def mip_host

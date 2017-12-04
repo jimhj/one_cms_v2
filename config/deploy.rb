@@ -79,16 +79,16 @@ namespace :deploy do
   end
 end
 
-namespace :whenever do
-  task :refresh do
-    on roles(:web, :db, :app) do
-      within release_path do
-        execute :bundle, "exec whenever -c -s 'environment=production'"
-        execute :bundle, "exec whenever -w -s 'environment=production'"
-      end
-    end
-  end
-end
+# namespace :whenever do
+#   task :refresh do
+#     on roles(:web, :db, :app) do
+#       within release_path do
+#         execute :bundle, "exec whenever -c -s 'environment=production'"
+#         execute :bundle, "exec whenever -w -s 'environment=production'"
+#       end
+#     end
+#   end
+# end
 
 namespace :sitemap do
   task :refresh do
@@ -103,40 +103,40 @@ namespace :sitemap do
   end
 end
 
-namespace :clear do
-  task :cache do
-    on roles(:web, :db, :app) do
-      within release_path do
-        with rails_env: :production do
-          execute :bundle, "exec rake tmp:clear --trace"
-        end
-      end
-    end    
-  end
-end
+# namespace :clear do
+#   task :cache do
+#     on roles(:web, :db, :app) do
+#       within release_path do
+#         with rails_env: :production do
+#           execute :bundle, "exec rake tmp:clear --trace"
+#         end
+#       end
+#     end    
+#   end
+# end
 
-namespace :assets do
-  task :precompile do
-    on roles(:web, :db, :app) do
-      within release_path do
-        with rails_env: :production do
-          execute :bundle, "exec rake assets:precompile --trace"
-        end
-      end
-    end    
-  end
-end
+# namespace :assets do
+#   task :precompile do
+#     on roles(:web, :db, :app) do
+#       within release_path do
+#         with rails_env: :production do
+#           execute :bundle, "exec rake assets:precompile --trace"
+#         end
+#       end
+#     end    
+#   end
+# end
 
-namespace :baidu do
-  task :mip do
-    on roles(:web, :db, :app) do
-      within release_path do
-        with rails_env: :production do
-          execute :bundle, "exec rake baidu:notify_mip --trace"
-        end
-      end
-    end    
-  end
+# namespace :baidu do
+#   task :mip do
+#     on roles(:web, :db, :app) do
+#       within release_path do
+#         with rails_env: :production do
+#           execute :bundle, "exec rake baidu:notify_mip --trace"
+#         end
+#       end
+#     end    
+#   end
 end
 
 after 'deploy:publishing', 'deploy:restart'
