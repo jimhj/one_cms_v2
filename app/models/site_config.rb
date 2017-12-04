@@ -36,11 +36,13 @@ class SiteConfig < ActiveRecord::Base
 
   def self.clear_html_cache
     system "cd #{Rails.root.join('public/cached_pages').to_s}; rm -rf *.html"
+    system "cd #{Rails.root.join('public/cached_pages/z').to_s}; rm -rf *.html"
     system "cd #{Rails.root.join('public/mobile_cached_pages').to_s}; rm -rf *.html"
   end
 
   def self.clear_index_cache
     system "cd #{Rails.root.join('public/cached_pages').to_s}; rm -rf index.html"
+    system "cd #{Rails.root.join('public/cached_pages/z').to_s}; rm -rf *.html"
     system "cd #{Rails.root.join('public/mobile_cached_pages').to_s}; rm -rf index.html"
   end
 end

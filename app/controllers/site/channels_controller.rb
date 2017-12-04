@@ -1,4 +1,7 @@
 class Site::ChannelsController < Site::ApplicationController
+  self.page_cache_directory = -> { Rails.root.join("public", 'cached_pages', 'z') }
+  caches_page :show
+
   caches_action :index, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 6.hours
   caches_action :show, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 6.hours
 

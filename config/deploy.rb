@@ -137,7 +137,7 @@ end
 #       end
 #     end    
 #   end
-end
+# end
 
 after 'deploy:publishing', 'deploy:restart'
 after 'deploy:restart', 'sitemap:refresh'
