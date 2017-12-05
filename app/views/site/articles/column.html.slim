@@ -45,16 +45,12 @@
             li
               a href="#{article_path(article)}"= article.title
 
-    .hot-pics.news-list
-      .list-head 精彩图文
-      ul.news-content.clearfix
-        - Article.photo_news.first(4).each do |article|
-          - picture_url = article.pictures.first
+    .text-list.news-list
+      .list-head 重点推荐
+      ul.news-content
+        - Article.recommend(page: 1, load: 10).each do |article|
           li
-            a.clearfix href="#{article_path(article)}"
-              .news-pic
-                img src="#{picture_url}" width=144 height=84 alt="#{article.title}"
-              p= article.title
+            a href="#{article_path(article)}"= article.title
 
     - if @links.present? && @links.any?
       .friend-links.news-list
