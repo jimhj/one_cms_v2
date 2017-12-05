@@ -1,0 +1,75 @@
+- content_for :header do
+  = javascript_include_tag 'tt/index'
+  = stylesheet_link_tag 'tt/views/node'
+
+.main.clearfix
+  .f-left.node-main
+    .node-box.clearfix
+      .node-logo.f-left
+        = image_tag @node.logo_url, size: '200x150'
+      .node-desc.f-left
+        .node-head= @node.name
+        .node-body= @node.seo_description
+
+    .recd-box.clearfix
+      h2.clearfix 
+        .h-tab.f-left 专栏导航
+      .node-list-nav
+        ul.node-list.clearfix
+          - @node.children.each do |node|
+            li.f-left
+              a href="#{articles_path(node.slug)}"= node.name
+
+    - (@node.children[1..-1] || []).each do |node|
+      .node-articles
+        .recd-box.clearfix
+          h2.clearfix 
+            a.h-tab.f-left href="#{articles_path(node.slug)}"= node.name
+          .articles-section
+            .cut-line
+            = render partial: 'site/application/index_article', collection: node.articles.order('id DESC').limit(3), as: :article
+
+  .f-right.index-right.right-sidebar
+    - SiteAd.rightsidetop.actived.each do |ad|
+      .r-side-ad.index-right-ad= raw ad.value
+
+    - SiteAd.rightsidemiddle.actived.each do |ad|
+      .r-side-ad.index-right-ad= raw ad.value
+
+    - n = @node.children.first
+    - if n.present?
+      .text-list.news-list
+        .list-head: a href="#{articles_path(n.slug)}"= n.name
+        ul.news-content
+          - n.articles.order('id DESC').limit(10).each do |article|
+            li
+              a href="#{article_path(article)}"= article.title
+
+    .hot-pics.news-list
+      .list-head 精彩图文
+      ul.news-content.clearfix
+        - Article.photo_news.first(4).each do |article|
+          - picture_url = article.pictures.first
+          li
+            a.clearfix href="#{article_path(article)}"
+              .news-pic
+                img src="#{picture_url}" width=144 height=84 alt="#{article.title}"
+              p= article.title
+
+    - if @links.present? && @links.any?
+      .friend-links.news-list
+        .list-head 官方链接
+        ul.news-content.clearfix
+          - (@links || []).each do |link|
+            li
+              a href="#{link.url}" target="_blank" title="#{link.title}" rel="nofollow"= link.name
+
+    - if controller_name == 'application' && action_name == 'index'
+      .about-section
+        p= SiteConfig.actived.copyright.html_safe
+        .declare
+          p= SiteConfig.actived.declare.html_safe
+
+    - SiteAd.rightsidebottom.actived.each do |ad|
+      .r-side-ad.index-right-ad.ad-fixed
+        .r-side-ad-inner= raw ad.value 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202140345) do
+ActiveRecord::Schema.define(version: 20171205115047) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 20171202140345) do
     t.string   "seo_description", limit: 255
     t.integer  "sortrank",        limit: 4,     default: 1000
     t.boolean  "is_nav",                        default: false
+    t.boolean  "is_column",                     default: false
     t.string   "nav_name",        limit: 255
     t.string   "nav_color",       limit: 255
     t.text     "extras",          limit: 65535

@@ -48,6 +48,6 @@ class Admin::NodesController < Admin::ApplicationController
   private
 
   def node_params
-    params.require(:node).permit(:name, :is_nav, :nav_name, :nav_color, :parent_id, :slug, :seo_title, :seo_keywords, :seo_description)
+    params.require(:node).permit(:name, :is_nav, :is_column, :logo, :nav_name, :nav_color, :parent_id, :slug, :seo_title, :seo_keywords, :seo_description)
   end
 end

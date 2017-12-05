@@ -17,6 +17,7 @@ class Site::ArticlesController < Site::ApplicationController
                        .where(approved: true)
                        .order('id DESC')
                        .paginate(page: params[:page], per_page: 20, total_entries: 1000000)
+
     @links = @node.links.pc
     @channel_keywords = @node.seo_keywords
 
@@ -24,6 +25,10 @@ class Site::ArticlesController < Site::ApplicationController
     set_meta title: title,
              description: @node.seo_description,
              keywords: @node.seo_keywords
+
+    if @node.is_column?
+      render template: 'site/articles/column'
+    end
   end
 
   def show
@@ -40,14 +45,14 @@ class Site::ArticlesController < Site::ApplicationController
     tag_ids = @article.taggings.pluck(:tag_id)
     if tag_ids.any?
       article_ids = Tagging.where(tag_id: tag_ids).order('id DESC').limit(8).pluck(:article_id)
-      @more_articles = Article.where(id: article_ids).order('id DESC').limit(8).to_a
+      @more_articles = Article.where(id: article_ids).where.not(id: @article.id).order('id DESC').limit(8).to_a
 
       if (ct = @more_articles.count) < 8
-        more = Article.where(node_id: @nodes.pluck(:id)).limit(8 - ct).to_a
+        more = Article.where(node_id: @nodes.pluck(:id)).where.not(id: @article.id).limit(8 - ct).to_a
         @more_articles = @more_articles + more
       end
     else
-      @more_articles = Article.where(node_id: @nodes.pluck(:id)).limit(8)
+      @more_articles = Article.where(node_id: @nodes.pluck(:id)).where.not(id: @article.id).limit(8)
     end
 
     @channel_keywords = @article.seo_keywords

@@ -9,6 +9,8 @@ class Node < ActiveRecord::Base
 
   store :extras
 
+  mount_uploader :logo, LogoUploader
+
   def self.rest
     roots.where(is_nav: false)
   end
