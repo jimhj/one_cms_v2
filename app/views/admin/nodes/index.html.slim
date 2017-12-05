@@ -7,6 +7,7 @@
           td.text-center 导航名称
           td.text-center 路径
           td.text-center 排序值
+          td.text-center 开通专栏
           td.text-center 创建时间
           td.text-center 操作
 
@@ -27,6 +28,7 @@
             td.text-center.w20
               span= node.slug
             td.w10.text-center= node.sortrank
+            td.w10.text-center= node.is_column? ? '是' : '否'
             td.w10.text-center= node.created_at.strftime('%Y-%m-%d')
             td.w10.text-center
               a href="#{new_admin_node_path(parent_id: node.id)}" title="添加子栏目"
