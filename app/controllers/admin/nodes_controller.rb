@@ -45,6 +45,13 @@ class Admin::NodesController < Admin::ApplicationController
     redirect_to admin_nodes_path
   end
 
+  def clear_cache
+    @node = Node.find params[:id]
+    system "cd #{Rails.root.join('public/cached_pages').to_s}; rm -rf #{@node.slug}.html"
+    system "cd #{Rails.root.join('public/mobile_cached_pages').to_s}; rm -rf #{@node.slug}.html"
+    redirect_to admin_nodes_path
+  end
+
   private
 
   def node_params

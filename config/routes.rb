@@ -28,6 +28,10 @@ Rails.application.routes.draw do
       collection do
         get :list
       end
+
+      member do
+        post :clear_cache
+      end
     end
 
     resources :keywords
