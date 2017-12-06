@@ -18,7 +18,7 @@ $(window).on 'scroll', (e) ->
     view.onLoading = true
     page = view.page + 1
 
-    url = "/#{window.currentNode}?page=#{page}"
+    url = "/fetch_articles/#{window.currentNode}?page=#{page}"
     $('.loading-box').show()
 
     $.get url, (rsp) ->
@@ -42,8 +42,9 @@ $(document).ready ->
     $('.navNode').not($link).parent().removeClass('active')
     $link.parent().addClass('active')
 
-    url = $link.attr 'href'
-    window.currentNode = $link.data('slug');
+    slug = $link.data('slug')
+    url = "/fetch_articles/#{slug}"
+    window.currentNode = slug
 
     $('.loading-box').show()
     $.get url, (rsp) ->

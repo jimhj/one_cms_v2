@@ -9,7 +9,7 @@
   .f-left.node-main
     .node-box.clearfix
       .node-logo.f-left
-        = image_tag @node.logo_url, size: '200x150'
+        = image_tag @node.logo_url
       .node-desc.f-left
         .node-head= @node.name
         .node-body= @node.seo_description
@@ -17,11 +17,11 @@
     .node-list-nav
       ul.node-list.clearfix
         li.f-left.active
-          a.navNode data-slug="#{@node.slug}" href="#{articles_path(@node.slug)}" 全部
+          a.navNode data-slug="#{@node.slug}" href="javascript:;" 全部
 
         - @node.children.each do |node|
           li.f-left
-            a.navNode data-slug="#{node.slug}" href="#{articles_path(node.slug)}"= node.name
+            a.navNode data-slug="#{node.slug}" href="javascript:;"= node.name
 
     .node-articles
       .recd-box.clearfix

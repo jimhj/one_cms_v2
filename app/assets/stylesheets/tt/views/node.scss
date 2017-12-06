@@ -7,11 +7,17 @@ $brand-success: #1989fa;
 }
 
 .node-box .node-logo {
-  width: 200px;
+  // width: 200px;
+  width: 160px;
+  img {
+    display: inline-block;
+    margin: 0 auto;
+    max-width: 160px;
+  }
 }
 
 .node-box .node-desc {
-  width: 560px;
+  width: 600px;
   margin-left: 20px;
 
   .node-head { 

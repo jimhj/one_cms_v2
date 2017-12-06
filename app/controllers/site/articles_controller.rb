@@ -40,6 +40,17 @@ class Site::ArticlesController < Site::ApplicationController
     end
   end
 
+  def fetch_articles
+    @node = Node.find_by!(slug: params[:slug])
+    @nodes = @node.root.self_and_descendants
+    @articles = Article.where(node_id: @node.self_and_descendants.pluck(:id))
+                       .where(approved: true)
+                       .order('id DESC')
+                       .paginate(page: params[:page], per_page: 20, total_entries: 1000000)
+    html = render_to_string(partial: 'site/application/index_article', collection: @articles, as: :article)
+    render json: { html: html }
+  end
+
   def show
     @node = Node.find_by!(slug: params[:slug])
     @article = @node.articles.find(params[:id])
