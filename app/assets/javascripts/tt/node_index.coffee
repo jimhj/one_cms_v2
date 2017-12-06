@@ -23,14 +23,13 @@ $(window).on 'scroll', (e) ->
 
     $.get url, (rsp) ->
       if rsp.html && $.trim(rsp.html) != ''
-        $('.loading-box').hide()
         $('.node-articles .articles-section').append rsp.html
         view.onLoading = false
         view.page = page
       else
-        $('.loading-box').text('没有更多了')
         view.canLoad = false
 
+      $('.loading-box').hide()
       view.scrollTop = top
     , 'json'
 
@@ -48,9 +47,8 @@ $(document).ready ->
 
     $('.loading-box').show()
     $.get url, (rsp) ->
-      $('.node-articles .articles-section').empty().append rsp.html
       $('.loading-box').hide()
-
+      $('.node-articles .articles-section').empty().append rsp.html
       view.onLoading = false
       view.scrollTop = 0
       view.page = 1
