@@ -26,8 +26,17 @@ class Site::ArticlesController < Site::ApplicationController
              description: @node.seo_description,
              keywords: @node.seo_keywords
 
-    if @node.is_column?
-      render template: 'site/articles/column'
+    respond_to do |format|
+      format.html {
+        if @node.is_column?
+          render template: 'site/articles/column'
+        end
+      }
+
+      format.js {
+        html = render_to_string(partial: 'site/application/index_article', collection: @articles, as: :article)
+        render json: { html: html }
+      }
     end
   end
 

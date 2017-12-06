@@ -30,21 +30,22 @@ $brand-success: #1989fa;
 }
 
 .node-list-nav {
-  // margin: 20px 0px;
+  margin: 30px 0px 20px 0px;
   width: 780px;
   // background-color: #fbfbfb;
   // border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .node-list-nav ul.node-list {
   list-style: none;
 
   > li {
-    font-size: 12px;
+    font-size: 14px;
     white-space: nowrap;
 
     &.active a {
+      color: $brand-success;
       border-bottom: 2px solid $brand-success;
     }
   }

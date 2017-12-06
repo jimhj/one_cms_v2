@@ -1,6 +1,9 @@
 - content_for :header do
-  = javascript_include_tag 'tt/index'
+  = javascript_include_tag 'tt/node_index'
   = stylesheet_link_tag 'tt/views/node'
+
+  javascript:
+    window.currentNode = "#{@node.slug}";
 
 .main.clearfix
   .f-left.node-main
@@ -11,24 +14,21 @@
         .node-head= @node.name
         .node-body= @node.seo_description
 
-    .recd-box.clearfix
-      h2.clearfix 
-        .h-tab.f-left 专栏导航
-      .node-list-nav
-        ul.node-list.clearfix
-          - @node.children.each do |node|
-            li.f-left
-              a href="#{articles_path(node.slug)}"= node.name
+    .node-list-nav
+      ul.node-list.clearfix
+        li.f-left.active
+          a.navNode data-slug="#{@node.slug}" href="#{articles_path(@node.slug)}" 全部
 
-    - (@node.children[1..-1] || []).each do |node|
-      .node-articles
-        .recd-box.clearfix
-          h2.clearfix 
-            a.h-tab.f-left href="#{articles_path(node.slug)}"= node.name
-          .articles-section
-            .cut-line
-            = render partial: 'site/application/index_article', collection: node.articles.order('id DESC').limit(3), as: :article
+        - @node.children.each do |node|
+          li.f-left
+            a.navNode data-slug="#{node.slug}" href="#{articles_path(node.slug)}"= node.name
 
+    .node-articles
+      .recd-box.clearfix
+        .articles-section
+          = render partial: 'site/application/index_article', collection: @articles, as: :article
+        .loading-box
+          = image_tag 'site/loading.gif'
   .f-right.index-right.right-sidebar
     - SiteAd.rightsidetop.actived.each do |ad|
       .r-side-ad.index-right-ad= raw ad.value

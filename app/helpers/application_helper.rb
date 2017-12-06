@@ -62,4 +62,22 @@ module ApplicationHelper
 
     flash_messages.join("\n").html_safe
   end
+
+  def node_set(nodes)
+    set = {}
+
+    nodes.each do |node|
+      root_node = [node.root.id, node.root.name]
+      set[root_node] ||= []
+      set[root_node] << [node.id, '─'*node.level+node.name]
+    end
+
+    h = {}
+    set.each_pair do |k, v|
+      h.merge! Hash[v.unshift(k)]
+    end
+
+    h.invert
+    # Hash[h.to_a.reverse]
+  end
 end
