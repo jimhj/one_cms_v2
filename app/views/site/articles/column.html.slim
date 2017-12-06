@@ -48,7 +48,7 @@
     .text-list.news-list
       .list-head 重点推荐
       ul.news-content
-        - Article.recommend(page: 1, load: 10).each do |article|
+        - Article.recommend(page: 1, load: 10, node_id: @node.id).each do |article|
           li
             a href="#{article_path(article)}"= article.title
 

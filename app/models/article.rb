@@ -211,7 +211,7 @@ class Article < ActiveRecord::Base
     seo_keywords.split(/,|，/)
   end
 
-  def self.recommend(page: 1, load: 20)
+  def self.recommend(page: 1, load: 20, node_id: nil)
     page = page.to_i
     init_offset = 20
     if page == 1
@@ -220,7 +220,15 @@ class Article < ActiveRecord::Base
       offset = load * (page - 1) + init_offset
     end
 
-    recommends = self.where(recommend: true).order('id DESC').offset(offset).limit(load)
+    recommends = self.where(recommend: true)
+
+    if node_id.present?
+      node = Node.find node_id
+      node_ids = node.self_and_descendants.pluck(:id)
+      recommends = recommends.where(node_id: node_ids)
+    end
+
+    recommends = recommends.order('id DESC').offset(offset).limit(load)
 
     # if recommends.count < load
     #   needs = self.where.not(id: recommends.pluck(:id)).order('id DESC').offset(offset).limit(load - recommends.count)
