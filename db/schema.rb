@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171205115047) do
+ActiveRecord::Schema.define(version: 20171207125916) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171205115047) do
   create_table "admin_users", force: :cascade do |t|
     t.string   "login",           limit: 30,  null: false
     t.string   "name",            limit: 255
-    t.string   "password_digest", limit: 255, null: false
+    t.string   "password_digest", limit: 255
     t.datetime "last_login_time"
     t.string   "last_login_ip",   limit: 255
     t.string   "login_ip",        limit: 255
@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20171205115047) do
     t.text    "body",              limit: 65535
     t.text    "body_html",         limit: 65535
     t.integer "cached_keyword_id", limit: 4,     default: 0
-    t.string  "redirect_url",      limit: 100
+    t.string  "redirect_url",      limit: 2083
   end
 
   add_index "article_bodies", ["article_id"], name: "index_article_bodies_on_article_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
-    t.integer  "user_id",         limit: 4,   default: 0
+    t.integer  "user_id",         limit: 4,   default: 0,     null: false
     t.integer  "node_id",         limit: 4,                   null: false
     t.string   "title",           limit: 200,                 null: false
     t.string   "short_title",     limit: 80
@@ -57,11 +57,12 @@ ActiveRecord::Schema.define(version: 20171205115047) do
     t.string   "seo_title",       limit: 255
     t.string   "seo_keywords",    limit: 255
     t.string   "seo_description", limit: 255
+    t.boolean  "approved",                    default: true
     t.boolean  "focus",                       default: false
     t.boolean  "secondary_focus",             default: false
     t.boolean  "hot",                         default: false
     t.boolean  "recommend",                   default: false
-    t.boolean  "approved",                    default: true
+    t.integer  "status",          limit: 4,   default: 0
     t.boolean  "linked",                      default: false
     t.string   "link_word",       limit: 255
     t.integer  "pictures_count",  limit: 4,   default: -1
@@ -154,15 +155,16 @@ ActiveRecord::Schema.define(version: 20171205115047) do
   create_table "links", force: :cascade do |t|
     t.integer  "linkable_id",   limit: 4
     t.string   "linkable_type", limit: 255
-    t.string   "name",          limit: 30,                 null: false
+    t.string   "name",          limit: 30,                  null: false
     t.string   "title",         limit: 150
-    t.string   "url",           limit: 150,                null: false
+    t.string   "url",           limit: 150,                 null: false
     t.string   "qq",            limit: 20
     t.integer  "sortrank",      limit: 4,   default: 1000
     t.integer  "status",        limit: 4,   default: 0
     t.string   "device",        limit: 255, default: "PC"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.boolean  "nofollow",                  default: false
   end
 
   add_index "links", ["linkable_type", "linkable_id"], name: "index_links_on_linkable_type_and_linkable_id", using: :btree
@@ -181,6 +183,7 @@ ActiveRecord::Schema.define(version: 20171205115047) do
     t.integer  "sortrank",        limit: 4,     default: 1000
     t.boolean  "is_nav",                        default: false
     t.boolean  "is_column",                     default: false
+    t.string   "logo",            limit: 255
     t.string   "nav_name",        limit: 255
     t.string   "nav_color",       limit: 255
     t.text     "extras",          limit: 65535
@@ -264,19 +267,19 @@ ActiveRecord::Schema.define(version: 20171205115047) do
     t.string   "username",            limit: 255,                  null: false
     t.string   "password_digest",     limit: 255,                  null: false
     t.string   "private_token",       limit: 255
+    t.string   "avatar",              limit: 255
     t.datetime "remember_created_at"
     t.integer  "state",               limit: 4,     default: 0
     t.integer  "sign_in_count",       limit: 4,     default: 0
-    t.boolean  "review_later",                      default: true
-    t.string   "allowed_node_ids",    limit: 255
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",  limit: 255
     t.string   "last_sign_in_ip",     limit: 255
+    t.string   "allowed_node_ids",    limit: 255
+    t.boolean  "review_later",                      default: true
     t.text     "extras",              limit: 65535
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
-    t.string   "avatar",              limit: 255
   end
 
 end

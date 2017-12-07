@@ -34,13 +34,16 @@
               img src="#{picture_url}" width=144 height=84 alt="#{article.title}"
             p= article.title
 
-- if @links.present? && @links.any?
+- if (@links || []).any?
   .friend-links.news-list
     .list-head 合作伙伴
     ul.news-content.clearfix
       - (@links || []).each do |link|
         li
-          a href="#{link.url}" target="_blank" title="#{link.title}"= link.name
+          - if link.nofollow?
+            a href="#{link.url}" target="_blank" rel="nofollow" title="#{link.title}"= link.name
+          - else
+            a href="#{link.url}" target="_blank" title="#{link.title}"= link.name
 
 - if controller_name == 'application' && action_name == 'index'
   .about-section

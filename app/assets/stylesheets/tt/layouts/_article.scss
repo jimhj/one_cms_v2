@@ -51,6 +51,25 @@
     background-image: image-url('site/tag.png');
     vertical-align: middle;
   }
+
+  table {
+    border-collapse: collapse;
+    font-size: 1em;
+    width: 100%;
+    margin: 20px 0px;
+  }
+  table td,
+  table th {
+    padding: 5px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    text-align: center;
+  }
+  table thead td,
+  table th {
+    font-weight: bold;
+    border-bottom-color: #888;
+  }
 }
 
 .a-content > p {
