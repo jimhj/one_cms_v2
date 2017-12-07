@@ -220,7 +220,7 @@ class Article < ActiveRecord::Base
       offset = load * (page - 1) + init_offset
     end
 
-    recommends = self.where(recommend: true)
+    recommends = self.where(recommend: true, approved: true)
 
     if node_id.present?
       node = Node.find node_id
