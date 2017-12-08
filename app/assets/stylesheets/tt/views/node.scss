@@ -48,10 +48,22 @@ $brand-success: #1989fa;
   > li {
     font-size: 14px;
     white-space: nowrap;
+    height: 35px;
 
     &.active a {
       color: $brand-success;
-      border-bottom: 2px solid $brand-success;
+      // border-bottom: 2px solid $brand-success;
+      &:before {
+        content: " ";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background-color: $brand-success;
+        vertical-align: middle;
+        opacity: 1;
+      }
     }
   }
 
