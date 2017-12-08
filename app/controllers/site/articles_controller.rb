@@ -46,7 +46,7 @@ class Site::ArticlesController < Site::ApplicationController
     @articles = Article.where(node_id: @node.self_and_descendants.pluck(:id))
                        .where(approved: true)
                        .order('id DESC')
-                       .paginate(page: params[:page], per_page: 20, total_entries: 1000000)
+                       .paginate(page: params[:page], per_page: 10, total_entries: 1000000)
     html = render_to_string(partial: 'site/application/index_article', collection: @articles, as: :article)
     render json: { html: html }
   end

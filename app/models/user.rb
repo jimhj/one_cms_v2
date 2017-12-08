@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     node_ids = (self.allowed_node_ids.presence || '').split('|')
     return [] if node_ids.blank?
 
-    Node.where(id: node_ids)
+    Node.order('lft asc, rgt desc').where(id: node_ids)
   end
 
   after_create do

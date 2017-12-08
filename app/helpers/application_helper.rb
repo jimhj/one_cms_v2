@@ -77,7 +77,10 @@ module ApplicationHelper
       h.merge! Hash[v.unshift(k)]
     end
 
-    h.invert
-    # Hash[h.to_a.reverse]
+    h    
+    # p h
+
+    # h.invert.to_a
+    # # Hash[h.to_a.reverse]
   end
 end

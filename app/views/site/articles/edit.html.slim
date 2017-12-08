@@ -20,7 +20,12 @@
           = f.text_field :title, class: 'cf-field', required: true
         .cf-group
           label.cf-label 发布栏目 *
-          = f.select :node_id, options_for_select(node_set(current_user.allowed_nodes), @article.node_id)
+          select name="article[node_id]"
+            - node_set(current_user.allowed_nodes).each_pair do |node_id, node_name|
+              - if @article.node_id.to_i == node_id
+                option value="#{node_id}" selected="selected"= node_name
+              - else
+                option value="#{node_id}"= node_name
 
         = f.fields_for :article_body do |body_field|
           .cf-group
