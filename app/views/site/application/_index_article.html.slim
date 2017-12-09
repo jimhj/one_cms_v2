@@ -30,7 +30,7 @@
         a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}"= article.node.name
         a href="#{article_path(article)}" #{article.source} ⋅ 
         a href="#{article_path(article)}#commentBox" 
-          span.cy_cmt_count id="sourceId::#{article.id}" 0 
+          span.cy_cmt_count= article.comments.count 
           span  评论 ⋅
         span= article.created_at.strftime('%F')
 - else
@@ -45,6 +45,6 @@
         a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}"= article.node.name
         a href="#{article_path(article)}" #{article.source} ⋅ 
         a href="#{article_path(article)}#commentBox" 
-          span.cy_cmt_count id="sourceId::#{article.id}" 0 
+          span.cy_cmt_count= article.comments.count 
           span  评论 ⋅ 
         span= article.created_at.strftime('%F')
