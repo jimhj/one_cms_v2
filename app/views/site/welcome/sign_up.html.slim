@@ -2,7 +2,7 @@
   .box
     .box-header 
       .box-header-inner.clearfix
-        h2.active 新用户注册
+        h2.active 邮箱注册
     .box-body      
         = form_for @user, url: sign_up_path, html: { class: 'common-form' } do |f|
           - if @user.errors.any?
