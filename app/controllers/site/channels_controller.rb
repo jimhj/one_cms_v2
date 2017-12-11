@@ -3,7 +3,7 @@ class Site::ChannelsController < Site::ApplicationController
   # caches_page :show
 
   # caches_action :index, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 6.hours
-  caches_action :show, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 20.minutes
+  caches_action :show, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 12.hours
 
   def index
     @channels = Channel.order('sortrank DESC, id DESC').paginate(page: params[:page], per_page: 300)
