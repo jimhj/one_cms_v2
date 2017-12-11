@@ -15,17 +15,17 @@ class Article < ActiveRecord::Base
   validates_presence_of :node_id, :title
   validates_uniqueness_of :title
 
-  scope :recent, -> { where(recommend: false).order('id DESC').limit(6) }
-  scope :focus, -> { where(focus: true).order('id DESC').limit(8) }
-  scope :secondary_focus, -> { where(secondary_focus: true).order('id DESC').limit(2) }
-  scope :hot, -> { where(hot: true).order('id DESC').limit(10) }
+  scope :recent, -> { where(approved: true).where(recommend: false).order('id DESC').limit(6) }
+  scope :focus, -> { where(approved: true).where(focus: true).order('id DESC').limit(8) }
+  scope :secondary_focus, -> { where(approved: true).where(secondary_focus: true).order('id DESC').limit(2) }
+  scope :hot, -> { where(approved: true).where(hot: true).order('id DESC').limit(10) }
 
   scope :with_photo, -> {
     where('pictures_count > 0')
   }
   
   scope :photo_news, -> {
-    where(hot: false).with_photo.order('id DESC').limit(6)
+    where(approved: true).where(hot: false).with_photo.order('id DESC').limit(6)
   }
 
   after_create do
