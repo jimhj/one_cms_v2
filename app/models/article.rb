@@ -203,6 +203,7 @@ class Article < ActiveRecord::Base
   def body_html
     html = article_body.body_html.presence || article_body.body
     article_body.delay.replace_keywords rescue nil
+    article_body.delay.restore_remote_images rescue nil
     # add_watermark_to_html_images(html)
     html
   end
