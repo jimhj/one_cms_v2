@@ -4,6 +4,7 @@
       ul.tag-list-fix
         - @tags.each do |tag|
           li
+            - next if tag.slug.blank?
             a title="#{tag.name}" href="#{tag_path(tag.slug)}"= tag.name
     .pagination
       = will_paginate @tags, inner_window: 1

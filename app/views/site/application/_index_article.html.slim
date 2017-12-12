@@ -1,4 +1,5 @@
-- if article.pictures.size >= 4  
+- target = @node && (@node.is_column? or @node.root.is_column?) ? '_blank' : '_self'
+- if article.pictures.size >= 4 && false
   .article-item.gallery-item.clearfix
     .item-right
       .right-bd
@@ -18,18 +19,18 @@
 - elsif article.pictures.size > 0
   - picture_url = article.pictures.first
   .article-item.clearfix
-    a.thumb-left href="#{article_path(article)}" title="#{article.title}"
+    a.thumb-left href="#{article_path(article)}" title="#{article.title}" target="#{target}"
       img src="#{picture_url}" alt="#{article.title}" title="#{article.title}"
     .item-right
       .right-bd
         h3
-          a href="#{article_path(article)}" title="#{article.title}"= article.title
+          a href="#{article_path(article)}" title="#{article.title}" target="#{target}"= article.title
         p.a-list-desc= article.seo_description
 
       .item-footer
-        a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}"= article.node.name
-        a href="#{article_path(article)}" #{article.source} ⋅ 
-        a href="#{article_path(article)}#commentBox" 
+        a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}" target="#{target}"= article.node.name
+        a target="#{target}" href="#{article_path(article)}" #{article.source} ⋅ 
+        a target="#{target}" href="#{article_path(article)}#commentBox" 
           span.cy_cmt_count= article.comments.count 
           span  评论 ⋅
         span= article.created_at.strftime('%F')
@@ -38,13 +39,13 @@
     .item-right
       .right-bd
         h3
-          a href="#{article_path(article)}" title="#{article.title}"= article.title
+          a href="#{article_path(article)}" title="#{article.title}" target="#{target}"= article.title
         p.a-list-desc= article.seo_description
 
       .item-footer
-        a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}"= article.node.name
-        a href="#{article_path(article)}" #{article.source} ⋅ 
-        a href="#{article_path(article)}#commentBox" 
+        a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}" target="#{target}"= article.node.name
+        a target="#{target}" href="#{article_path(article)}" #{article.source} ⋅ 
+        a target="#{target}" href="#{article_path(article)}#commentBox" 
           span.cy_cmt_count= article.comments.count 
           span  评论 ⋅ 
         span= article.created_at.strftime('%F')

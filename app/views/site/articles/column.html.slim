@@ -39,18 +39,18 @@
     - n = @node.children.first
     - if n.present?
       .text-list.news-list
-        .list-head: a href="#{articles_path(n.slug)}"= n.name
+        .list-head: a target="_blank" href="#{articles_path(n.slug)}"= n.name
         ul.news-content
           - n.articles.order('id DESC').limit(10).each do |article|
             li
-              a href="#{article_path(article)}"= article.title
+              a target="_blank" href="#{article_path(article)}"= article.title
 
     .text-list.news-list
       .list-head 重点推荐
       ul.news-content
         - Article.recommend(page: 1, load: 10, node_id: @node.id).each do |article|
           li
-            a href="#{article_path(article)}"= article.title
+            a target="_blank" href="#{article_path(article)}"= article.title
 
     - if (@links || []).any?
       .friend-links.news-list
