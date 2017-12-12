@@ -11,7 +11,15 @@ class Site::WelcomeController < Site::ApplicationController
     end
 
     if request.post?
-      @user = User.find_by(email: params[:email])
+      if params[:account].blank?
+        flash[:error] = "请输入手机号或者邮箱登录"
+        redirect_to :back
+        return
+      end
+
+      @user = User.find_by(email: params[:account])
+      @user ||= User.find_by(mobile: params[:account])
+
       if @user && @user.authenticate(params[:password])
         if @user.actived?
           login_as @user
@@ -33,8 +41,11 @@ class Site::WelcomeController < Site::ApplicationController
 
     if request.post?
       @user = User.new(user_params)
-      if @user.valid?
+      if @user.valid?(:email_regist)
         @user.save!
+
+        t = @user.g_active_token
+        UserMailer.delay(queue: 'mailing').activation_email(t)
 
         flash[:info] = "已注册成功，请注意查收注册验证邮件"
         redirect_to sign_in_path
@@ -49,14 +60,28 @@ class Site::WelcomeController < Site::ApplicationController
 
     if request.post?
       @user = User.new(user_params)
-      if @user.valid?
+      if @user.valid?(:mobile_regist)
+        @user.email = "__unbind__#{@user.mobile}"
+        @user.state = :actived
         @user.save!
 
-        flash[:info] = "已注册成功，请注意查收注册验证邮件"
+        flash[:info] = "注册成功，请登录"
         redirect_to sign_in_path
       else
         render :sign_up_mobile
       end
+    end
+  end
+
+  def send_active_code
+    return if params[:mobile].blank?
+
+    begin
+      ActiveToken.send_active_code(params[:mobile])
+
+      render json: { success: true }
+    rescue => e
+      render json: { success: false }
     end
   end
 
@@ -125,6 +150,6 @@ class Site::WelcomeController < Site::ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :username, :password, :password_confirmation)
+    params.require(:user).permit(:email, :mobile, :active_code, :username, :password, :password_confirmation)
   end
 end

@@ -7,6 +7,10 @@ zh-CN:
         body: 文章内容
       comment:
         content: 评论内容
+      user:
+        email: 邮箱
+        mobile: 手机号
+        active_code: 验证码
 
   errors:
     messages:

@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
   
-  validates :email, presence: { allow_blank: true }, uniqueness: { allow_blank: true }
-  validates :mobile, presence: { allow_blank: true }, uniqueness: { allow_blank: true }
+  validates :email, presence: true, uniqueness: true, on: [:email_regist]
+  validates :mobile, presence: true, uniqueness: true, on: [:mobile_regist]
   validates :username, presence: { case_sensitive: false }, format: { with: /\A[\p{Word}\w\s-]*\z/ }, length: { in: 3..20 }
   validates :password, length: { minimum: 6 }, presence: true, confirmation: true, on: [:create, :reset_password]
   validate :verify_active_code, on: [:mobile_regist]
@@ -30,33 +30,12 @@ class User < ActiveRecord::Base
     Node.order('lft asc, rgt desc').where(id: node_ids)
   end
 
-  after_create do
-    t = g_active_token
-    UserMailer.delay(queue: 'mailing').activation_email(t)
-  end
-
   def g_active_token
     t = ActiveToken.new
     t.receiver = self.email
     t.token = SecureRandom.urlsafe_base64(32)
     t.save
     t
-  end
-
-  def g_mobile_active_code
-    t = ActiveToken.new
-    t.receiver = self.mobile
-
-    loop do 
-      active_code = '%06d' % SecureRandom.random_number(999999)
-      if not ActiveToken.where(token: active_code, receiver: self.mobile, state: 0).first
-        t.token = active_code
-        break
-      end
-    end
-    
-    t.save
-    t   
   end
 
   def active_code
@@ -71,8 +50,11 @@ class User < ActiveRecord::Base
 
   def verify_active_code
     t = ActiveToken.where(token: self.active_code, receiver: self.mobile, state: 0).first
-    if t.blank?
-      errors.add(:active_code, "验证码不正确")
+    p t
+    p !ActiveToken.check(self.active_code)
+    
+    if t.blank? or !ActiveToken.check(self.active_code)
+      errors.add(:active_code, "无效")
     end
   end
 end

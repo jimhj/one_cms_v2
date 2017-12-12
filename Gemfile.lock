@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/VICTOR-LUO-F/aliyun-sms.git
+  revision: d31ffc1280da52bf25544f4b387d29a2388e551d
+  specs:
+    aliyun-sms (0.1.0)
+      typhoeus
+
+GIT
   remote: git://github.com/rails/actionpack-page_caching.git
   revision: 19acd46b9e24c82f9358fd91578e500ca2f9ac29
   specs:
@@ -112,7 +119,10 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
+    ethon (0.11.0)
+      ffi (>= 1.3.0)
     execjs (2.6.0)
+    ffi (1.9.18)
     font-awesome-sass (4.5.0)
       sass (>= 3.2)
     globalid (0.3.6)
@@ -220,6 +230,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    typhoeus (1.3.0)
+      ethon (>= 0.9.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -246,6 +258,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack-action_caching (~> 1.1.1)
   actionpack-page_caching!
+  aliyun-sms!
   awesome_nested_set (~> 3.0.2)
   bcrypt (~> 3.1.10)
   bootstrap-sass (~> 3.3.6)

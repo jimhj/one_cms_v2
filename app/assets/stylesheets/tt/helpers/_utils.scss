@@ -29,6 +29,10 @@
 
 .text-success {
   color: $brand-success;
+
+  &:visited {
+    color: $brand-success;
+  }
 }
 
 .text-muted {

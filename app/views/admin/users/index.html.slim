@@ -5,6 +5,7 @@
         tr
           td.w5.text-center ID
           td.w10.text-center 用户名
+          td.w15.text-center 手机号
           td.w15.text-center 邮箱
           td.w10.w15.text-center 状态
           td.w10.text-center 注册时间          
@@ -15,6 +16,7 @@
           tr
             td.text-center= user.id
             td.text-center= user.username
+            td.text-center= user.mobile
             td.text-center= user.email
             td.text-center= user.state
             td.text-center= user.created_at.strftime('%F %T')

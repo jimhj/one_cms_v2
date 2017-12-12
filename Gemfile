@@ -75,6 +75,9 @@ gem 'actionpack-page_caching', github: 'rails/actionpack-page_caching'
 # Schedule
 gem 'whenever', '~> 0.9.4'
 
+# SMS
+gem 'aliyun-sms', github: 'VICTOR-LUO-F/aliyun-sms'
+
 group :development do
   # Deployment
   gem 'capistrano', '~> 3.4.1'

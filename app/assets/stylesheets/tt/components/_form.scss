@@ -103,7 +103,22 @@ input::-webkit-input-placeholder {
 
   &.disabled {
     background-color: #ddd;
+    color: #999;
   }
+}
+
+.cf-input-group {
+  .cf-field {
+    float: left;
+    width: 246px;
+    margin-right: 10px;
+  }
+
+  .cf-btn {
+    float: left;
+    width: 122px;
+    border: 1px solid #ccc;
+  } 
 }
 
 .cf-alert {
