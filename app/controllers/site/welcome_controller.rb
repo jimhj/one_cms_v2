@@ -76,12 +76,17 @@ class Site::WelcomeController < Site::ApplicationController
   def send_active_code
     return if params[:mobile].blank?
 
+    if User.find_by(mobile: params[:mobile])
+      render json: { success: false, error: '这个手机号已经被注册了' }
+      return
+    end
+
     begin
       ActiveToken.send_active_code(params[:mobile])
 
       render json: { success: true }
     rescue => e
-      render json: { success: false }
+      render json: { success: false, error: '出错了，请重试' }
     end
   end
 

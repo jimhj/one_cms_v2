@@ -45,6 +45,7 @@ $(function () {
       if (rsp.success) {
         activeCountDown();
       } else {
+        alert(rsp.error);
         reableButton().text("发送验证码");
       }
     }, 'json');
