@@ -72,7 +72,7 @@ class Site::WelcomeController < Site::ApplicationController
       end
     end
   end
-
+  
   def send_active_code
     return if params[:mobile].blank?
 
