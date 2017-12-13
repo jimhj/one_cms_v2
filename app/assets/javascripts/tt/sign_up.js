@@ -39,6 +39,11 @@ $(function () {
       return false;
     }
 
+    if (!/^1[3|4|5|7|8][0-9]{9}$/.test(mobile)) {
+      alert('请输入正确的手机号');
+      return false;
+    }
+
     disableButton();
 
     $.post('/send_active_code', { mobile: mobile }, function (rsp) {
