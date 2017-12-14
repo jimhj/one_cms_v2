@@ -67,7 +67,7 @@ class ArticleBody < ActiveRecord::Base
 
 
   def restore_remote_images
-    doc = Nokogiri::HTML(self.body)
+    doc = Nokogiri::HTML(self.body_html.presence || self.body)
     doc.css('img').each do |img|
       begin
         next if img[:src].include?(Setting.carrierwave.asset_host)
@@ -87,6 +87,6 @@ class ArticleBody < ActiveRecord::Base
       end
     end
 
-    update_column :body, doc.to_s
+    update_column :body_html, doc.to_s
   end
 end
