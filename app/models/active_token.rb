@@ -15,7 +15,7 @@ class ActiveToken < ActiveRecord::Base
       return false
     end
 
-    !!t
+    t
   end
 
   def self.g_mobile_active_code(mobile)
