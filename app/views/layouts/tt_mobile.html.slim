@@ -1,9 +1,10 @@
 doctype html
 html
   head
-    = render_seo_meta_tags
-    = stylesheet_link_tag "tt_mobile/app"
     meta charset="utf-8"
+    = render_seo_meta_tags
+    = javascript_include_tag 'tt_mobile/app'
+    = stylesheet_link_tag "tt_mobile/app"
     meta name="viewport" content="width=device-width, initial-scale=1"
     meta name="applicable-device" content="mobile" 
     meta name="MobileOptimized" content="width"
@@ -11,16 +12,36 @@ html
     meta name="format-detection" content="telephone=no"
     link rel="miphtml" href="#{@miphtml}"
     = csrf_meta_tags
+    = yield :header
 
-  body
+  body.drawer.drawer--right class="#{controller_name}-#{action_name}"
+    nav.login-state class="drawer-nav" role="navigation"
+      ul.drawer-menu
+        li
+          a href="#{mobile_sign_up_mobile_path}" 注册
+        li
+          a href="#{mobile_sign_in_path}" 登录
+        li
+          a href="#{root_url}" 首页
+        li
+          a href="#" 专题
+        li
+          a href="#" 标签
+
     .top-header
       .top-bar
         .node-name= [SiteConfig.actived.site_name, @node.try(:name)].compact.join(' · ')
-      .top-menu
-        .top-menu-tabs
-          a.tab class=('current' if controller_name == 'application' && action_name == 'index') href="#{root_url}" 推荐
-          - Node.where(is_nav: true).order('sortrank DESC').each_with_index  do |node, i|
-            a.tab class=('current' if params[:slug] == node.slug && controller_name != 'application') href="#{mobile_articles_path(node.slug)}"= node.short_name
+        button.drawer-btn type="button" class="drawer-toggle drawer-hamburger"
+          | <span class="sr-only">toggle navigation</span>
+          | <span class="drawer-hamburger-icon"></span>
+    
+      - if not action_name.include?('sign')
+        .top-menu
+          .top-menu-tabs
+            a.tab class=('current' if controller_name == 'application' && action_name == 'index') href="#{root_url}" 推荐
+            - Node.where(is_nav: true).order('sortrank DESC').each_with_index  do |node, i|
+              a.tab class=('current' if params[:slug] == node.slug && controller_name != 'application') href="#{mobile_articles_path(node.slug)}"= node.short_name
+
     .main
       - SiteAd.mobilelisttop.actived.each do |ad|
         .ad-container= raw ad.value 

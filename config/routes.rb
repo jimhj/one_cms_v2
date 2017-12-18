@@ -64,6 +64,15 @@ Rails.application.routes.draw do
   constraints(MobileConstraint) do
     scope module: 'mobile', as: :mobile do
       root 'application#index'
+
+      match 'sign_up_mobile',    to: 'application#sign_up_mobile', as: :sign_up_mobile,   via: [:get, :post]
+      match 'send_active_code',    to: 'application#send_active_code', as: :send_active_code,   via: [:post]
+      match 'sign_in',    to: 'application#sign_in', as: :sign_in,   via: [:get, :post]
+      match 'sign_out',   to: 'application#sign_out', as: :sign_out, via: [:delete]
+      get 'check_login',  to: 'application#check_login', as: :check_login
+
+      resources :comments
+
       resources :tags,  only: [:index, :show],    trailing_slash: true
       get 'z',            to: 'channels#index',   as: :channels, trailing_slash: true
       get 'z/:slug',      to: 'channels#show',    as: :channel, trailing_slash: true

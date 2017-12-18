@@ -1,0 +1,120 @@
+.common-form {
+  max-width: 100%;
+  padding: 20px 20px;
+  // margin: 0px auto;
+}
+
+.cf-group {
+  margin-bottom: 20px;
+
+  &.error .cf-field {
+    border: 1px solid #ccc;
+  }
+}
+
+.cf-field {
+  width: 100%;
+  padding: 0px 10px;
+  height: 48px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  &:focus {
+    border: 1px solid $brand-success;
+    box-shadow: 0px 0px 2px 0px $brand-success;
+  }
+
+  &.tag-field {
+    padding: 10px 10px;
+  }
+}
+
+textarea.cf-field {
+  padding: 0 0;
+  width: 398px;
+}
+
+input::-webkit-input-placeholder {
+  color: #999;
+}
+
+.cf-label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cf-btn {
+  display: inline-block;
+  // height: 50px;
+  height: 48px;
+  font-size: 14px;
+  border-radius: 4px;
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  &.cf-btn-lg {
+    font-size: 16px;
+    // padding: 15px 20px;
+  }
+
+  &.cf-btn-block {
+    width: 100%;
+  }
+}
+
+.cf-btn.cf-btn-primary {
+  background-color: $brand-success;
+  color: #fff;
+
+  &.disabled {
+    background-color: lighten($brand-success, 20%);
+  }
+}
+
+.cf-btn.cf-btn-default {
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #f0f0f0;
+
+  &.disabled {
+    background-color: #ddd;
+    color: #999;
+  }
+}
+
+.cf-input-group {
+  .cf-field {
+    float: left;
+    width: 64%;
+    margin-right: 2%;
+  }
+
+  .cf-btn {
+    float: right;
+    width: 32%;
+    border: 1px solid #ccc;
+  } 
+}
+
+.cf-alert {
+  padding: 15px 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.cf-alert.error {
+  background-color: #f2dede;
+  border-left: 4px solid #ff4600;
+  color: #a94442;
+}
+
+.cf-alert.info {
+  background-color: #d9edf7;
+  border-left: 4px solid #5bc0de;
+  color: #31708f;
+}

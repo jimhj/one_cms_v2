@@ -1,0 +1,17 @@
+.box
+  .box-header 
+    .box-header-inner.clearfix
+      h2 
+        a href="#{mobile_sign_up_mobile_path}" 注册账号
+      h2.active 已有账号登录
+  .box-body
+    = form_tag sign_in_path, class: 'common-form' do
+      = site_notice_message
+      .cf-group
+        label.cf-label 手机号或者邮箱
+        input.cf-field type="text" name="account" required=true
+      .cf-group
+        label.cf-label 登录密码
+        input.cf-field type="password" name="password" required=true
+      .cf-group
+        button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 登录

@@ -1,10 +1,10 @@
-// $brand-success: #5cb85c;
-
-// @import "weui";
+@import "drawer.min";
 @import "vars";
 @import "normalize";
 @import "header";
 @import "article";
+@import "components/box";
+@import "components/form";
 
 a {
   color: #222222;
@@ -33,6 +33,11 @@ a:hover {
   content: " ";
   clear: both;
   height: 0;
+}
+
+.application-sign_up_mobile,
+.application-sign_in {
+  .main { margin-top: 50px; }
 }
 
 .main {
@@ -76,6 +81,14 @@ a:hover {
 
 .moblePageBreak {
   display: none !important;
+}
+
+@each $distance in 0, 2, 5, 8, 10, 15, 20, 30, 50, 70, 100 {
+  @each $direction in 'left', 'right', 'top', 'bottom' {
+    .m-#{$direction}#{$distance} {
+      margin-#{$direction}: #{$distance}px;
+    }
+  }
 }
 
 

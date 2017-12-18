@@ -1,0 +1,25 @@
+nav class="drawer-nav" role="navigation"
+  ul.drawer-menu
+    - if login?
+      li
+        a href="#{root_url}"= current_user.username
+      li
+        a href="#{root_url}" 首页
+      li
+        a href="#" 专题
+      li
+        a href="#" 标签
+      li
+        a href="#{mobile_sign_out_path}" data-method="delete" 退出登录
+    - else
+      li
+        - arg = { return_to: return_to }
+        a href="#{mobile_sign_up_mobile_path(arg)}" 注册
+      li
+        a href="#{mobile_sign_in_path}" 登录
+      li
+        a href="#{root_url}" 首页
+      li
+        a href="#" 专题
+      li
+        a href="#" 标签

@@ -1,0 +1,32 @@
+- content_for :header do
+  = javascript_include_tag 'tt/sign_up'
+  
+.box
+  .box-header 
+    .box-header-inner.clearfix
+      h2.active 注册账号
+      h2 
+        a href="#{mobile_sign_in_path}" 已有账号登录
+  .box-body
+    = form_for @user, url: mobile_sign_up_mobile_path, html: { class: 'common-form' } do |f|
+      - if @user.errors.any?
+        .cf-alert.error= @user.errors.full_messages.first
+      .cf-group
+        label.cf-label 手机号码 *
+        = f.number_field :mobile, class: 'cf-field', required: true, placeholder: '输入11位手机号码'
+      .cf-group
+        label.cf-label 验证码 *
+        .cf-input-group.clearfix
+          = f.text_field :active_code, class: 'cf-field', required: true, placeholder: '6位数字验证码'
+          button.cf-btn.cf-btn-default.cf-btn-lg.sendSMSCode type="button" 发送验证码
+      .cf-group
+        label.cf-label 昵称 *
+        = f.text_field :username, class: 'cf-field', required: true, placeholder: "2-20位英文字母或者数字，不要包含特殊字符"
+      .cf-group
+        label.cf-label 密码 *
+        = f.password_field :password, class: 'cf-field', required: true, placeholder: '6-20位密码'
+      .cf-group
+        label.cf-label 确认密码 *
+        = f.password_field :password_confirmation, class: 'cf-field', required: true, placeholder: '确认密码'
+      .cf-group
+        button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 注册
