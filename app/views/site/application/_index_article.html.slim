@@ -30,9 +30,12 @@
       .item-footer
         a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}" target="#{target}"= article.node.name
         a target="#{target}" href="#{article_path(article)}" #{article.source} ⋅ 
+        a target="#{target}" href="#{article_path(article)}" 
+          span.cy_cmt_count= article.hits
+          span  阅读 ⋅  
         a target="#{target}" href="#{article_path(article)}#commentBox" 
           span.cy_cmt_count= article.comments.count 
-          span  评论 ⋅
+          span  评论 ⋅ 
         span= article.created_at.strftime('%F')
 - else
   .article-item.text-item.clearfix
@@ -45,6 +48,9 @@
       .item-footer
         a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}" target="#{target}"= article.node.name
         a target="#{target}" href="#{article_path(article)}" #{article.source} ⋅ 
+        a target="#{target}" href="#{article_path(article)}" 
+          span.cy_cmt_count= article.hits
+          span  阅读 ⋅ 
         a target="#{target}" href="#{article_path(article)}#commentBox" 
           span.cy_cmt_count= article.comments.count 
           span  评论 ⋅ 

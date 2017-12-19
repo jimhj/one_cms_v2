@@ -24,7 +24,11 @@
             a href="#{article_path(article)}" title="#{article.title}"= article.title
           .item-info
             span= article.source.presence || '网友投稿' 
-            span= article.created_at.strftime('%F %T')
+            span= article.created_at.strftime('%F')
+            | &nbsp;
+            span 阅读
+            | &nbsp;
+            span= article.hits 
             | &nbsp;
             span 评论
             | &nbsp;
@@ -41,7 +45,11 @@
 
         .item-info
           span= article.source.presence || '网友投稿' 
-          span= article.created_at.strftime('%F %T')
+          span= article.created_at.strftime('%F')
+          | &nbsp;
+          span 阅读
+          | &nbsp;
+          span= article.hits 
           | &nbsp;
           span 评论
           | &nbsp;
