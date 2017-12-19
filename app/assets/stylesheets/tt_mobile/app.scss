@@ -5,6 +5,9 @@
 @import "article";
 @import "components/box";
 @import "components/form";
+@import "components/comment";
+@import "components/tag";
+
 
 a {
   color: #222222;
@@ -81,6 +84,26 @@ a:hover {
 
 .moblePageBreak {
   display: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-success {
+  color: $brand-success;
+
+  &:visited {
+    color: $brand-success;
+  }
+}
+
+.text-muted {
+  color: #cccccc;
 }
 
 @each $distance in 0, 2, 5, 8, 10, 15, 20, 30, 50, 70, 100 {

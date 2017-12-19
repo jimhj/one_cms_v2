@@ -1,5 +1,5 @@
 - articles.each do |article|
-  - if article.pictures.size >= 3
+  - if article.pictures.size >= 3 && false
     .article-item.item-pics
       .item-inner.clearfix
         .item-text
@@ -25,6 +25,10 @@
           .item-info
             span= article.source.presence || '网友投稿' 
             span= article.created_at.strftime('%F %T')
+            | &nbsp;
+            span 评论
+            | &nbsp;
+            span= article.comments.count 
         a.item-image href="#{article_path(article)}" title="#{article.title}"
           = image_tag article.pictures.first, alt: article.title, title: article.title
 
@@ -38,3 +42,7 @@
         .item-info
           span= article.source.presence || '网友投稿' 
           span= article.created_at.strftime('%F %T')
+          | &nbsp;
+          span 评论
+          | &nbsp;
+          span= article.comments.count 

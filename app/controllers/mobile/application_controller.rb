@@ -103,8 +103,8 @@ class Mobile::ApplicationController < ApplicationController
     end
 
     login_html = render_to_string(partial: 'mobile/application/login_state', locals: { return_to: return_to })
-    # post_box = render_to_string(partial: 'site/comments/post_box', locals: { return_to: return_to })
-    render json: { login: login?, login_html: login_html }
+    post_box = render_to_string(partial: 'mobile/comments/post_box', locals: { return_to: return_to })
+    render json: { login: login?, login_html: login_html, post_box: post_box }
   end
 
   private

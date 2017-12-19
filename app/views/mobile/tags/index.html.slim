@@ -1,0 +1,10 @@
+.articles-list
+  .tags-section
+    ul.tag-list-fix.clearfix
+      - @tags.each do |tag|
+        li
+          - next if tag.slug.blank?
+          a title="#{tag.name}" href="#{tag_path(tag.slug)}"= tag.name
+
+.loadmore.loadmore-pagination
+  = simple_pagination

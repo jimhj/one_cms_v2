@@ -1,7 +1,10 @@
 doctype html
 html
   head
+    meta charset="utf-8"
     = render_seo_meta_tags
+    = javascript_include_tag 'tt_mobile/app'
+    = javascript_include_tag 'tt/comment'
     = stylesheet_link_tag "tt_mobile/app"
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1"
@@ -11,7 +14,27 @@ html
     meta name="format-detection" content="telephone=no"
     link rel="miphtml" href=url_for(host: "#{Setting.mobile_domain}/mip")
     
-  body.article-detail-page
+  body.article-detail-page.drawer.drawer--right
+    nav.login-state class="drawer-nav" role="navigation"
+      ul.drawer-menu
+        li
+          a href="#{mobile_sign_up_mobile_path}" 注册
+        li
+          a href="#{mobile_sign_in_path}" 登录
+        li
+          a href="#{root_url}" 首页
+        li
+          a href="#{mobile_channels_path}" 专题
+        li
+          a href="#{mobile_tags_path}" 标签
+
+    .top-header
+      .top-bar
+        .node-name= [SiteConfig.actived.site_name, @node.try(:name)].compact.join(' · ')
+        button.drawer-btn type="button" class="drawer-toggle drawer-hamburger"
+          | <span class="sr-only">toggle navigation</span>
+          | <span class="drawer-hamburger-icon"></span>
+
     article.article-detail
       h1.title= @article.title
       .article-info 
@@ -28,6 +51,17 @@ html
         .ad-container= raw ad.value
 
     .article-list-section
+      h2 参与讨论
+      .comment-section
+        .post-comment-box
+          .post-disabled
+            a.cf-btn.cf-btn-primary href="#{mobile_sign_in_path}" 登录
+            a.cf-btn.cf-btn-default href="#{mobile_sign_up_mobile_path}" 注册
+            
+        .comments-list
+        .text-center.comment-loading= image_tag 'site/loading.gif'
+        
+    .article-list-section
       h2 热文推荐
       .articles-list
         = render partial: 'mobile/share/article_list', locals: { articles: @more_articles }
@@ -40,3 +74,5 @@ html
       
       = render 'mobile/mip/ld_json'
     = render 'site/share/bjh'
+    javascript:
+      window.currentArticleId = #{@article.id};

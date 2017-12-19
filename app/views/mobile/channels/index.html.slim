@@ -1,0 +1,9 @@
+.articles-list
+  .tags-section
+    ul.tag-list-fix.clearfix
+      - @channels.each do |channel|
+        li
+          a title="#{channel.name}" href="#{channel_path(channel)}"= channel.name
+
+.loadmore.loadmore-pagination
+  = simple_pagination

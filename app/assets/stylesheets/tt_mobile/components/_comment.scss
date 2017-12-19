@@ -1,0 +1,150 @@
+//= require jquery-ui
+//= require jquery.tagit
+//= require redactor-rails
+
+.comment-section {
+  max-width: 100%;
+  
+  .cf-btn {
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    width: 80px;
+  }
+
+  .load-more {
+    text-align: center;
+  }
+
+  .load-more .cf-btn-default {
+    height: 30px;
+    line-height: 30px;
+    width: 80px;
+  }
+}
+
+.post-comment-box {
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+
+  .post-box {
+    padding: 10px 10px;
+  }
+
+  .post-action {
+    padding: 10px 10px;
+    background-color: #fbfbfb;
+    text-align: right;
+  }
+}
+
+.post-comment-box textarea.post-field {
+  width: 100%;
+  height: 60px;
+  font-size: 14px;
+}
+
+.comment-section .comments-list {
+  // border-top: 1px dotted #ddd;
+  padding-top: 20px;
+  // margin-top: 20px;
+}
+
+.comments-list .comment {
+  font-size: 14px;
+  color: #444;
+  border-bottom: 1px dotted #ddd;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.comment .comment-avatar {
+  float: left;
+
+  width: 40px;
+  height: 40px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+}
+
+.comment .comment-body {
+  float: left;
+  margin-left: 10px;
+  width: calc(100% - 70px);
+}
+
+.comment-body .comment-user {
+  span { 
+    margin-right: 5px; 
+  }
+
+  span.text-muted {
+    color: #ccc;
+  }
+}
+
+.comment-body .comment-content {
+  margin-top: 2px;
+  
+  .content-body > .f-left {
+    line-height: 20px;
+  }
+
+  .f-left {
+    // width: 500px;
+  }
+
+  a.reply-btn {
+    display: none;
+  }
+}
+
+.comment:hover .comment-body .comment-content {
+  a.reply-btn {
+    display: block;
+  }
+}
+
+.parent_comment {
+  margin-top: 5px;
+  padding: 5px 5px;
+  // border: 1px solid #f0f0f0;
+  background-color: #fbfbfb;
+
+  .parent_comment-user {
+    img {
+      border-radius: 8px;
+      vertical-align: text-top;
+    }
+
+    span,img {
+      display: inline-block;
+      margin-right: 5px;
+    }
+  }
+
+  .parent_comment_content {
+    margin-top: 2px;
+  }
+}
+
+.post-disabled {
+  background-color: #fbfbfb;
+  height: 80px;
+  text-align: center;
+  padding-top: 42px;
+
+  .cf-btn-primary {
+    margin-right: 20px;
+  }
+}
+
+.comment-loading {
+  display: none;
+  margin-top: 20px;
+}

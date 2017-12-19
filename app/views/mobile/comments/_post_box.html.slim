@@ -1,0 +1,9 @@
+- if login?
+  .post-box
+    textarea.post-field name="content" placeholder="说点什么吧..."
+  .post-action
+    button.cf-btn.cf-btn-primary.submitComment 提交评论
+- else
+  .post-disabled
+    a.cf-btn.cf-btn-primary href="#{mobile_sign_in_path(return_to: return_to)}" 登录
+    a.cf-btn.cf-btn-default href="#{mobile_sign_up_mobile_path}" 注册
