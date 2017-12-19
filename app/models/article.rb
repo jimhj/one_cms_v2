@@ -254,4 +254,9 @@ class Article < ActiveRecord::Base
     s = read_attribute(:source)
     s.presence || '网友'
   end
+
+  def incr_hits
+    c = Array.new(10, 1) + Array.new(5, 2) + Array.new(3, 3) + Array.new(2, 4) + [5]
+    update_column(:hits, self.hits+c.sample)    
+  end
 end

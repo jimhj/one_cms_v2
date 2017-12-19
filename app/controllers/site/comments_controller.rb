@@ -6,7 +6,8 @@ class Site::CommentsController < Site::ApplicationController
   def index
     @comments = @article.comments.includes(:user, :reply_user, :reply_comment).where(approved: true).order('id ASC')
     html = render_to_string(partial: 'site/comments/comment_list', locals: { comments: @comments })
-    render json: { html: html }
+    hits = @article.incr_hits
+    render json: { html: html, hits: @article.hits, count: @comments.count }
   end
 
   def create

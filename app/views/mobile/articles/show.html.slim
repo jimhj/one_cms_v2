@@ -41,6 +41,9 @@ html
         em= @article.created_at.strftime('%F')
         em= @article.source
         a href="#{articles_path(@article.node.slug)}"= @article.node.name
+        em.articleHits 阅读 -
+        a.articleComments href="#commentBox" 评论 #{@article.comments.count}
+
       - SiteAd.mobilearticletop.actived.each do |ad|
         .ad-container= raw ad.value 
 
@@ -50,8 +53,8 @@ html
       - SiteAd.mobilearticlebottom.actived.each do |ad|
         .ad-container= raw ad.value
 
-    .article-list-section
-      h2 参与讨论 (#{@article.comments.count} 人参与讨论)
+    .article-list-section#commentBox
+      h2 参与讨论 (<em class="articlePartition">#{@article.comments.count} </em> 人参与讨论)
       .comment-section
         .post-comment-box
           .post-disabled

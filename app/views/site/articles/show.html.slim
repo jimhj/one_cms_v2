@@ -10,8 +10,12 @@
         span.tag.tag-gray= @article.node.name
         span= @article.source
         span= @article.created_at.strftime('%F %T')
+        | &nbsp;&nbsp;
+        span.articleHits 阅读 -
+        a.articleComments href="#commentBox" 评论 #{@article.comments.count}
 
         - if not @article.article_body.redirect_url.blank?
+          | &nbsp;&nbsp;
           a href="#{@article.article_body.redirect_url}" rel="nofollow" target="blank" 阅读原文
 
       .a-content
@@ -39,7 +43,7 @@
 
     .recd-box.clearfix#commentBox
       h2.clearfix 
-        .h-tab.f-left 参与讨论 (#{@article.comments.count} 人参与讨论)
+        .h-tab.f-left 参与讨论 (<em class="articlePartition">#{@article.comments.count} </em>人参与讨论)
       .comment-section
         .post-comment-box
           .post-disabled

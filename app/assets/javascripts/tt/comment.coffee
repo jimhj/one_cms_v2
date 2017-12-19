@@ -4,6 +4,9 @@ $(document).ready ->
   $('.comment-loading').show()
   $.get '/comments', { article_id: article_id }, (rsp) ->
     $('.comments-list').append rsp.html
+    $('.articleHits').text "阅读 #{rsp.hits}"
+    $('.articleComments').text "评论 #{rsp.count}"
+    $('.articlePartition').text "#{rsp.count}"
     $('.comment-loading').hide()
   , 'json'
 

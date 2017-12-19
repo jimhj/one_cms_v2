@@ -124,7 +124,11 @@ body.article-detail-page {
   line-height: 20px;
   font-size: 17px;
 
-  em, a, mip-link {
+  .articleHits, .articleComments {
+    font-size: 12px;
+  }
+
+  em, a, mip-link, span {
     font-style: normal;
     color: #8c8c8c;
     display: inline-block;
