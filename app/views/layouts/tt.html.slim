@@ -49,7 +49,7 @@ html
                 a href="javascript:;" 专栏
                 .nav-dropdown
                   ul.nav-dropdown-list.clearfix
-                    - Node.where(is_column: true).each do |n|
+                    - Node.where(is_column: true, is_at_top: true).each do |n|
                       li
                         - if not n.nav_color.blank?
                           a href="#{articles_path(n.slug)}" style="#{n.nav_color}"= n.short_name

@@ -44,5 +44,9 @@
         label
           = f.check_box :is_column, class: 'checkbox'
           | 开通专栏
+        | &nbsp;&nbsp;
+        label
+          = f.check_box :is_at_top, class: 'checkbox'
+          | 在专栏列表显示
       .form-group
         button.btn.btn-primary.btn-lg type="submit" 保存
