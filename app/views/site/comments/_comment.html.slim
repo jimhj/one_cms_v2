@@ -1,4 +1,4 @@
-.comment.clearfix
+.comment.clearfix id="cf-#{comment.floor_number}"
   .comment-avatar
     = image_tag comment.user.avatar_url(:small), size: '40x40', alt: comment.user.username
   .comment-body
@@ -14,7 +14,14 @@
         .f-left
           = simple_format comment.content
         .f-right
-          a.reply-btn.text-success data-reply_to_id="#{comment.id}" data-to_user_id="#{comment.user.id}" data-username="#{comment.user.username}" href="javascript:;" 回复
+          a.reply-btn.text-success data-cancel-text="取消" data-origin-text="回复" href="javascript:;" 回复
+      .instant-reply 
+        .text 回复成功：
+        .instant-reply-text
+
+      .reply-box.clearfix
+        textarea.reply-field 
+        button.cf-btn.cf-btn-primary.submitReply.submitComment data-reply_to_id="#{comment.id}" data-to_user_id="#{comment.user.id}" data-username="#{comment.user.username}" 回复评论
 
       - if comment.reply_comment.present?
         .parent_comment.clearfix

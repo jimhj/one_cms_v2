@@ -64,7 +64,7 @@ html
         .comments-list
         .text-center.comment-loading= image_tag 'site/loading.gif'
         
-    .article-list-section
+    .article-list-section#recdBox
       h2 热文推荐
       .articles-list
         = render partial: 'mobile/share/article_list', locals: { articles: @more_articles }

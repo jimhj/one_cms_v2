@@ -10,16 +10,47 @@ $(document).ready ->
     $('.comment-loading').hide()
   , 'json'
 
+  $('body').on 'mouseenter', '.comment', ->
+    $(this).find('.reply-btn').show()
+  .on 'mouseleave', '.comment', ->
+    $(this).find('.reply-btn').hide()
+
+  $('body').on 'click', '.comment .reply-btn', ->
+    $rbtn = $(this)
+
+    $('.reply-btn').not($rbtn)
+                   .removeClass('cancel-btn')
+                   .text('回复')
+                   .parents('.comment-content')
+                   .find('.reply-box')
+                   .hide()
+
+    origin_text = $rbtn.data('origin-text')
+    cancel_text = $rbtn.data('cancel-text')
+    $rbox = $rbtn.parents('.comment-content').find '.reply-box'
+
+    if $rbtn.hasClass('cancel-btn')
+      $rbtn.removeClass('cancel-btn').text origin_text
+      $rbox.hide()
+    else
+      $rbtn.addClass('cancel-btn').text cancel_text
+      $rbox.show()
+
   $('body').on 'click', '.submitComment', ->
     $btn = $(this)
-    content = $.trim $('textarea.post-field').val()
+
+    if $btn.hasClass('submitReply')
+      content = $.trim $btn.parent().find('textarea').val()
+      to_user_id = $btn.data('to_user_id')
+      reply_to_id = $btn.data('reply_to_id')
+    else
+      content = $.trim $('textarea.post-field').val()
+      to_user_id = null
+      reply_to_id = null
 
     if content == ''
       alert('请输入评论内容哦')
-      rturn false
-
-    to_user_id = $btn.data('to_user_id')
-    reply_to_id = $btn.data('reply_to_id')
+      return false
 
     params = { 
       article_id: article_id, 
@@ -32,22 +63,32 @@ $(document).ready ->
     $('.comment-loading').show()
     $.post '/comments', params, (rsp) ->
       if rsp.success
-        $('textarea.post-field').val('')
+        if $btn.hasClass('submitReply')
+          $btn.parent().find('textarea').val('')
+          $btn.parents('.comment-content').find('.instant-reply-text').text rsp.content
+          $btn.parents('.comment-content').find('.instant-reply').show()
+        else
+          $('textarea.post-field').val('')
+
         $('.comments-list').append rsp.html
-        $btn.data('to_user_id', '')
-        $btn.data('reply_to_id', '')
+
+        if not $btn.hasClass('submitReply') && rsp.has_tag != "none"
+          setTimeout ->
+            window.location.hash = rsp.hash_tag
+          , 100
       else
         alert rsp.error
 
       $('.comment-loading').hide()
       $btn.removeClass('disabled')
+
     , 'json'
 
-  $('body').on 'click', '.reply-btn', ->
-    $btn = $(this)
-    to_user_id = $btn.data('to_user_id')
-    reply_to_id = $btn.data('reply_to_id')
-    username = $btn.data("username")
-    $('.submitComment').data('to_user_id', to_user_id)
-    $('.submitComment').data('reply_to_id', reply_to_id)
-    $('textarea.post-field').val("回复 #{username}：").focus()
+  # $('body').on 'click', '.reply-btn', ->
+  #   $btn = $(this)
+  #   to_user_id = $btn.data('to_user_id')
+  #   reply_to_id = $btn.data('reply_to_id')
+  #   username = $btn.data("username")
+  #   $('.submitComment').data('to_user_id', to_user_id)
+  #   $('.submitComment').data('reply_to_id', reply_to_id)
+  #   $('textarea.post-field').val("回复 #{username}：").focus()

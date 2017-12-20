@@ -25,7 +25,13 @@ class Site::CommentsController < Site::ApplicationController
     begin
       if @comment.save
         html = render_to_string(partial: 'site/comments/comment', locals: { comment: @comment })
-        ret = { success: true, html: html }
+        jump = @comment.floor_number - 2
+        hash_tag = if jump <= 0
+          "none"
+        else
+          "cf-#{jump}"
+        end
+        ret = { success: true, html: html, content: @comment.content, hash_tag: hash_tag }
       else
         ret = { success: false, error: @comment.errors.full_messages.first }
       end
