@@ -23,4 +23,4 @@
             span.text-success= comment.reply_user.username
             span.text-muted ##{comment.reply_comment.floor_number}
           .parent_comment_content
-            = comment.reply_comment.content
+            = simple_format comment.reply_comment.content
