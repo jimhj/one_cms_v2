@@ -50,4 +50,4 @@ $(document).ready ->
     username = $btn.data("username")
     $('.submitComment').data('to_user_id', to_user_id)
     $('.submitComment').data('reply_to_id', reply_to_id)
-    $('textarea.post-field').val("").focus()
+    $('textarea.post-field').val("回复 #{username}：").focus()
