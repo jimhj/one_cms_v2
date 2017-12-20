@@ -11,6 +11,11 @@ class Mobile::CommentsController < Mobile::ApplicationController
   end
 
   def create
+    if not current_user.can_comment?
+      render json: { success: false, error: '您评论的频率太快了，休息一下吧！' }
+      return 
+    end
+
     @comment = @article.comments.build
     @comment.user = current_user
     @comment.to_user_id = params[:to_user_id]
