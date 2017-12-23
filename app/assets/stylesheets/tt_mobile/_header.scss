@@ -10,8 +10,11 @@
 
 .top-bar {
   height: 44px;
+  line-height: 44px;
   position: relative;
-  background: $brand-success;
+  // background: $brand-success;
+  background-color: #ffffff;
+  border-bottom: 1px solid #efefef;
 }
 
 .top-bar a.logo {
@@ -25,8 +28,9 @@
   text-align: center;
   font-size: 17px;
   color: #FFFFFF;
-  line-height: 44px;
-  
+  // line-height: 44px;
+  // height: 44px;
+  // display: block;
 }
 
 .top-bar a.search-btn {
@@ -56,7 +60,7 @@
 
   .drawer-hamburger-icon {
     &, &:before, &:after {
-      background-color: #fff;
+      background-color: #ccc;
     }
 
     &:before {
@@ -104,6 +108,7 @@ ul.drawer-menu li a {
   background: #f4f5f6;
   height: 37px;
   box-sizing: border-box;
+  border-bottom: 1px solid #efefef;
 }
 
 .top-menu-tabs {
@@ -134,8 +139,14 @@ ul.drawer-menu li a {
 .node-name {
   text-align: center;
   font-size: 17px;
-  color: #FFFFFF;
+  // color: #FFFFFF;
+  height: 44px;
   line-height: 44px;
+
+  img {
+    // margin-top: 10px;
+    vertical-align: sub;
+  }
 }
 
 .drawer--right.drawer-open .node-name {
