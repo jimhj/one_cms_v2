@@ -10,6 +10,7 @@
           td.text-center 发布时间
           td.text-center 操作
         - @comments.each do |comment|
+          - next if comment.article.nil?
           tr
             td.w5.text-center= comment.id
             td.w5.text-center= comment.user.username
