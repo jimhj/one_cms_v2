@@ -30,7 +30,10 @@ html
 
     .top-header
       .top-bar
-        .node-name= [SiteConfig.actived.site_name, @node.try(:name)].compact.join(' · ')
+        .node-name
+          = image_tag SiteConfig.actived.logo.url, width: 80
+          - if node_name = @node.try(:name)
+            = " · #{node_name}"
         button.drawer-btn type="button" class="drawer-toggle drawer-hamburger"
           | <span class="sr-only">toggle navigation</span>
           | <span class="drawer-hamburger-icon"></span>
