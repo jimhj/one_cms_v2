@@ -16,7 +16,10 @@ class Mobile::ApplicationController < ApplicationController
   # self.page_cache_directory = -> { Rails.root.join("public", 'mobile_cached_pages') }
   # caches_page :index
 
-  caches_action :index, :cache_path => Proc.new { |c| c.request.url + '-mobile-index' }, :expires_in => 10.minutes
+  caches_action :index, 
+                :cache_path => Proc.new { |c| c.request.url + '-mobile-index' }, 
+                :expires_in => 10.minutes, 
+                :unless => -> { request.format.json? }
 
   def index
     @articles = Article.recommend(page: params[:page])
