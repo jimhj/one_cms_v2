@@ -11,7 +11,7 @@ class Mobile::CommentsController < Mobile::ApplicationController
   end
 
   def create
-    if not current_user.can_comment?
+    if not current_user.can_comment?(@article)
       render json: { success: false, error: '您评论的频率太快了，休息一下吧！' }
       return 
     end

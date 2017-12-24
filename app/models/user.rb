@@ -46,8 +46,13 @@ class User < ActiveRecord::Base
     @verify_code = new_code
   end
 
-  def can_comment?
-    last_comment = comments.order('id DESC').first
+  def can_comment?(article = nil)
+    last_comment = if article
+      article.comments.order('id DESC').first
+    else
+      comments.order('id DESC').first
+    end
+    
     return true if last_comment.nil?
 
     Time.now - last_comment.created_at >= 1.minute
