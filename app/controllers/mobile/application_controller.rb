@@ -64,7 +64,7 @@ class Mobile::ApplicationController < ApplicationController
     if request.post?
       @user = User.new(user_params)
       if @user.valid?(:mobile_regist)
-        @user.email = "__unbind__#{@user.mobile}"
+        @user.email = "__unbind__#{@user.mobile}@7234.cn"
         @user.state = :actived
         @user.save!
 
