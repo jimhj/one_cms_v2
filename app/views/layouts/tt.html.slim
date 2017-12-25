@@ -32,7 +32,7 @@ html
               - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
                 - klass = 'f-left'
                 - klass << ' active' if params[:slug] == node.slug
-                - nodes = (node.children.presence || node.parent.try(:children) || [node])
+                - nodes = (node.children.order('sortrank DESC').presence || node.parent.try(:children).try(:order, 'sortrank DESC') || [node])
                 li.nav-dropdown-toggle class=(klass)
                   a href="#{articles_path(node.slug)}"= node.short_name
                   - if nodes && nodes.any?
