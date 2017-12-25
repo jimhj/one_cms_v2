@@ -7,6 +7,8 @@ class Node < ActiveRecord::Base
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
 
+  default_scope { order('sortrank DESC, id ASC')}
+
   store :extras
 
   mount_uploader :logo, LogoUploader
