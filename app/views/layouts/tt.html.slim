@@ -32,7 +32,7 @@ html
               - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
                 - klass = 'f-left'
                 - klass << ' active' if params[:slug] == node.slug
-                - nodes = (node.children.order('sortrank DESC').presence || node.parent.try(:children).try(:order, 'sortrank DESC') || [node])
+                - nodes = (node.children.except(:order).order('sortrank DESC').presence || [node])
                 li.nav-dropdown-toggle class=(klass)
                   a href="#{articles_path(node.slug)}"= node.short_name
                   - if nodes && nodes.any?
@@ -49,7 +49,7 @@ html
                 a href="javascript:;" 专栏
                 .nav-dropdown
                   ul.nav-dropdown-list.clearfix
-                    - Node.where(is_column: true, is_at_top: true).each do |n|
+                    - Node.where(is_column: true, is_at_top: true).order('sortrank DESC').each do |n|
                       li
                         - if not n.nav_color.blank?
                           a href="#{articles_path(n.slug)}" style="#{n.nav_color}"= n.short_name
