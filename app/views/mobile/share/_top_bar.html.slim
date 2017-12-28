@@ -1,0 +1,11 @@
+.top-bar
+  .node-name
+    - logo = Rails.env.development? ? 'https://i1.7234.cn/uploads/site_config/logo/1/a84204bde135fd01efdda2d39cadd861.png' : SiteConfig.actived.logo.url
+    a href="#{root_url}"= image_tag logo, width: 80
+    - if action_name == 'column'
+      a href="#{mobile_column_path}"= " · 专栏"
+    - elsif @node.present?
+      a href="#{mobile_articles_path(@node.slug)}"= " · #{@node.name}"
+  button.drawer-btn type="button" class="drawer-toggle drawer-hamburger"
+    | <span class="sr-only">toggle navigation</span>
+    | <span class="drawer-hamburger-icon"></span>

@@ -18,7 +18,9 @@ class Mobile::ArticlesController < Mobile::ApplicationController
 
     set_meta title: "#{@node.name}_#{@node.seo_title}",
              description: @node.seo_description,
-             keywords: @node.seo_keywords    
+             keywords: @node.seo_keywords
+
+    render template: 'mobile/application/index'
   end
 
   def show

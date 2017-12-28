@@ -1,0 +1,32 @@
+body {
+  padding-bottom: 60px !important;
+}
+
+.bottom-node-bar {
+  position: fixed;
+  height: 40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-top: 1px solid #efefef;
+}
+
+.bottom-node-bar a {
+  display: inline-block;
+  width: calc(25% - 1px);
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #333;
+  border-right: 1px solid #efefef;
+
+  &.current {
+    color: $brand-success;
+  }
+
+  &:last-child {
+    width: 25%;
+    border-right: none;
+  }
+}

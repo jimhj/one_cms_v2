@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       match 'sign_in',    to: 'application#sign_in', as: :sign_in,   via: [:get, :post]
       match 'sign_out',   to: 'application#sign_out', as: :sign_out, via: [:delete]
       get 'check_login',  to: 'application#check_login', as: :check_login
+      get 'column',  to: 'application#column', as: :column, trailing_slash: true
 
       resources :comments
 

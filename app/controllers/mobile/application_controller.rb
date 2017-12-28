@@ -21,10 +21,23 @@ class Mobile::ApplicationController < ApplicationController
                 :expires_in => 10.minutes, 
                 :unless => -> { request.format.json? }
 
+  caches_action :column, 
+                :cache_path => Proc.new { |c| c.request.url + '-mobile-index' }, 
+                :expires_in => 10.minutes, 
+                :unless => -> { request.format.json? }
+
   def index
     @articles = Article.recommend(page: params[:page])
     @miphtml = "#{Setting.mobile_domain}/mip/"
     # @links = Link.where(linkable_id: 0).mobile
+  end
+
+  def column
+    @nodes = Node.where(is_column: true, is_at_top: true).order('sortrank DESC')
+    @articles = Article.where(node_id: @nodes.pluck(:id))
+    @miphtml = "#{Setting.mobile_domain}/mip/"
+
+    render template: 'mobile/application/index'
   end
 
   def sign_in

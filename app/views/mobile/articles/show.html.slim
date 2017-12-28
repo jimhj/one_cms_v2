@@ -29,14 +29,7 @@ html
           a href="#{mobile_tags_path}" 标签
 
     .top-header
-      .top-bar
-        .node-name
-          a href="#{root_url}"= image_tag SiteConfig.actived.logo.url, width: 80
-          - if @node.present?
-            a href="#{mobile_articles_path(@node.slug)}"= " · #{@node.name}"
-        button.drawer-btn type="button" class="drawer-toggle drawer-hamburger"
-          | <span class="sr-only">toggle navigation</span>
-          | <span class="drawer-hamburger-icon"></span>
+      = render 'mobile/share/top_bar'
 
     article.article-detail
       h1.title= @article.title
@@ -77,8 +70,9 @@ html
 
     - SiteAd.mobileglobal.actived.each do |ad|
       .ad-container= raw ad.value
-      
-      = render 'mobile/mip/ld_json'
+    
+    / = render 'mobile/share/bottom_node'  
+    = render 'mobile/mip/ld_json'
     = render 'site/share/bjh'
     javascript:
       window.currentArticleId = #{@article.id};

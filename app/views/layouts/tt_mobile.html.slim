@@ -29,23 +29,20 @@ html
           a href="#" 标签
 
     .top-header
-      .top-bar
-        .node-name
-          a href="#{root_url}"= image_tag SiteConfig.actived.logo.url, width: 80
-          - if @node.present?
-            a href="#{mobile_articles_path(@node.slug)}"= " · #{@node.name}"
-        button.drawer-btn type="button" class="drawer-toggle drawer-hamburger"
-          | <span class="sr-only">toggle navigation</span>
-          | <span class="drawer-hamburger-icon"></span>
-    
+      = render 'mobile/share/top_bar'
+
       - if not action_name.include?('sign')
         .top-menu
           .top-menu-tabs
             a.tab.first-tab class=('current' if controller_name == 'application' && action_name == 'index') href="#{root_url}" 推荐
 
             - if controller_name == 'application'
-              - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
-                a.tab class=('current' if params[:slug] == node.slug && controller_name != 'application') href="#{mobile_articles_path(node.slug)}"= node.short_name
+              - if action_name == 'index'
+                - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
+                  a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name
+              - elsif action_name == 'column'
+                - @nodes.each_with_index do |node, i|
+                  a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name    
             - elsif @node.present?
               - @node.nav_nodes(params[:slug]).each_with_index do |node, i| 
                 a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name
@@ -59,5 +56,7 @@ html
     / - SiteAd.mobileglobal.actived.each do |ad|
     /   .ad-container= raw ad.value
     
+    = render 'mobile/share/bottom_node'
+
     - if ['articles', 'mip'].include?(controller_name) && action_name == 'show'
       = render 'mobile/mip/ld_json'
