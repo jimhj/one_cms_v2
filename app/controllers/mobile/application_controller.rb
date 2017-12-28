@@ -35,7 +35,7 @@ class Mobile::ApplicationController < ApplicationController
   def column
     @nodes = Node.where(is_column: true, is_at_top: true).order('sortrank DESC')
     @articles = Article.where(node_id: @nodes.pluck(:id))
-                       .where(approved: true)
+                       .where(approved: true).order('id DESC')
                        .paginate(page: params[:page], per_page: 20, total_entries: 10000)
     @miphtml = "#{Setting.mobile_domain}/mip/"
 
