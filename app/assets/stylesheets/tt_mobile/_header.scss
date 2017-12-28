@@ -133,6 +133,10 @@ ul.drawer-menu li a {
   margin-bottom: 5px;
   -webkit-tap-highlight-color: rgba(0,0,0,.3);
 
+  &.first-tab {
+    border-right: 1px solid #efefef;
+  }
+
   &.current { color: $brand-success; }
 }
 
