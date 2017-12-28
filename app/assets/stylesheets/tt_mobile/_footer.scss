@@ -21,7 +21,11 @@ body {
   color: #333;
   border-right: 1px solid #efefef;
 
-  &.current {
+  &:visited {
+    color: #333;
+  }
+
+  &:hover, &.current {
     color: $brand-success;
   }
 
