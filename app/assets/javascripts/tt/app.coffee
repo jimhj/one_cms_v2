@@ -1,8 +1,11 @@
 # = require jquery
 # = require jquery_ujs
 # = require jquery.sticky-kit
+# = require backToTop
 
 $(document).ready ->
+  $('.to-top').toTop()
+  
   return_to = window.location.href
 
   $.get '/check_login', { return_to: return_to }, (rsp) ->
