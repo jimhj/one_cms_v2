@@ -1,3 +1,7 @@
+- if show_indexdetailtop_ad?
+  - SiteAd.indexdetailtop.actived.each do |ad|
+    = raw ad.value
+
 - SiteAd.rightsidetop.actived.each do |ad|
   .r-side-ad.index-right-ad= raw ad.value
 

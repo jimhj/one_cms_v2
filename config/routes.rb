@@ -96,6 +96,8 @@ Rails.application.routes.draw do
     get 'check_login',  to: 'welcome#check_login', as: :check_login
     get 'active/:token', to: 'welcome#activation', as: :active_user
 
+    get 'column',  to: 'application#column', as: :column, trailing_slash: true
+    
     resources :comments
     resources :tags,  only: [:index, :show],    trailing_slash: true
     get 'feed',         to: 'articles#feed',    as: :feed

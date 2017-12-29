@@ -116,9 +116,32 @@
   }
 }
 
-.text-list .list-head {
-  
+.round-pics.hot-pics ul.news-content {
+  padding: 0 30px;
+  margin-right: -50px;
 }
+
+.round-pics.hot-pics ul.news-content li {
+  width: 60px;
+  margin-right: 50px;
+
+  > a {
+    text-align: center;
+  }
+
+  .news-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    background-color: #efefef;
+
+    img { 
+      border-radius: 40px;
+    }
+  }
+}
+
+.text-list .list-head {}
 
 .text-list .list-desc {
   font-size: 14px;

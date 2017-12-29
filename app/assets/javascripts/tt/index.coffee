@@ -7,6 +7,7 @@ view.page = 1
 view.canLoad = true
 
 $(window).on 'scroll', (e) ->
+  return if window.disableAutoLoading == true
   return if not view.canLoad 
   return if view.onLoading
 

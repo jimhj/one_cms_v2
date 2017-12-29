@@ -12,6 +12,24 @@ class Site::ApplicationController < ApplicationController
     @articles = Article.recommend
   end
 
+  def column
+    @nodes = Node.where(is_column: true, is_at_top: true).order('sortrank DESC')
+    @articles = Article.where(node_id: @nodes.pluck(:id))
+                       .where(approved: true).order('id DESC')
+                       .paginate(page: params[:page], per_page: 20, total_entries: 10000)
+
+    respond_to do |format|
+      format.html {
+        render template: 'site/articles/index'
+      }
+
+      format.js {
+        html = render_to_string(partial: 'site/application/index_article', collection: @articles, as: :article)
+        render json: { html: html }
+      }
+    end
+  end
+
   def more
     @articles = Article.recommend(page: params[:page], load: 5)
     # @articles = Article.recommend

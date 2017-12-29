@@ -15,6 +15,7 @@ class SiteAd < ActiveRecord::Base
       'leftsidearticlebottom' => '正文内容下方',
       'leftsidemiddle'        => '相关文章上方',
       'leftsidebottom'        => '相关文章下方',
+      'indexdetailtop'        => '首页和内容页右侧上方',
       'rightsidetop'          => '右侧上方',
       'rightsidemiddle'       => '右侧中间',
       'rightsidebottom'       => '右侧下方',

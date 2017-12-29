@@ -78,9 +78,10 @@ module ApplicationHelper
     end
 
     h    
-    # p h
+  end
 
-    # h.invert.to_a
-    # # Hash[h.to_a.reverse]
+  def show_indexdetailtop_ad?
+    (controller_name == 'application' && action_name == 'index') or \
+    (controller_name == 'articles' && action_name == 'show')
   end
 end
