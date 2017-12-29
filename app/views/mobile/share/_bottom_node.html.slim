@@ -1,6 +1,14 @@
 .bottom-node-bar
-  a class=('current' if action_name == 'column') href="/column/" 专栏
-  a class=('current' if params[:slug] == 'news') href="/news/" 资讯
-  a class=('current' if params[:slug] == 'blockchain') href="/blockchain/" 项目
-  a class=('current' if params[:slug] == 'huodong') href="/huodong/" 活动
+  a class=('current' if action_name == 'column') href="/column/" 
+    span.icon.icon-notebook
+    span 专栏
+  a class=('current' if params[:slug] == 'news') href="/news/"
+    span.icon.icon-event
+    span 资讯
+  a class=('current' if params[:slug] == 'blockchain') href="/blockchain/" 
+    span.icon.icon-bulb
+    span 项目
+  a class=('current' if params[:slug] == 'huodong') href="/huodong/" 
+    span.icon.icon-bell
+    span 活动
   / a href="/profile" 我的
