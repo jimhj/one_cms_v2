@@ -34,7 +34,9 @@ html
       - if not action_name.include?('sign')
         .top-menu
           .top-menu-tabs
-            a.tab.first-tab class=('current' if controller_name == 'application' && action_name == 'index') href="#{root_url}" 推荐
+            a.tab.first-tab class=('current' if controller_name == 'application' && action_name == 'index') href="#{root_url}" 
+              span.icon.icon-refresh
+              span 推荐
 
             - if controller_name == 'application'
               - if action_name == 'index'
