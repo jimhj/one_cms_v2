@@ -36,7 +36,6 @@ html
       .article-info 
         em= @article.created_at.strftime('%F')
         em= @article.source
-        a href="#{articles_path(@article.node.slug)}"= @article.node.name
         em.articleHits 阅读 -
         a.articleComments href="#commentBox" 评论 #{@article.comments.count}
 
