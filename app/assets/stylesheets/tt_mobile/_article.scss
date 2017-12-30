@@ -151,9 +151,13 @@ body.article-detail-page {
   font-size: 17px;
   font-family: Avenir, sans-serif;
 
-  a {
-    color: #607fa6;
-    text-decoration: underline;
+  // a {
+  //   color: #607fa6;
+  //   text-decoration: underline;
+  // }
+
+  a:visited {
+    color: #3e3e3e;
   }
 
   p {
