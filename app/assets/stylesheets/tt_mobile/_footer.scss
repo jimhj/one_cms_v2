@@ -21,6 +21,10 @@ body {
   text-align: center;
   color: #333;
   border-right: 1px solid #e6e6e6;
+  
+  &:visited {
+    color: #333;
+  }
 
   span.icon {
     margin-right: 5px;
