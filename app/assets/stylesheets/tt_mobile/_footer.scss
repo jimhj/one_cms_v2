@@ -4,7 +4,7 @@ body {
 
 .bottom-node-bar {
   position: fixed;
-  height: 40px;
+  height: 50px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -16,18 +16,25 @@ body {
   display: block;
   float: left;
   width: calc(20% - 1px);
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  // line-height: 40px;
   text-align: center;
   color: #333;
   border-right: 1px solid #e6e6e6;
+  padding-top: 6px;
   
   &:visited {
     color: #333;
   }
 
+  span {
+    display: block;
+    font-size: 14px;
+  }
+
   span.icon {
-    margin-right: 5px;
+    // margin-right: 5px;
+    font-size: 20px;
   }
 
   &:hover, &.current {
@@ -43,8 +50,8 @@ body {
 .bottom-node-bar ul.user-node-menu {
   position: absolute;
   right: 10px;
-  bottom: 40px;
-  width: 25%;
+  bottom: 50px;
+  width: 30%;
   background-color: #ffffff;
   list-style: none;
   border: 1px solid #ddd;
