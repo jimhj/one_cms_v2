@@ -25,7 +25,7 @@ html
               span.icon.icon-refresh
               span 推荐
 
-            - if controller_name == 'application'
+            - if ['application', 'comments', 'articles'].include?(controller_name)
               - if action_name == 'index'
                 - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
                   a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name
