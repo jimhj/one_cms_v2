@@ -1,0 +1,23 @@
+.box
+  .box-header 
+    .box-header-inner.clearfix
+      h2
+        a href="#{mobile_user_articles_path}" 我的文章
+      h2.active 我的评论
+  .box-body
+    - if @comments.blank?
+      .text-center.text-muted style="margin-top: 40px;" 暂无评论
+    - else
+      .articles-list
+        - @comments.each do |comment|
+          .article-item.comment-item
+            .item-inner.clearfix
+              .item-text
+                h4
+                  a= comment.article.title
+                .time= comment.created_at.strftime('%F')
+              .item-info
+                a= comment.content
+
+      .loadmore.loadmore-pagination
+        = simple_pagination

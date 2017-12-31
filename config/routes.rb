@@ -72,11 +72,16 @@ Rails.application.routes.draw do
       get 'check_login',  to: 'application#check_login', as: :check_login
       get 'column',  to: 'application#column', as: :column, trailing_slash: true
 
-      resources :comments
+      resources :comments do
+        collection do
+          get :user_comments
+        end
+      end
 
       resources :tags,  only: [:index, :show],    trailing_slash: true
       get 'z',            to: 'channels#index',   as: :channels, trailing_slash: true
       get 'z/:slug',      to: 'channels#show',    as: :channel, trailing_slash: true
+      get 'articles',     to: 'articles#user_articles',  as: :user_articles
       get ':slug/:id',    to: 'articles#show'
       get ':slug',        to: 'articles#index',   as: :articles, trailing_slash: true
     end

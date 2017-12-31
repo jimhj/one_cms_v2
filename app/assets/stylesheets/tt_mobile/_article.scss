@@ -3,6 +3,19 @@
   border-bottom: 1px solid hsla(0,0%,87%,.6);
 }
 
+.article-item.comment-item {
+  &, .item-inner h4, .item-inner h4 a, a { font-size: 14px; }
+
+  .item-inner h4 a {
+    color: $brand-success;
+    text-decoration: underline;
+  }
+  
+  .time {
+    color: #999;
+  }
+}
+
 .article-item .item-inner {
   display: block;
   position: relative;

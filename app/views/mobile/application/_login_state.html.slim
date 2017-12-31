@@ -1,25 +1,46 @@
-nav class="drawer-nav" role="navigation"
-  ul.drawer-menu
-    - if login?
-      li
-        a href="#{root_url}"= current_user.username
-      li
-        a href="#{root_url}" 首页
-      li
-        a href="#{mobile_channels_path}" 专题
-      li
-        a href="#{mobile_tags_path}" 标签
-      li
-        a href="#{mobile_sign_out_path}" data-method="delete" 退出登录
-    - else
-      li
-        - arg = { return_to: return_to }
-        a href="#{mobile_sign_up_mobile_path(arg)}" 注册
-      li
-        a href="#{mobile_sign_in_path}" 登录
-      li
-        a href="#{root_url}" 首页
-      li
-        a href="#{mobile_channels_path}" 专题
-      li
-        a href="#{mobile_tags_path}" 标签
+/ nav class="drawer-nav" role="navigation"
+/   ul.drawer-menu
+/     - if login?
+/       li
+/         a href="#{root_url}"= current_user.username
+/       li
+/         a href="#{root_url}" 首页
+/       li
+/         a href="#{mobile_channels_path}" 专题
+/       li
+/         a href="#{mobile_tags_path}" 标签
+/       li
+/         a href="#{mobile_sign_out_path}" data-method="delete" 退出登录
+/     - else
+/       li
+/         - arg = { return_to: return_to }
+/         a href="#{mobile_sign_up_mobile_path(arg)}" 注册
+/       li
+/         a href="#{mobile_sign_in_path}" 登录
+/       li
+/         a href="#{root_url}" 首页
+/       li
+/         a href="#{mobile_channels_path}" 专题
+/       li
+/         a href="#{mobile_tags_path}" 标签
+
+- if login?
+  li.avatar
+    a href="javascript:;"
+      = image_tag 'site/avatar.png', size: '20x20'
+      span jimhj
+  li
+    a href="#{user_comments_mobile_comments_path}" 我的评论
+  li
+    a href="#{mobile_user_articles_path}" 我的文章
+  li
+    a href="#{mobile_sign_out_path}" data-method="delete" 退出登录
+- else
+  li
+    a href="#{mobile_sign_in_path}" 登录
+  li
+    a href="#{mobile_sign_up_mobile_path}" 注册
+  li
+    a href="#{user_comments_mobile_comments_path}" 我的评论
+  li
+    a href="#{mobile_user_articles_path}" 我的文章

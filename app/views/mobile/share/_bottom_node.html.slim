@@ -1,4 +1,4 @@
-.bottom-node-bar
+.bottom-node-bar.clearfix
   a class=('current' if action_name == 'column') href="/column/" 
     span.icon.icon-notebook
     span 专栏
@@ -11,4 +11,9 @@
   a class=('current' if params[:slug] == 'huodong') href="/huodong/" 
     span.icon.icon-bell
     span 活动
-  / a href="/profile" 我的
+  a.mobileProfile href="javascript:;" 
+    span.icon.icon-user
+    span 我的
+
+  ul.user-node-menu.hide.login-state
+    = render 'mobile/application/login_state'

@@ -14,20 +14,7 @@ html
     = csrf_meta_tags
     = yield :header
 
-  body.drawer.drawer--right class="#{controller_name}-#{action_name}"
-    nav.login-state class="drawer-nav" role="navigation"
-      ul.drawer-menu
-        li
-          a href="#{mobile_sign_up_mobile_path}" 注册
-        li
-          a href="#{mobile_sign_in_path}" 登录
-        li
-          a href="#{root_url}" 首页
-        li
-          a href="#" 专题
-        li
-          a href="#" 标签
-
+  body class="#{controller_name}-#{action_name}"
     .top-header
       = render 'mobile/share/top_bar'
 
@@ -59,6 +46,7 @@ html
     /   .ad-container= raw ad.value
     
     = render 'mobile/share/bottom_node'
+    = render 'mobile/share/node_list'
 
     - if ['articles', 'mip'].include?(controller_name) && action_name == 'show'
       = render 'mobile/mip/ld_json'

@@ -1,0 +1,32 @@
+.box
+  .box-header 
+    .box-header-inner.clearfix
+      h2.active 我的文章
+      h2 
+        a href="#{user_comments_mobile_comments_path}" 我的评论
+  .box-body
+    - if @articles.blank?
+      .text-center.text-muted style="margin-top: 40px;" 暂无文章
+    - else
+      .articles-list
+        - @articles.each do |article|
+          .article-item
+            .item-inner.clearfix
+              .item-text
+                h4
+                  a href="#{article_path(article)}" title="#{article.title}"= article.title
+
+              .item-info
+                span= article.source.presence || '网友投稿' 
+                span= article.created_at.strftime('%F')
+                | &nbsp;
+                span 阅读
+                | &nbsp;
+                span= article.hits 
+                | &nbsp;
+                span 评论
+                | &nbsp;
+                span= article.comments.count
+                
+      .loadmore.loadmore-pagination
+        = simple_pagination

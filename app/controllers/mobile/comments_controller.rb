@@ -1,7 +1,7 @@
 class Mobile::CommentsController < Mobile::ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
   before_action :login_required, except: [:index]
-  before_action :find_article
+  before_action :find_article, except: [:user_comments]
 
   def index
     @comments = @article.comments.includes(:user, :reply_user, :reply_comment).where(approved: true).order('id ASC')
@@ -40,6 +40,10 @@ class Mobile::CommentsController < Mobile::ApplicationController
     rescue ActiveRecord::StatementInvalid => e
       render json: { success: false, error: '暂不支持表情符号等特殊符号评论' }
     end 
+  end
+
+  def user_comments
+    @comments = current_user.comments.where(approved: true).order('id DESC').paginate(per_page: 10, page: params[:page])
   end
 
   private

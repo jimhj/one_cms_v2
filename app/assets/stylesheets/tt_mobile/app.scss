@@ -116,5 +116,56 @@ a:hover {
   }
 }
 
+body.open-nodes-list {
+  height: 200px;
+  overflow: hidden;
+}
+
+.site-nodes-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #fff;
+  min-height: 100%;
+  overflow-y: scroll; 
+  z-index: 99999;
+  display: none;
+}
+
+.site-nodes-list a.close-nodes-list {
+  display: block;
+  font-size: 20px;
+  color: #cccccc;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+.site-nodes-list .site-node {
+  padding: 15px 15px;
+  border-bottom:  1px solid #ddd;
+
+  .site-node-name a {
+    color: $brand-success;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .site-sub-nodes {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+
+  .site-sub-nodes a {
+    width: 33.3%;
+    // text-align: center;
+    padding: 5px 0px;
+    display: inline-block;
+    overflow: hidden;
+  }
+}
+
 
 

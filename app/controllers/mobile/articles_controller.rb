@@ -2,9 +2,12 @@ class Mobile::ArticlesController < Mobile::ApplicationController
   # self.page_cache_directory = -> { Rails.root.join("public", 'mobile_cached_pages') }
   # caches_page :index
 
+  before_action :login_required, only: [:user_articles]
+
   caches_action :index, :cache_path => Proc.new { |c| c.request.url + '-mobile' }, :expires_in => 10.minutes
   caches_action :show, :cache_path => Proc.new{ |c| 'articles-' + "#{c.params[:slug]}-" + c.params[:id] + '-mobile' }, :expires_in => 10.minutes
 
+  
   def index
     @node = Node.find_by(slug: params[:slug])
     @nodes = @node.root.self_and_descendants
@@ -21,6 +24,10 @@ class Mobile::ArticlesController < Mobile::ApplicationController
              keywords: @node.seo_keywords
 
     render template: 'mobile/application/index'
+  end
+
+  def user_articles
+    @articles = Article.order('id DESC').where(approved: true).paginate(page: params[:page], per_page: 20)
   end
 
   def show

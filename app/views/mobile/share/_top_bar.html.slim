@@ -6,6 +6,6 @@
       a href="#{mobile_column_path}"= " · 专栏"
     - elsif @node.present?
       a href="#{mobile_articles_path(@node.slug)}"= " · #{@node.name}"
-  button.drawer-btn type="button" class="drawer-toggle drawer-hamburger"
-    | <span class="sr-only">toggle navigation</span>
-    | <span class="drawer-hamburger-icon"></span>
+
+  a.toggle-nodes-btn href="javascript:;"
+    span.icon.icon-menu

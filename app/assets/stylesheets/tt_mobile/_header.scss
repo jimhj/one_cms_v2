@@ -12,96 +12,14 @@
   height: 44px;
   line-height: 44px;
   position: relative;
-  // background: $brand-success;
   background-color: #ffffff;
   border-bottom: 1px solid #efefef;
 }
 
 .top-bar a.logo {
-  // background-image: image-url('mobile/logo.png');
-  // background-size: 140px 40px;
-  // background-repeat: no-repeat;
-  // display: block;
-  // margin: 0px auto;
-  // height: 40px;
-  // width: 140px;
   text-align: center;
   font-size: 17px;
   color: #FFFFFF;
-  // line-height: 44px;
-  // height: 44px;
-  // display: block;
-}
-
-.top-bar a.search-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  background-image: image-url('mobile/search.png');
-  width: 24px;
-  height: 24px;
-  background-size: 24px 24px;
-  background-repeat: no-repeat;
-  display: block;
-}
-
-.drawer-nav {
-  width: 140px;
-  background-color: #3c3c44;
-}
-
-.top-bar .drawer-btn {
-  position: absolute;
-  width: 26px;
-  top: 0px;
-  right: 0px;
-  display: block;
-  padding: 10px 10px;
-
-  .drawer-hamburger-icon {
-    &, &:before, &:after {
-      background-color: #ccc;
-    }
-
-    &:before {
-      top: -8px;
-    }
-
-    &:after {
-      top: 8px;
-    }
-  }
-}
-
-ul.drawer-menu li a {
-  display: block;
-  padding: 10px 15px;
-  border-bottom: 1px solid #545454;
-  color: #d2d2d2;
-}
-
-.drawer-open .drawer-btn .drawer-hamburger-icon {
-  background-color: transparent;
-
-  &:before {
-    top: 0px;
-  }
-
-  &:after {
-    top: 0px;
-  }
-}
-
-.drawer--right.drawer-open .drawer-hamburger {
-  right: 140px;
-}
-
-.drawer-open .drawer-overlay {
-  z-index: 999;
-}
-
-.drawer-nav {
-  z-index: 9999;
 }
 
 .top-menu {
@@ -154,7 +72,10 @@ ul.drawer-menu li a {
   }
 }
 
-.drawer--right.drawer-open .node-name {
-  text-align: left;
-  margin-left: 15px;
+.top-bar .toggle-nodes-btn {
+  position: absolute;
+  right: 15px;
+  top: 2px;
+  font-size: 20px;
+  color: #999;
 }
