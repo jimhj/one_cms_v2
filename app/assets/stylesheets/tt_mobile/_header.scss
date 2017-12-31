@@ -1,11 +1,6 @@
 .top-header {
   display: block;
-  z-index: 999;
   overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
 }
 
 .top-bar {
@@ -14,6 +9,7 @@
   position: relative;
   background-color: #ffffff;
   border-bottom: 1px solid #efefef;
+  z-index: 99999;
 }
 
 .top-bar a.logo {

@@ -25,14 +25,13 @@ html
               span.icon.icon-refresh
               span 推荐
 
-            - if ['application', 'comments', 'articles'].include?(controller_name)
-              - if ['index', 'user_articles', 'user_comments'].include?(action_name)
-                - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
-                  a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name
-              - elsif action_name == 'column'
-                - @nodes.each_with_index do |node, i|
-                  a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name    
-            - elsif @node.present?
+            - if controller_name == 'application' && action_name == 'index' or ['user_articles', 'user_comments'].include?(action_name)
+              - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
+                a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name
+            - elsif action_name == 'column'
+              - @nodes.each_with_index do |node, i|
+                a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name    
+            - if @node.present?
               - @node.nav_nodes(params[:slug]).each_with_index do |node, i| 
                 a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name
     .main

@@ -1,8 +1,10 @@
 # = require jquery
 # = require jquery_ujs
-# = require iscroll.min
+# = require jquery.sticky-kit
 
 $(document).ready ->
+  $(".top-bar").stick_in_parent(parent: 'html')
+
   $('.mobileProfile').click ->
     $('.user-node-menu').toggleClass('hide')
 
