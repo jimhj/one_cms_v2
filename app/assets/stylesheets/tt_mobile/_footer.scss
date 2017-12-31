@@ -22,16 +22,8 @@ body {
   color: #333;
   border-right: 1px solid #e6e6e6;
 
-  &:visited {
-    color: #333;
-  }
-
   span.icon {
     margin-right: 5px;
-  }
-
-  &:visited {
-    color: #333;
   }
 
   &:hover, &.current {
@@ -71,6 +63,9 @@ body {
     padding: 10px 0px;
     text-align: center;
     border-bottom: 1px solid #ddd;
+    &:visited {
+      color: #333;
+    }
   }
 
   li:last-child a {
