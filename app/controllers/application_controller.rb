@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def login_required
     unless login?
-      flash[:warning] = "请登录后访问"
+      flash[:error] = "请登录后访问"
       options =  { 
         :protocol   => 'http://', 
         :controller => 'site/welcome', 

@@ -27,7 +27,7 @@ class Mobile::ArticlesController < Mobile::ApplicationController
   end
 
   def user_articles
-    @articles = Article.order('id DESC').where(approved: true).paginate(page: params[:page], per_page: 20)
+    @articles = current_user.articles.order('id DESC').where(approved: true).paginate(page: params[:page], per_page: 20)
   end
 
   def show
