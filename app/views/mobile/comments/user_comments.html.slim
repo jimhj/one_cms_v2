@@ -14,10 +14,10 @@
             .item-inner.clearfix
               .item-text
                 h4
-                  a= comment.article.title
+                  a href="#{article_path(comment.article)}"= comment.article.title
                 .time= comment.created_at.strftime('%F')
               .item-info
-                a= comment.content
+                a href="#{article_path(comment.article)}"= comment.content
 
       .loadmore.loadmore-pagination
         = simple_pagination
