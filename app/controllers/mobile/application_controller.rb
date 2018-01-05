@@ -1,4 +1,6 @@
 class Mobile::ApplicationController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:sign_out]
+
   layout 'tt_mobile'
   
   # layout 'mobile'
