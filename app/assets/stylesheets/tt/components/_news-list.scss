@@ -180,6 +180,17 @@
   }
 }
 
+.news-list .pic-content {
+  text-align: center;
+  padding: 15px 0px;
+
+  .pic-text {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+  }
+}
+
 // 友情链接
 .friend-links .news-content {
   overflow: hidden;

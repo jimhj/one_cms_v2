@@ -36,6 +36,11 @@
       - if not @node.read_attribute(:logo).blank?
         .text
           = image_tag @node.logo_url(:large)
+
+      .form-group.form-group-bordered
+        label 自定义顶部板块
+        = f.text_area :customize_section_top, class: 'form-control'
+
       .checkbox
         label
           = f.check_box :is_nav, class: 'checkbox'

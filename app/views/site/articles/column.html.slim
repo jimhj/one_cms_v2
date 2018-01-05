@@ -30,6 +30,9 @@
         .loading-box
           = image_tag 'site/loading.gif'
   .f-right.index-right.right-sidebar
+    - if !@node.customize_section_top.blank?
+      = raw @node.customize_section_top
+
     - SiteAd.rightsidetop.actived.each do |ad|
       .r-side-ad.index-right-ad= raw ad.value
 
