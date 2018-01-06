@@ -7,6 +7,12 @@ class Mobile::MipController < Mobile::ApplicationController
 
   def show
     @article = Article.find params[:id]
+    
+    unless @article.approved?
+      render :file => 'public/404.html', status: 404, layout: false
+      return
+    end
+
     @node = Node.find_by!(slug: params[:slug])
 
     @nodes = @node.self_and_ancestors
