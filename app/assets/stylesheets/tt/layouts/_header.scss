@@ -97,7 +97,7 @@
     // width: 1170px;
     width: 100%;
     // margin: 0 auto;
-    padding: 0px 5px 15px 5px;
+    padding: 0px 0px 10px 0px;
     list-style: none;
     // height: 40px;
   }
@@ -111,10 +111,12 @@
 
   li a {
     display: inline-block;
-    padding: 0px 10px;
+    /* padding: 0px 10px; */
     font-size: 13px;
     height: 20px;
     color: #666;
+    width: 100px;
+    overflow: hidden;
   }
 
   li a:hover {
