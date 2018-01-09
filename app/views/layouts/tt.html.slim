@@ -31,9 +31,10 @@ html
 
               - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
                 - klass = 'f-left'
+                - klass << ' nav-dropdown-toggle' unless params[:slug] == 'whitepaper'
                 - klass << ' active' if params[:slug] == node.slug
                 - nodes = (node.children.except(:order).order('sortrank DESC').presence || [node])
-                li.nav-dropdown-toggle class=(klass)
+                li class=(klass)
                   a href="#{articles_path(node.slug)}"= node.short_name
                   - if nodes && nodes.any?
                     .nav-dropdown
