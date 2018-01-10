@@ -78,7 +78,7 @@
 }
 
 .main-nav .nav-list > li > .nav-dropdown {
-  width: 500px;
+  width: 520px;
   position: absolute;
   top: 60px;
   left: -100px;
@@ -97,7 +97,7 @@
     // width: 1170px;
     width: 100%;
     // margin: 0 auto;
-    padding: 0px 0px 10px 0px;
+    padding: 0px 0px 10px 15px;
     list-style: none;
     // height: 40px;
   }
@@ -117,13 +117,21 @@
     color: #666;
     width: 100px;
     overflow: hidden;
+    text-align: left;
+
+    img {
+      border-radius: 8px;
+      vertical-align: text-bottom;
+      margin-right: 5px;
+    }
   }
 
   li a:hover {
     // border-bottom: 2px solid $brand-success;
-    background-color: $brand-success;
-    color: #ffffff !important;
-    border-radius: 8px;
+    // background-color: $brand-success;
+    // color: #ffffff !important;
+    // border-radius: 8px;
+    color: $brand-success;
   }
 }
 

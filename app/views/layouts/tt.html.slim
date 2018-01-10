@@ -41,10 +41,11 @@ html
                       ul.nav-dropdown-list.clearfix
                         - nodes.each do |n|
                           li
-                            - if not n.nav_color.blank?
-                              a href="#{articles_path(n.slug)}" style="#{n.nav_color}"= n.short_name
-                            - else
-                              a href="#{articles_path(n.slug)}"= n.short_name
+                            a href="#{articles_path(n.slug)}" style="#{n.nav_color}"
+                              -if not node.logo.blank?
+                                = image_tag node.logo_url(:small), size: '15x15'
+                              = n.short_name
+
 
               li.nav-dropdown-toggle.f-left
                 a href="/column/" 专栏
