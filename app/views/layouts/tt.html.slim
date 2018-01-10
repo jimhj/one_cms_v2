@@ -42,8 +42,8 @@ html
                         - nodes.each do |n|
                           li
                             a href="#{articles_path(n.slug)}" style="#{n.nav_color}"
-                              -if not node.logo.blank?
-                                = image_tag node.logo_url(:small), size: '15x15'
+                              -if not n.logo.blank?
+                                = image_tag n.logo_url(:small), size: '15x15'
                               = n.short_name
 
 
