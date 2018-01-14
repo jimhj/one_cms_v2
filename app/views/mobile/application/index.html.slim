@@ -1,5 +1,17 @@
+- if action_name == 'index' && controller_name == 'application'
+  .swiper-container
+    .swiper-wrapper
+      - @focus.each_with_index do |a, ind|
+        a.swiper-slide style="background:url(#{a.thumb.url}) left center no-repeat;" href="#{article_path(a)}" title="#{a.title}"
+          .slide-inner
+            .swiper-slide-text= a.title
+
+    .swiper-pagination.swiper-pagination-bullets
+
 .articles-list
   = render partial: 'mobile/share/article_list', locals: { articles: @articles }
 
 .loadmore.loadmore-pagination
   = simple_pagination
+
+= javascript_include_tag 'tt_mobile/index'

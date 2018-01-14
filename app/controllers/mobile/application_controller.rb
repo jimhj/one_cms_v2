@@ -30,6 +30,7 @@ class Mobile::ApplicationController < ApplicationController
 
   def index
     @articles = Article.recommend(page: params[:page])
+    @focus = Article.focus
     @miphtml = "#{Setting.mobile_domain}/mip/"
     # @links = Link.where(linkable_id: 0).mobile
   end

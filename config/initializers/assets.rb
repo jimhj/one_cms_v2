@@ -23,6 +23,7 @@ Rails.application.config.assets.precompile += %w(
   tt/comment.js
   tt/sign_up.js
   tt_mobile/app.js
+  tt_mobile/index.js
   tt_mobile/app.css
   tt/views/article.css
   tt/views/node.css
