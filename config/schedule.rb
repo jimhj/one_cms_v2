@@ -23,7 +23,7 @@ every 12.hours do
   command "echo 'flush_all' | nc localhost 11211"
 end
 
-every 20.minutes do
+every 30.minutes do
   runner "SiteConfig.clear_index_cache"
 end
 

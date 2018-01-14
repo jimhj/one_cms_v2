@@ -45,6 +45,14 @@
       /     = f.select :theme, [['绿色健康', 'green'], ['橙色食谱', 'orange'], ['母婴咨询', 'red']]
 
       .form-group.form-group-bordered
+        label 联系方式
+        = f.text_area :contact, class: 'form-control'
+
+      .form-group.form-group-bordered
+        label 媒体合作伙伴
+        = f.text_area :partner_list, class: 'form-control'
+
+      .form-group.form-group-bordered
         label 联系邮箱
         = f.text_field :contact_email, class: 'form-control'
       .form-group.form-group-bordered

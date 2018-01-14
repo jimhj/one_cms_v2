@@ -4,13 +4,14 @@ class Site::ApplicationController < ApplicationController
   self.page_cache_directory = -> { Rails.root.join("public", 'cached_pages') }
   
   caches_page :index
+  caches_action :index, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 30.minutes
   caches_action :column, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 10.minutes
 
   def index
     @links = Link.where(linkable_id: 0).pc
     @focus = Article.focus
     @secondary_focus = Article.secondary_focus
-    @articles = Article.recommend
+    @articles = Article.recommend(page: params[:page])
   end
 
   def column
@@ -32,7 +33,7 @@ class Site::ApplicationController < ApplicationController
   end
 
   def more
-    @articles = Article.recommend(page: params[:page], load: 5)
+    @articles = Article.recommend(page: params[:page], load: 10)
     # @articles = Article.recommend
     html = render_to_string(partial: 'site/application/index_article', layout: false, collection: @articles, as: :article, locals: { lazyload: true, page: params[:page] })
     render json: { html: html }

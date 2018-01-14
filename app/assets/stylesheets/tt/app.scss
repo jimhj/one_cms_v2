@@ -3,3 +3,23 @@
 .moblePageBreak {
   display: none !important;
 }
+
+a.load-more-btn {
+  display: block;
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  padding: 15px 0px;
+  text-align: center;
+  font-size: 14px;
+  margin: 20px 0;
+  cursor: pointer;
+
+  &.disabled {
+    color: #777;
+    background-color: #fbfbfb;
+  }
+
+  &:hover {
+    background-color: #fbfbfb;
+  }
+}

@@ -24,8 +24,11 @@
 
     .articles-section.m-top10
       = render partial: 'site/application/index_article', collection: @articles, as: :article
-      .loading-box
-        = image_tag 'site/loading.gif'
+
+      a.load-more-btn href="javascript:;" data-page=1 
+        .load-text 加载更多
+        .loading-box
+          = image_tag 'site/loading.gif'
 
   .f-right.index-right.right-sidebar
     = render 'site/articles/share_sidebar'
