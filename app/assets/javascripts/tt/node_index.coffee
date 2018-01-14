@@ -1,4 +1,4 @@
-# view = {}
+view = {}
 # view.onLoading = false
 # view.scrollTop = 0
 # view.page = 1
