@@ -74,6 +74,7 @@ html
           .footer-title 战略合作和伙伴
           .footer-partner-list
             = SiteConfig.actived.partner_list.html_safe
+
         - if (@links || []).any?
           .footer-links
             .footer-title 媒体合作伙伴
@@ -86,7 +87,8 @@ html
 
         .footer-contact
           p= (SiteConfig.actived.contact || '').html_safe
-    .footer-copyright
+
+    .site-footer-copyright
       p= SiteConfig.actived.copyright.html_safe
       p= SiteConfig.actived.declare.html_safe
 
