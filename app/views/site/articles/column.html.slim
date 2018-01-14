@@ -70,12 +70,6 @@
               - else
                 a href="#{link.url}" target="_blank" title="#{link.title}"= link.name
 
-    - if controller_name == 'application' && action_name == 'index'
-      .about-section
-        p= SiteConfig.actived.copyright.html_safe
-        .declare
-          p= SiteConfig.actived.declare.html_safe
-
     - SiteAd.rightsidebottom.actived.each do |ad|
       .r-side-ad.index-right-ad.ad-fixed
         .r-side-ad-inner= raw ad.value 

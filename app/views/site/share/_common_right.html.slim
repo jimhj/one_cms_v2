@@ -38,22 +38,28 @@
               img src="#{picture_url}" width=144 height=84 alt="#{article.title}"
             p= article.title
 
-- if (@links || []).any?
   .friend-links.news-list
-    .list-head 合作伙伴
+    .list-head 链要点
     ul.news-content.clearfix
-      - (@links || []).each do |link|
-        li
-          - if link.nofollow?
-            a href="#{link.url}" target="_blank" rel="nofollow" title="#{link.title}"= link.name
-          - else
-            a href="#{link.url}" target="_blank" title="#{link.title}"= link.name
+      - Channel.order('sortrank DESC, created_at DESC').limit(100).each do |channel|
+        a title="#{channel.name}" href="#{channel_path(channel)}"= channel.name
 
-- if controller_name == 'application' && action_name == 'index'
-  .about-section
-    p= SiteConfig.actived.copyright.html_safe
-    .declare
-      p= SiteConfig.actived.declare.html_safe
+/ - if (@links || []).any?
+/   .friend-links.news-list
+/     .list-head 合作伙伴
+/     ul.news-content.clearfix
+/       - (@links || []).each do |link|
+/         li
+/           - if link.nofollow?
+/             a href="#{link.url}" target="_blank" rel="nofollow" title="#{link.title}"= link.name
+/           - else
+/             a href="#{link.url}" target="_blank" title="#{link.title}"= link.name
+
+/ - if controller_name == 'application' && action_name == 'index'
+/   .about-section
+/     p= SiteConfig.actived.copyright.html_safe
+/     .declare
+/       p= SiteConfig.actived.declare.html_safe
 
 - SiteAd.rightsidebottom.actived.each do |ad|
   .r-side-ad.index-right-ad.ad-fixed
