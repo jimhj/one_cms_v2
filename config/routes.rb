@@ -88,7 +88,7 @@ Rails.application.routes.draw do
   end 
   
   scope module: :site do
-    root 'application#index'
+    root 'application#site_index'
     get 'more',         to: 'application#more'
 
     match 'sign_up',    to: 'welcome#sign_up', as: :sign_up,   via: [:get, :post]
