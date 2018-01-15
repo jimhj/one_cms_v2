@@ -4,7 +4,6 @@ class Site::ApplicationController < ApplicationController
   self.page_cache_directory = -> { Rails.root.join("public", 'cached_pages') }
   
   caches_page :index
-  caches_action :index, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 30.minutes
   caches_action :column, :cache_path => Proc.new { |c| c.request.url + '-desktop' }, :expires_in => 10.minutes
 
   def index

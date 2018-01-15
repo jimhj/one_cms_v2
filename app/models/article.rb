@@ -257,7 +257,8 @@ class Article < ActiveRecord::Base
 
   def incr_hits
     c = Array.new(10, 1) + Array.new(5, 2) + Array.new(3, 3) + Array.new(2, 4) + [5]
-    update_column(:hits, self.hits+c.sample)
+    self.hits = self.hits+c.sample
+    self.save(validate: false)
     self.hits
   end
 end
