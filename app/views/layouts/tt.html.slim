@@ -26,7 +26,7 @@ html
 
           .main-nav.f-left
             ul.nav-list.clearfix
-              li.f-left class=('active' if controller_name == 'application' && action_name == 'index')
+              li.f-left class=('active' if controller_name == 'application' && action_name == 'site_index')
                 a href="#{root_path}" 首页
 
               - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
