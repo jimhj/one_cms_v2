@@ -14,8 +14,8 @@ class UserCreditLog < ActiveRecord::Base
   def self.init!
     log_day = Time.now.at_beginning_of_day.strftime('%Y%m%d').to_i
   
-    User.all.each do |user|
-      User.transaction do
+    User.transaction do
+      User.all.each do |user|
         user.credit_logs.destroy_all
 
         log = user.credit_logs.build
@@ -32,6 +32,10 @@ class UserCreditLog < ActiveRecord::Base
         user.save!
         log
       end
+
+      conf = SiteConfig.first
+      conf.rank_updated_at = Time.now
+      conf.save!
     end
   end
 
