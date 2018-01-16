@@ -81,7 +81,7 @@ module ApplicationHelper
   end
 
   def show_indexdetailtop_ad?
-    (controller_name == 'application' && action_name == 'index') or \
+    (controller_name == 'application' && action_name == 'site_index') or \
     (controller_name == 'articles' && action_name == 'show')
   end
 end
