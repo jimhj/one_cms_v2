@@ -21,7 +21,7 @@
             tr
               td= ind+1
               td.user
-                = image_tag user.avatar.url(:small), size: '15x15'
+                = image_tag user.avatar.url(:small), size: '24x24'
                 = user.username
               td= user.articles.approved.count
               td= user.comments.approved.count
