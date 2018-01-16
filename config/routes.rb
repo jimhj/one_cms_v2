@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     match 'password',    to: 'welcome#password', as: :password,   via: [:get, :post]
     get 'check_login',  to: 'welcome#check_login', as: :check_login
     get 'active/:token', to: 'welcome#activation', as: :active_user
+    get 'users/rank', to: 'welcome#users_rank', as: :users_rank
 
     get 'column',  to: 'application#column', as: :column, trailing_slash: true
     

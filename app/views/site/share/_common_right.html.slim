@@ -2,6 +2,33 @@
   - SiteAd.indexdetailtop.actived.each do |ad|
     = raw ad.value
 
+.rank-list
+  .rank-head
+    .rank-head-inner
+      .rank-head-title 
+        span.icon.icon-fire
+        span 麦妖榜
+      .date 更新日期 #{SiteConfig.rank_update_date}
+
+  .user-ranks
+    table.user-rank-table
+      thead
+        tr
+          td 排名
+          td 用户
+          td 贡献值
+      tbody
+        - User.order('credits DESC').limit(10).each_with_index do |user, ind|
+          tr
+            td= ind+1
+            td.user
+              = image_tag user.avatar.url(:small), size: '15x15'
+              = user.username
+            td= user.credits
+
+  .rank-footer
+    a href="#{users_rank_path}" 查看总榜
+
 - SiteAd.rightsidetop.actived.each do |ad|
   .r-side-ad.index-right-ad= raw ad.value
 

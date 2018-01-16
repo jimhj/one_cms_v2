@@ -2,8 +2,8 @@ class Site::WelcomeController < Site::ApplicationController
   skip_before_action :verify_authenticity_token, only: [:sign_out]
   before_action :no_login_required, only: [:sign_in, :sign_up]
   before_action :login_required, only: [:sign_out, :password, :profile]
-  skip_before_action :no_login_required, only: [:check_login, :activation]
-  skip_before_action :login_required, only: [:check_login, :activation]
+  skip_before_action :no_login_required, only: [:check_login, :activation, :users_rank]
+  skip_before_action :login_required, only: [:check_login, :activation, :users_rank]
 
   def sign_in
     if request.get?
@@ -147,9 +147,15 @@ class Site::WelcomeController < Site::ApplicationController
       params[:return_to]
     end
 
+    current_user.init_daily_credits! if login?
+
     login_html = render_to_string(partial: 'site/welcome/login_state', locals: { return_to: return_to })
     post_box = render_to_string(partial: 'site/comments/post_box', locals: { return_to: return_to })
     render json: { login: login?, login_html: login_html, post_box: post_box }
+  end
+
+  def users_rank
+    @users = User.order('credits DESC').limit(200)
   end
 
   private

@@ -6,6 +6,8 @@ class Comment < ActiveRecord::Base
 
   validates :content, presence: true, length: { maximum: 500 }
 
+  scope :approved, -> { where(approved: true) }
+
   def floor_number
     article.comments.index(self).to_i + 1
   end

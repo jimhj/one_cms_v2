@@ -7,6 +7,26 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
+.box-header .user-rank-header {
+  padding: 20px 0px;
+  text-align: center;
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+
+    span.icon {
+      margin-right: 5px;
+    }
+  }
+
+  .date {
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 5px;
+  }
+}
+
 .box-header .box-header-inner {
   padding: 20px 15px 0px 15px;
 

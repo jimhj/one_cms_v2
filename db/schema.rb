@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171229132135) do
+ActiveRecord::Schema.define(version: 20180116123416) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -265,6 +265,19 @@ ActiveRecord::Schema.define(version: 20171229132135) do
   add_index "tags", ["slug"], name: "index_tags_on_slug", using: :btree
   add_index "tags", ["taggings_count"], name: "index_tags_on_taggings_count", using: :btree
 
+  create_table "user_credit_logs", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "comments_count", limit: 4,     default: 0
+    t.integer  "articles_count", limit: 4,     default: 0
+    t.integer  "daily_credits",  limit: 4,     default: 0
+    t.string   "log_day",        limit: 255
+    t.text     "extras",         limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "user_credit_logs", ["user_id"], name: "index_user_credit_logs_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",               limit: 255,                  null: false
     t.string   "mobile",              limit: 255
@@ -282,6 +295,7 @@ ActiveRecord::Schema.define(version: 20171229132135) do
     t.string   "allowed_node_ids",    limit: 255
     t.boolean  "review_later",                      default: true
     t.text     "extras",              limit: 65535
+    t.integer  "credits",             limit: 4,     default: 0
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
   end

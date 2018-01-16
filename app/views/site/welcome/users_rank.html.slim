@@ -1,0 +1,29 @@
+.main
+  .box
+    .box-header
+      .user-rank-header
+        .title
+          span.icon.icon-fire 
+          span 麦妖总榜
+        .date= "更新日期 #{SiteConfig.rank_update_date}"
+    .box-body
+      table.user-rank-table
+        thead
+          tr
+            td 排名
+            td 用户
+            td 文章数
+            td 评论数
+            td 连续登录
+            td 贡献值
+        tbody
+          - @users.each_with_index do |user, ind|
+            tr
+              td= ind+1
+              td.user
+                = image_tag user.avatar.url(:small), size: '15x15'
+                = user.username
+              td= user.articles.approved.count
+              td= user.comments.approved.count
+              td= user.login_number
+              td= user.credits
