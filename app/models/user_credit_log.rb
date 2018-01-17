@@ -15,7 +15,8 @@ class UserCreditLog < ActiveRecord::Base
     log_day = Time.now.at_beginning_of_day.strftime('%Y%m%d').to_i
   
     User.transaction do
-      User.where('id >= 463').each do |user|
+      # User.where('id >= 463').each do |user|
+      User.all.each do |user|
         user.credit_logs.destroy_all
 
         log = user.credit_logs.build
@@ -33,9 +34,9 @@ class UserCreditLog < ActiveRecord::Base
         log
       end
 
-      # conf = SiteConfig.first
-      # conf.rank_updated_at = Time.now
-      # conf.save!
+      conf = SiteConfig.first
+      conf.rank_updated_at = Time.now
+      conf.save!
     end
   end
 

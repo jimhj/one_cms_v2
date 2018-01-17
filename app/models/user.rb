@@ -60,19 +60,19 @@ class User < ActiveRecord::Base
   end
 
   def current_credit_log
-    credit_logs.order('id DESC').first
+    log_day = Time.now.strftime('%Y%m%d').to_i
+    credit_logs.find_by(log_day: log_day)
   end
 
   def prev_credit_log
-    return nil if current_credit_log.nil?
-    credit_logs.order('id DESC').where('id < ?', current_credit_log.id).first
+    log_day = Time.now.strftime('%Y%m%d').to_i
+    credit_logs.order('id DESC').where('log_day < ?', log_day).first
   end
 
-  def calc_login_number(day = nil)
+  def calc_login_number
     return 1 if current_credit_log.nil?
     return 1 if prev_credit_log.nil?
 
-    log_day = day || Time.now.strftime('%Y%m%d').to_i
     diff_day = current_credit_log.log_day - prev_credit_log.log_day
 
     return 1 if diff_day > 1
@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
 
       log = self.credit_logs.build
       log.log_day = log_day
-      self.login_number = calc_login_number(log_day)
+      self.login_number = calc_login_number
       self.save!
 
       log.login_number = self.login_number
