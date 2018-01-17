@@ -29,7 +29,7 @@ class UserCreditLog < ActiveRecord::Base
         log.save!
         user.login_number = 1
         user.credits = log.daily_credits
-        user.save!
+        user.save!(validate: false)
         log
       end
 
