@@ -155,7 +155,7 @@ class Site::WelcomeController < Site::ApplicationController
   end
 
   def users_rank
-    @users = User.order('credits DESC').limit(50)
+    @users = User.order('credits DESC').limit(100)
   end
 
   private
