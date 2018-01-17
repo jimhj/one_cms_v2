@@ -35,7 +35,7 @@ class UserCreditLog < ActiveRecord::Base
       end
 
       conf = SiteConfig.first
-      conf.rank_updated_at = Time.now
+      conf.rank_updated_at = Time.now.yesterday.at_beggin_of_day + 10.hours
       conf.save!
     end
   end

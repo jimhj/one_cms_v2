@@ -59,25 +59,9 @@ class User < ActiveRecord::Base
     Time.now - last_comment.created_at >= 1.minute
   end
 
-  def current_credit_log
-    log_day = Time.now.strftime('%Y%m%d').to_i
-    credit_logs.find_by(log_day: log_day)
-  end
-
   def prev_credit_log
     log_day = Time.now.strftime('%Y%m%d').to_i
     credit_logs.order('id DESC').where('log_day < ?', log_day).first
-  end
-
-  def calc_login_number
-    return 1 if current_credit_log.nil?
-    return 1 if prev_credit_log.nil?
-
-    diff_day = current_credit_log.log_day - prev_credit_log.log_day
-
-    return 1 if diff_day > 1
-    return (self.login_number + 1) if diff_day == 1
-    return self.login_number
   end
 
   def init_daily_credits!
@@ -88,7 +72,15 @@ class User < ActiveRecord::Base
 
       log = self.credit_logs.build
       log.log_day = log_day
-      self.login_number = calc_login_number
+
+      login_times = if prev_credit_log.nil?
+        1
+      else
+        diff_day = log_day - prev_credit_log.log_day
+        diff_day > 1 ? 1 : (self.login_number + 1)
+      end
+
+      self.login_number = login_times
       self.save!
 
       log.login_number = self.login_number
