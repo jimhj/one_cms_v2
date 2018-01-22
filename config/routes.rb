@@ -12,6 +12,13 @@ Rails.application.routes.draw do
 
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
+  scope path: '/api/v1', module: 'api/v1', as: :api_v1 do
+    get "/category/:category_id/page/:page", to: 'articles#index', defaults: { format: :json }
+
+    resources :categories
+    resources :articles, only: [:index]
+  end
+
   namespace :onecmsmanage, module: :admin, as: :admin do
     get :login, to: 'sessions#new'
     post :login, to: 'sessions#create'

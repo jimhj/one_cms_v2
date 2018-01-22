@@ -12,7 +12,7 @@ class UserCreditLog < ActiveRecord::Base
   end
 
   def self.init!
-    log_day = 20170117
+    log_day = 20180117
   
     User.transaction do
       # User.where('id >= 463').each do |user|

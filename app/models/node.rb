@@ -7,7 +7,10 @@ class Node < ActiveRecord::Base
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
 
-  store :extras, accessors: [:customize_section_top]
+  store :extras, accessors: [
+    :customize_section_top,
+    :api_node
+  ]
 
   mount_uploader :logo, LogoUploader
 
