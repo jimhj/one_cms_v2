@@ -29,6 +29,7 @@ Rails.application.config.assets.precompile += %w(
   tt/views/node.css
   jquery.slideBox.js
   jquery.slideBox.css
+  dasai.js
 )
 
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/

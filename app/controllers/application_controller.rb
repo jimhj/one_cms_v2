@@ -104,6 +104,10 @@ class ApplicationController < ActionController::Base
     render :text => "Sitemap:http://#{SiteConfig.actived.domain}/sitemap.xml\nUser-agent: *\nDisallow:/*?*"
   end
 
+  def dasai
+    render layout: false
+  end
+
   private
 
   def set_meta(tags)
