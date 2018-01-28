@@ -1,7 +1,7 @@
 $(function () {
   var timer;
   var duration = 59;
-  var $btn = $('button.sendSMSCode');
+  var $btn = $('button.sendCode');
 
   var disableButton = function () {
     $btn.addClass('disabled').attr('disabled', 'disabled');
@@ -33,20 +33,40 @@ $(function () {
   };
 
   $btn.click(function () {
-    var mobile = $.trim($('#user_mobile').val());
-    if (mobile == '') {
-      alert('请输入手机号');
-      return false;
-    }
+    if ($('#new_user').is('.email-regist-form')) {
+      var email = $.trim($('#user_email').val());
+      if (email == '') {
+        alert('请输入邮箱');
+        return false;
+      }
 
-    if (!/^1[3|4|5|7|8][0-9]{9}$/.test(mobile)) {
-      alert('请输入正确的手机号');
-      return false;
+      if(!/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(email)) {
+        alert('请输入正确的邮箱');
+        return false;
+      }
+
+      var req_url = "/send_email_code";
+      var params = { email: email };
+
+    } else {
+      var mobile = $.trim($('#user_mobile').val());
+      if (mobile == '') {
+        alert('请输入手机号');
+        return false;
+      }
+
+      if (!/^1[3|4|5|7|8][0-9]{9}$/.test(mobile)) {
+        alert('请输入正确的手机号');
+        return false;
+      }
+
+      var req_url = "/send_active_code";
+      var params = { mobile: mobile };
     }
 
     disableButton();
 
-    $.post('/send_active_code', { mobile: mobile }, function (rsp) {
+    $.post(req_url, params, function (rsp) {
       if (rsp.success) {
         activeCountDown();
       } else {

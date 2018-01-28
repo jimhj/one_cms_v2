@@ -18,7 +18,7 @@
         label.cf-label 验证码 *
         .cf-input-group.clearfix
           = f.text_field :active_code, class: 'cf-field', required: true, placeholder: '6位数字验证码'
-          button.cf-btn.cf-btn-default.cf-btn-lg.sendSMSCode type="button" 发送验证码
+          button.cf-btn.cf-btn-default.cf-btn-lg.sendCode type="button" 发送验证码
       .cf-group
         label.cf-label 昵称 *
         = f.text_field :username, class: 'cf-field', required: true, placeholder: "2-20位英文字母或者数字，不要包含特殊字符"

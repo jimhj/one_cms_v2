@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :username, presence: { case_sensitive: false }, format: { with: /\A[\p{Word}\w\s-]*\z/ }, length: { in: 3..20 }
   validates :password, length: { minimum: 6 }, presence: true, confirmation: true, on: [:create, :reset_password]
   validate :verify_active_code, on: [:mobile_regist]
+  validate :verify_email_code, on: [:email_regist]
 
   store :extras
 
@@ -31,12 +32,14 @@ class User < ActiveRecord::Base
     Node.order('lft asc, rgt desc').where(id: node_ids)
   end
 
-  def g_active_token
-    t = ActiveToken.new
-    t.receiver = self.email
-    t.token = SecureRandom.urlsafe_base64(32)
-    t.save
-    t
+  def g_active_token(email)
+    # t = ActiveToken.new
+    # t.receiver = self.email
+    # t.token = SecureRandom.urlsafe_base64(32)
+    # t.save
+    # t
+
+    ActiveToken.g_email_active_code(email)
   end
 
   def active_code
@@ -126,6 +129,14 @@ class User < ActiveRecord::Base
 
   def verify_active_code
     t = ActiveToken.where(token: self.active_code, receiver: self.mobile, state: 0).first
+    
+    if t.blank? or !ActiveToken.check(self.active_code)
+      errors.add(:active_code, "无效")
+    end
+  end
+
+  def verify_email_code
+    t = ActiveToken.where(token: self.active_code, receiver: self.email, state: 0).first
     
     if t.blank? or !ActiveToken.check(self.active_code)
       errors.add(:active_code, "无效")

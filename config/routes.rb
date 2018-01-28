@@ -75,6 +75,7 @@ Rails.application.routes.draw do
 
       match 'sign_up_mobile',    to: 'application#sign_up_mobile', as: :sign_up_mobile,   via: [:get, :post]
       match 'send_active_code',    to: 'application#send_active_code', as: :send_active_code,   via: [:post]
+      match 'send_email_code',    to: 'application#send_email_code', as: :send_email_code,   via: [:post]
       match 'sign_in',    to: 'application#sign_in', as: :sign_in,   via: [:get, :post]
       match 'sign_out',   to: 'application#sign_out', as: :sign_out, via: [:delete]
       get 'check_login',  to: 'application#check_login', as: :check_login
@@ -102,6 +103,7 @@ Rails.application.routes.draw do
     match 'sign_up',    to: 'welcome#sign_up', as: :sign_up,   via: [:get, :post]
     match 'sign_up_mobile',    to: 'welcome#sign_up_mobile', as: :sign_up_mobile,   via: [:get, :post]
     match 'send_active_code',    to: 'welcome#send_active_code', as: :send_active_code,   via: [:post]
+    match 'send_email_code',    to: 'welcome#send_email_code', as: :send_email_code,   via: [:post]
     match 'sign_in',    to: 'welcome#sign_in', as: :sign_in,   via: [:get, :post]
     match 'sign_out',   to: 'welcome#sign_out', as: :sign_out, via: [:delete]
     match 'profile',    to: 'welcome#profile', as: :profile,   via: [:get, :post]

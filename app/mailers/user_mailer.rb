@@ -1,7 +1,8 @@
 class UserMailer < ActionMailer::Base
   def activation_email(token)
-    @url = active_user_url(token.token)
-
+    # @url = active_user_url(token.token)
+    @code = token.token
+    
     mail(
       from: '链世界 <kefu@7234.cn>',
       to: token.receiver, 

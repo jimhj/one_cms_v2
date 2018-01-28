@@ -42,16 +42,38 @@ class Site::WelcomeController < Site::ApplicationController
     if request.post?
       @user = User.new(user_params)
       if @user.valid?(:email_regist)
+        @user.state = :actived
         @user.save!
 
-        t = @user.g_active_token
-        UserMailer.delay(queue: 'mailing').activation_email(t)
-
-        flash[:info] = "已注册成功，请注意查收注册验证邮件"
+        flash[:info] = "注册成功，请登录"
         redirect_to sign_in_path
+
+        # t = @user.g_active_token(@user.email)
+        # UserMailer.delay(queue: 'mailing').activation_email(t)
+
+        # flash[:info] = "已注册成功，请注意查收注册验证邮件"
+        # redirect_to sign_in_path
       else
         render :sign_up
       end
+    end
+  end
+
+  def send_email_code
+    return if params[:email].blank?
+
+    if User.find_by(email: params[:email])
+      render json: { success: false, error: '这个邮箱已经被注册了' }
+      return
+    end
+
+    begin
+      ActiveToken.send_email_code(params[:email])
+
+      render json: { success: true }
+    rescue => e
+      raise e
+      render json: { success: false, error: '出错了，请重试' }
     end
   end
 

@@ -93,6 +93,24 @@ class Mobile::ApplicationController < ApplicationController
       end
     end
   end
+
+  def send_email_code
+    return if params[:email].blank?
+
+    if User.find_by(email: params[:email])
+      render json: { success: false, error: '这个邮箱已经被注册了' }
+      return
+    end
+
+    begin
+      ActiveToken.send_email_code(params[:email])
+
+      render json: { success: true }
+    rescue => e
+      raise e
+      render json: { success: false, error: '出错了，请重试' }
+    end
+  end
   
   def send_active_code
     return if params[:mobile].blank?

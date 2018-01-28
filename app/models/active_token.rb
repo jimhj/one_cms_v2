@@ -34,9 +34,19 @@ class ActiveToken < ActiveRecord::Base
     t   
   end
 
+  def self.g_email_active_code(email)
+    g_mobile_active_code(email)
+  end
+
   def self.send_active_code(mobile)
     token = g_mobile_active_code(mobile)
     param_string = { code: token.token }.to_json
     Aliyun::Sms.send(mobile, Setting.alisms.template.activation, param_string)
+  end
+
+  def self.send_email_code(email)
+    token = g_email_active_code(email)
+    # UserMailer.delay(queue: 'mailing').activation_email(token)
+    UserMailer.activation_email(token).deliver!
   end
 end
