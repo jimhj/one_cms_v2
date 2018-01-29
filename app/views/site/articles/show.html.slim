@@ -2,6 +2,9 @@
   = javascript_include_tag 'tt/comment'
   = stylesheet_link_tag 'tt/views/article'
 
+- if !@node.read_attribute(:logo).blank?
+  img.wx-image src="#{@node.logo_url}"
+
 .main.article-main.clearfix
   .f-left.a-main.article-box
     .article-inner

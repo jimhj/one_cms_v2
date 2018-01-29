@@ -23,3 +23,11 @@ a.load-more-btn {
     background-color: #fbfbfb;
   }
 }
+
+.wx-image {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
