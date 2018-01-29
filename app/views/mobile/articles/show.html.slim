@@ -15,9 +15,9 @@ html
     link rel="miphtml" href=url_for(host: "#{Setting.mobile_domain}/mip")
     
   body.article-detail-page
-  - if !@node.read_attribute(:logo).blank?
-    img.wx-image src="#{@node.logo_url}"
-    
+    - if !@node.read_attribute(:logo).blank?
+      img.wx-image src="#{@node.logo_url}"
+
     .top-header
       = render 'mobile/share/top_bar'
 
