@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :articles do
       collection do
         get :search
+        get :unapproved
       end
     end
 

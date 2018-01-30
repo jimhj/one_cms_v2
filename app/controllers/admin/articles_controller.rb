@@ -20,6 +20,11 @@ class Admin::ArticlesController < Admin::ApplicationController
     render :index
   end
 
+  def unapproved
+    @articles = Article.where(approved: false).order('id DESC').paginate(paginate_params)
+    render :index
+  end
+
   def new
     @article = Article.new
     @article.build_article_body
