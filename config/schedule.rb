@@ -35,7 +35,7 @@ every 12.hours do
   rake 'baidu:notify_mip'
 end
 
-every 1.day, at: '23:45 pm' do
+every 1.day, at: '01:00 am' do
   runner 'UserCreditLog.log_everyone!'
 end
 
