@@ -94,19 +94,24 @@ class User < ActiveRecord::Base
   end
 
   def log_daily_credits!(day = nil)
-    now = Time.now
+    # now = Time.now
+    now = Time.now.yesterday
     log_day = day || now.strftime('%Y%m%d').to_i
 
     log = self.credit_logs.find_by(log_day: log_day)
     return if log.nil?
     return log if log.logged?
 
-    time_range = now.at_beginning_of_day.strftime('%F %T')..now.end_of_day.strftime('%F %T')
+    begin_time = now.at_beginning_of_day
+    end_time = now.end_of_day
+    time_range = "created_at >= ? and created_at <= ?"
+
     coefficients = UserCreditLog.coefficients
 
     User.transaction do
-      log.comments_count = self.comments.where(created_at: time_range).approved.count
-      log.articles_count = self.articles.where(created_at: time_range).approved.count
+
+      log.comments_count = self.comments.where(time_range, begin_time, end_time).approved.count
+      log.articles_count = self.articles.where(time_range, begin_time, end_time).approved.count
       log.log_day = log_day
       log.login_number = self.login_number
       log.daily_credits = log.articles_count * coefficients[:article] + 

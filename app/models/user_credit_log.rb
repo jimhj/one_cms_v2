@@ -12,7 +12,7 @@ class UserCreditLog < ActiveRecord::Base
   end
 
   def self.init!
-    log_day = 20180117
+    log_day = 20180130
   
     User.transaction do
       # User.where('id >= 463').each do |user|
@@ -23,12 +23,12 @@ class UserCreditLog < ActiveRecord::Base
         log.comments_count = user.comments.approved.count
         log.articles_count = user.articles.approved.count
         log.log_day = log_day
-        log.login_number = 1
-        log.daily_credits = log.articles_count * 10 + log.comments_count * 2 + log.login_number * 1
+        log.login_number = user.login_number
+        log.daily_credits = log.articles_count * 10 + log.comments_count * 2 + user.login_number * 1
         log.creation = true
         log.logged = true
         log.save!
-        user.login_number = 1
+        # user.login_number = 1
         user.credits = log.daily_credits
         user.save!(validate: false)
         log
