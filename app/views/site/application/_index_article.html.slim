@@ -18,7 +18,7 @@
         span= article.created_at.strftime('%F')
 - elsif article.pictures.size > 0
   - picture_url = article.pictures.first
-  .article-item.clearfix
+  .article-item.clearfix data-article_id="#{article.id}"
     a.thumb-left href="#{article_path(article)}" title="#{article.title}" target="#{target}"
       img src="#{picture_url}" alt="#{article.title}" title="#{article.title}"
     .item-right
@@ -31,14 +31,14 @@
         a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}" target="#{target}"= article.node.name
         a target="#{target}" href="#{article_path(article)}" #{article.source} ⋅ 
         a target="#{target}" href="#{article_path(article)}" 
-          span.cy_cmt_count= article.hits
+          span.rdCount
           span  阅读 ⋅  
         a target="#{target}" href="#{article_path(article)}#commentBox" 
-          span.cy_cmt_count= article.comments.count 
+          span.cmtCount
           span  评论 ⋅ 
         span= article.created_at.strftime('%F')
 - else
-  .article-item.text-item.clearfix
+  .article-item.text-item.clearfix data-article_id="#{article.id}"
     .item-right
       .right-bd
         h3
@@ -49,9 +49,9 @@
         a.tag class="tag#{article.node_id%6}" href="#{articles_path(article.node.slug)}" target="#{target}"= article.node.name
         a target="#{target}" href="#{article_path(article)}" #{article.source} ⋅ 
         a target="#{target}" href="#{article_path(article)}" 
-          span.cy_cmt_count= article.hits
+          span.rdCount
           span  阅读 ⋅ 
         a target="#{target}" href="#{article_path(article)}#commentBox" 
-          span.cy_cmt_count= article.comments.count 
+          span.cmtCount
           span  评论 ⋅ 
         span= article.created_at.strftime('%F')

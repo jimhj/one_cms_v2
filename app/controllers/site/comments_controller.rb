@@ -1,7 +1,7 @@
 class Site::CommentsController < Site::ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
-  before_action :login_required, except: [:index]
-  before_action :find_article
+  before_action :login_required, except: [:index, :read_counts]
+  before_action :find_article, except: [:read_counts]
 
   def index
     @comments = @article.comments.includes(:user, :reply_user, :reply_comment).where(approved: true).order('id ASC')
@@ -40,6 +40,14 @@ class Site::CommentsController < Site::ApplicationController
     rescue ActiveRecord::StatementInvalid => e
       render json: { success: false, error: '暂不支持表情符号等特殊符号评论' }
     end 
+  end
+
+  def read_counts
+    counts = Article.where(id: params[:aid].split(',')).collect do |a|
+      { aid: a.id, comments: a.comments.count, hits: a.hits }
+    end
+
+    render json: counts
   end
 
   private

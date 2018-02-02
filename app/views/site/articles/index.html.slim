@@ -5,7 +5,7 @@
 .main.clearfix
   .f-left.index-main
     .articles-section
-      = render partial: 'site/application/index_article', collection: @articles, as: :article
+      = render 'site/application/render_collection'
 
     .pagination
       = will_paginate @articles, inner_window: 1

@@ -23,7 +23,8 @@
               a.rf-tip-title href="#{article_path(a)}" title="#{a.title}"= a.title.truncate(34)
 
     .articles-section.m-top10
-      = render partial: 'site/application/index_article', collection: @articles, as: :article
+      = render 'site/application/render_collection'
+      / = render partial: 'site/application/index_article', collection: @articles, as: :article
 
       a.load-more-btn href="javascript:;" data-page=1 
         .load-text 加载更多

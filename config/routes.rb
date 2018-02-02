@@ -120,7 +120,12 @@ Rails.application.routes.draw do
 
     get 'column',  to: 'application#column', as: :column, trailing_slash: true
     
-    resources :comments
+    resources :comments do
+      collection do
+        get :read_counts
+      end
+    end
+
     resources :tags,  only: [:index, :show],    trailing_slash: true
     get 'feed',         to: 'articles#feed',    as: :feed
     get 'search',       to: 'articles#search',  as: :search

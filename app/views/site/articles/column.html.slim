@@ -26,7 +26,7 @@
     .node-articles
       .recd-box.clearfix
         .articles-section
-          = render partial: 'site/application/index_article', collection: @articles, as: :article
+          = render 'site/application/render_collection'
 
         a.load-more-btn href="javascript:;" data-page=1 
           .load-text 加载更多

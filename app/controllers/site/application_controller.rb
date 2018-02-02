@@ -25,7 +25,7 @@ class Site::ApplicationController < ApplicationController
       }
 
       format.js {
-        html = render_to_string(partial: 'site/application/index_article', collection: @articles, as: :article)
+        html = render_to_string(partial: 'site/application/render_collection')
         render json: { html: html }
       }
     end
@@ -34,7 +34,7 @@ class Site::ApplicationController < ApplicationController
   def more
     @articles = Article.recommend(page: params[:page], load: 10)
     # @articles = Article.recommend
-    html = render_to_string(partial: 'site/application/index_article', layout: false, collection: @articles, as: :article, locals: { lazyload: true, page: params[:page] })
+    html = render_to_string(partial: 'site/application/render_collection', locals: { lazyload: true, page: params[:page] })
     render json: { html: html }
   end
 end

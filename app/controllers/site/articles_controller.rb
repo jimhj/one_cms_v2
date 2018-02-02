@@ -34,7 +34,7 @@ class Site::ArticlesController < Site::ApplicationController
       }
 
       format.js {
-        html = render_to_string(partial: 'site/application/index_article', collection: @articles, as: :article)
+        html = render_to_string(partial: 'site/application/render_collection')
         render json: { html: html }
       }
     end
@@ -47,7 +47,7 @@ class Site::ArticlesController < Site::ApplicationController
                        .where(approved: true)
                        .order('id DESC')
                        .paginate(page: params[:page], per_page: 10, total_entries: 1000000)
-    html = render_to_string(partial: 'site/application/index_article', collection: @articles, as: :article)
+    html = render_to_string(partial: 'site/application/render_collection')
     render json: { html: html }
   end
 
