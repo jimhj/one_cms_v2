@@ -26,8 +26,8 @@ class UserCreditLog < ActiveRecord::Base
         time_range = "created_at <= ?"
 
         log = user.credit_logs.build
-        log.comments_count = user.comments.where(time_range, begin_time, end_time).approved.count
-        log.articles_count = user.articles.where(time_range, begin_time, end_time).approved.count
+        log.comments_count = user.comments.where(time_range, end_time).approved.count
+        log.articles_count = user.articles.where(time_range, end_time).approved.count
         log.log_day = log_day
         log.login_number = user.login_number
         log.daily_credits = log.articles_count * 10 + log.comments_count * 2 + user.login_number * 1
