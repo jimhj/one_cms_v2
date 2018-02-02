@@ -2,7 +2,7 @@
   .col-lg-12.article-list
     = form_tag search_admin_users_path, method: 'GET', style: "width: 50%;margin-bottom: 15px;" do
       .input-group
-        input.form-control type="text" name="q" placeholder="搜索文章" value="#{params[:q]}"
+        input.form-control type="text" name="q" placeholder="搜索" value="#{params[:q]}"
         span.input-group-btn
           button.btn.btn-default
             i.fa.fa-search

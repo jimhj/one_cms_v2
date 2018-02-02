@@ -9,7 +9,6 @@ javascript:
   $.get('/comments/read_counts?aid=' + aids, function(rsp) {
     for (var i=0,len=rsp.length; i<len; i++) {
       var $item = $(".article-item[data-article_id="+rsp[i]['aid']+"]");
-      console.log($item);
       $item.find('.cmtCount').text(rsp[i]['comments'])
       $item.find('.rdCount').text(rsp[i]['hits'])
     }
