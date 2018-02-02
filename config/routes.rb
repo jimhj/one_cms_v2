@@ -59,7 +59,12 @@ Rails.application.routes.draw do
       post :restart
     end
 
-    resources :users
+    resources :users do
+      collection do
+        get :search
+      end
+    end
+
     get :mip, to: 'site_config#mip', as: :mip
   end
 

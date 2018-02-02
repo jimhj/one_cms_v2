@@ -17,6 +17,13 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
+  def search
+    @users = User.where('username like ? or email like ?', "%#{params[:q]}%", "%#{params[:q]}%")
+                 .order('id DESC').paginate(paginate_params)
+
+    render :index
+  end
+
   private
 
   def find_user

@@ -36,7 +36,8 @@ every 12.hours do
 end
 
 every 1.day, at: '01:00 am' do
-  runner 'UserCreditLog.log_everyone!'
+  # runner 'UserCreditLog.log_everyone!'
+  runner 'UserCreditLog.init!'
 end
 
 # every 2.hours do

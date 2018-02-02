@@ -12,16 +12,22 @@ class UserCreditLog < ActiveRecord::Base
   end
 
   def self.init!
-    log_day = 20180130
+    # log_day = 20180130
+    t = Time.now.yesterday
+    log_day = t.strftime('%Y%m%d')
   
     User.transaction do
       # User.where('id >= 463').each do |user|
       User.all.each do |user|
         user.credit_logs.destroy_all
 
+        begin_time = t.at_beginning_of_day
+        end_time = t.end_of_day
+        time_range = "created_at <= ?"
+
         log = user.credit_logs.build
-        log.comments_count = user.comments.approved.count
-        log.articles_count = user.articles.approved.count
+        log.comments_count = user.comments.where(time_range, begin_time, end_time).approved.count
+        log.articles_count = user.articles.where(time_range, begin_time, end_time).approved.count
         log.log_day = log_day
         log.login_number = user.login_number
         log.daily_credits = log.articles_count * 10 + log.comments_count * 2 + user.login_number * 1
@@ -35,7 +41,7 @@ class UserCreditLog < ActiveRecord::Base
       end
 
       conf = SiteConfig.first
-      conf.rank_updated_at = Time.now.yesterday.at_beggin_of_day + 10.hours
+      conf.rank_updated_at = t
       conf.save!
     end
   end
