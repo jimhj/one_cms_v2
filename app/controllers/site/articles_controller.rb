@@ -68,7 +68,7 @@ class Site::ArticlesController < Site::ApplicationController
       @more_articles = Article.where(id: article_ids).where.not(id: @article.id).order('id DESC').where(approved: true).limit(8).to_a
 
       if (ct = @more_articles.count) < 8
-        more = Article.where(node_id: @nodes.pluck(:id)).where.not(id: @article.id).limit(8 - ct).to_a
+        more = Article.where(node_id: @nodes.pluck(:id)).where.not(id: @article.id).where(approved: true).limit(8 - ct).to_a
         @more_articles = @more_articles + more
       end
     else
