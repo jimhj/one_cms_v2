@@ -1,7 +1,7 @@
 .hongbao
   a.hongbao-close href="javascript:void(0);"
   .hongbao-body
-    a.logo href="javascript:void(0);" style="background-image:url(#{hongbao.token.token_logo.url(:small)})"
-    a.token-name href="javascript:void(0);"= hongbao.token.name
+    a.logo href="#{hongbao.token.official_site}" style="background-image:url(#{hongbao.token.token_logo.url(:small)})" target="_blank"
+    a.token-name href="#{hongbao.token.official_site}" target="_blank"= hongbao.token.name
     a.open-hongbao-btn data-hongbao-id="#{hongbao.id}" href="javascript:void(0);"
     .token-desc= hongbao.token.token_desc
