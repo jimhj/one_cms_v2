@@ -46,7 +46,7 @@ class Token < ActiveRecord::Base
   end
 
   def start?
-    self.start_time >= Time.now
+    self.start_time <= Time.now
   end
 
   def finished?

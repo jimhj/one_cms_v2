@@ -36,8 +36,10 @@ class Site::CommentsController < Site::ApplicationController
 
         if @comment.can_send_hongbao?
           token = Token.available.sample
-          hongbao = token.send_hongbao_to(@comment.user, 'comment')
-          hongbao_html = render_to_string(partial: 'site/share/hongbao', locals: { hongbao: hongbao })
+          if token.present?
+            hongbao = token.send_hongbao_to(@comment.user, 'comment')
+            hongbao_html = render_to_string(partial: 'site/share/hongbao', locals: { hongbao: hongbao })
+          end
         end
 
         ret = { success: true, html: html, content: @comment.content, hash_tag: hash_tag, hongbao_html: hongbao_html }
