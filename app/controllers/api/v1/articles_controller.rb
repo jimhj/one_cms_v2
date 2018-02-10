@@ -13,7 +13,7 @@ class Api::V1::ArticlesController < Api::V1::ApplicationController
       node = Node.find_by(id: params[:category_id])
       return [] if node.blank?
 
-    @articles = Article.where(node_id: node.self_and_descendants.pluck(:id))
+      @articles = Article.where(node_id: node.self_and_descendants.pluck(:id))
                        .where(approved: true)
                        .order('id DESC')
                        .paginate(page: params[:page], per_page: 20, total_entries: 1000000)
