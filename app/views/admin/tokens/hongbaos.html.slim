@@ -5,6 +5,7 @@
         tr
           td.text-center ID
           td.text-center 代币红包
+          td.text-center 红包类型
           td.text-center 红包金额
           td.text-center 用户
           td.text-center 是否打开
@@ -14,6 +15,7 @@
           tr
             td.text-center= hongbao.id
             td.text-center= hongbao.token.name
+            td.text-center= hongbao.from == 'comment' ? '评论' : '注册'
             td.text-center #{hongbao.amount} #{hongbao.token.code}
             td.text-center= hongbao.user.username
             td.text-center= hongbao.opened? ? '已打开' : '未打开'
