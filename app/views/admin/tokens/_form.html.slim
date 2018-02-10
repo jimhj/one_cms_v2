@@ -34,7 +34,11 @@
 
       .form-group.form-group-bordered
         label 项目 logo *
-        = f.file_field :token_logo, class: 'form-control', required: true
+        = f.file_field :token_logo
+
+      - if not @token.read_attribute(:token_logo).blank?
+        .text
+          = image_tag @token.token_logo.url(:small)
 
       .form-group.form-group-bordered
         label 官网地址 *

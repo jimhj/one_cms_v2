@@ -11,15 +11,14 @@
         h2.active 
           a 提现
     .box-body
-      = site_notice_message
-
       = form_tag new_withdraw_hongbaos_path(user_token_id: @user_token.id), class: 'common-form common-form-lg' do
+        = site_notice_message
 
         .cf-group
           label.cf-label 提现代币 <strong>#{@user_token.token.name}</strong> *
         .cf-group
           label.cf-label 提现金额 *
-          input.cf-field required=true name="amount" type="number" max="#{@user_token.amount}"
+          input.cf-field required=true name="amount" type="number" max="#{@user_token.amount}" min=0
           .text style="margin-top: 10px;" 可用余额 #{@user_token.amount} #{@user_token.token.code}
         .cf-group
           label.cf-label 钱包地址 *

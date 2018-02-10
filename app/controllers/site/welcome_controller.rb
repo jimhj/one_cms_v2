@@ -176,8 +176,10 @@ class Site::WelcomeController < Site::ApplicationController
 
       if current_user.hongbaos.sign_up.count == 0
         token = Token.available.sample
-        hongbao = token.send_hongbao_to(current_user, 'sign_up')
-        hongbao_html = render_to_string(partial: 'site/share/hongbao', locals: { hongbao: hongbao })
+        if token.present?
+          hongbao = token.send_hongbao_to(current_user, 'sign_up')
+          hongbao_html = render_to_string(partial: 'site/share/hongbao', locals: { hongbao: hongbao })
+        end
       end
     end
 

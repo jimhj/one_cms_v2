@@ -1,0 +1,48 @@
+.row.pt-30.node-list
+  .col-lg-12
+    table.table.table-hover.table-bordered.table-condensed
+      tbody
+        tr
+          td.text-center ID
+          td.text-center 用户
+          td.text-center 代币
+          td.text-center 提现金额
+          td.text-center 钱包地址
+          td.text-center 状态
+          td.text-center 时间
+          td.text-center 操作
+
+        - @withdraws.each do |withdraw|
+          tr
+            td.text-center= withdraw.id
+            td.text-center= withdraw.user.username
+            td.text-center= withdraw.user_token.token.name
+            td.text-center #{withdraw.amount} #{withdraw.user_token.token.code}
+            td.text-center= withdraw.address
+            td.text-center= withdraw.state_text
+            td.text-center= withdraw.created_at.strftime('%F %T')
+            td.text-center
+              select.setWithdrawState data-withdraw-id="#{withdraw.id}" data-current_state="#{withdraw.state}"
+                - TokenWithdraw.state_mapping.each_pair do |k, v|
+                  - if k == withdraw.state
+                    option selected="selected" value="#{k}"= v
+                  - else
+                    option value="#{k}"= v
+
+    = will_paginate @withdraws, renderer: BootstrapPagination::Rails
+
+
+javascript:
+  $('.setWithdrawState').change(function () {
+    var $s = $(this);
+    var cur = $s.data('current_state');
+    var withdraw_id = $s.data('withdraw-id');
+
+    if (confirm('确认吗？')) {
+      var params = { withdraw_id: withdraw_id, state: $s.val() };
+      $.post('/onecmsmanage/tokens/handle_withdraw', params, function () {}, 'json');
+    } else {
+      $s.find('option').removeAttr('selected')
+      $s.find("option[value="+cur+"]").attr('selected', 'selected');
+    }
+  });

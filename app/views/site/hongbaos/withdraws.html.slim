@@ -24,7 +24,7 @@
               td style="width: 120px;"= token.name
               td #{withdraw.amount} #{token.code}
               td= withdraw.created_at.strftime('%F %T')
-              td style="width: 100px;"= withdraw.state
+              td style="width: 100px;"= withdraw.state_text
 
       .box-pagination
         = will_paginate @withdraws, inner_window: 1, class: 'pagination'

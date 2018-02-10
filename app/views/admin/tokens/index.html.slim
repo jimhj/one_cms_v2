@@ -5,8 +5,9 @@
         tr
           td.text-center 代币名称
           td.text-center 代币总量
-          td.text-center 红包个数
           td.text-center 剩余数量
+          td.text-center 红包个数
+          td.text-center 已发红包数
           td.text-center 红包金额范围
           td.text-center 活动时间
           td.text-center 项目介绍
@@ -17,8 +18,9 @@
           tr
             td.text-center= token.name
             td.text-center #{token.total} #{token.code}
-            td.text-center= token.hongbao_number
             td.text-center #{token.available_total} #{token.code}
+            td.text-center= token.hongbao_number
+            td.text-center= token.hongbaos.count
             td.text-center #{token.hongbao_range_text} #{token.code}
             td.text-center style="width: 140px;"
               = "#{token.start_time.strftime('%F %T')} ~ #{token.end_time.strftime('%F %T')}"

@@ -65,7 +65,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tokens
+    resources :tokens do
+      collection do
+        get :hongbaos
+        get :withdraws
+        post :handle_withdraw
+      end
+    end
 
     get :mip, to: 'site_config#mip', as: :mip
   end
