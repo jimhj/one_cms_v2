@@ -69,7 +69,6 @@ class Token < ActiveRecord::Base
     end
 
     return if !available?
-    return if user.hongbaos.today.where(from: 'comment').count >= 3
 
     hongbao = self.hongbaos.build
 
