@@ -12,10 +12,6 @@ class Token < ActiveRecord::Base
   has_many :hongbaos, class_name: 'TokenHongbao', foreign_key: :token_id
 
   def self.available(user = nil)
-    if user && user.created_at <= '2018-02-11 00:00:00'
-      return []
-    end
-
     self.select{ |t| t.available? }
   end
 
