@@ -23,10 +23,10 @@
         .text-muted 填写格式：10|200，表示范围为 10-200
       .form-group.form-group-bordered
         label 活动开始时间 *
-        = f.date_field :start_time, class: 'form-control', placeholder: '活动开始时间', required: true
+        = f.datetime_select :start_time, class: 'form-control', placeholder: '活动开始时间', required: true
       .form-group.form-group-bordered
         label 活动结束时间 *
-        = f.date_field :end_time, class: 'form-control', placeholder: '活动结束时间', required: true
+        = f.datetime_select :end_time, class: 'form-control', placeholder: '活动结束时间', required: true
 
       .form-group.form-group-bordered
         label 项目介绍 *

@@ -40,7 +40,7 @@ $(document).ready ->
 
     $.post '/hongbaos/open', { hongbao_id: hongbao_id }, (rsp) ->
       if rsp.success
-        alert '红包已打开，请在个人中心查看'
+        alert '红包已打开，请在个人中心-我的红包-我的资产查看'
 
         if $t.is('.user-center')
           $t.text('已打开').removeClass('text-success').removeClass('text-underline')
@@ -49,3 +49,6 @@ $(document).ready ->
 
       $('.hongbao').hide()
     , 'json'
+
+  $('body').on 'click', '.hongbao-close', ->
+    $(this).parents('.hongbao').hide()

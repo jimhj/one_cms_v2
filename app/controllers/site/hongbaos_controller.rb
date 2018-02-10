@@ -20,7 +20,7 @@ class Site::HongbaosController < Site::ApplicationController
       return
     end
 
-    token = Token.available.sample
+    token = Token.available(current_user).sample
     if token.nil?
       render json: { available: false }
       return

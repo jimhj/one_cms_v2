@@ -175,7 +175,7 @@ class Site::WelcomeController < Site::ApplicationController
       current_user.init_daily_credits!
 
       if current_user.hongbaos.sign_up.count == 0
-        token = Token.available.sample
+        token = Token.available(current_user).sample
         if token.present?
           hongbao = token.send_hongbao_to(current_user, 'sign_up')
           hongbao_html = render_to_string(partial: 'site/share/hongbao', locals: { hongbao: hongbao })

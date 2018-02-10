@@ -39,6 +39,18 @@ a.load-more-btn {
   margin-left: -160px; 
 }
 
+.hongbao-close {
+  background-image: image-url('site/close.png');
+  width: 48px;
+  height: 48px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: absolute;
+  right: -20px;
+  top: -20px; 
+}
+
 .hongbao-body {
   width: 320px;
   height: 568px;
