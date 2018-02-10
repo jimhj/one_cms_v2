@@ -16,7 +16,7 @@ class Token < ActiveRecord::Base
   end
 
   def available?
-    start? && !finished? && !exceed_max_hongbao_number? && !ranout?
+    start? && !finished? && !exceed_max_hongbao_number? && !ranout? && actived?
   end
 
   def hongbao_range
