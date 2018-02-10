@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116123416) do
+ActiveRecord::Schema.define(version: 20180210101815) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -265,18 +265,68 @@ ActiveRecord::Schema.define(version: 20180116123416) do
   add_index "tags", ["slug"], name: "index_tags_on_slug", using: :btree
   add_index "tags", ["taggings_count"], name: "index_tags_on_taggings_count", using: :btree
 
+  create_table "token_hongbaos", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "token_id",   limit: 4
+    t.float    "amount",     limit: 24,    default: 0.0
+    t.text     "extras",     limit: 65535
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "token_hongbaos", ["token_id"], name: "index_token_hongbaos_on_token_id", using: :btree
+  add_index "token_hongbaos", ["user_id"], name: "index_token_hongbaos_on_user_id", using: :btree
+
+  create_table "token_withdraws", force: :cascade do |t|
+    t.integer  "user_token_id", limit: 4
+    t.float    "amount",        limit: 24
+    t.integer  "state",         limit: 4
+    t.text     "extras",        limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "tokens", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.float    "total",           limit: 24,    null: false
+    t.float    "site_total",      limit: 24,    null: false
+    t.float    "available_total", limit: 24,    null: false
+    t.string   "gift_range",      limit: 255
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text     "token_desc",      limit: 65535
+    t.string   "official_site",   limit: 255
+    t.text     "gift_words",      limit: 65535
+    t.text     "qr_code",         limit: 65535
+    t.string   "token_logo",      limit: 255
+    t.text     "extras",          limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
   create_table "user_credit_logs", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
     t.integer  "comments_count", limit: 4,     default: 0
     t.integer  "articles_count", limit: 4,     default: 0
     t.integer  "daily_credits",  limit: 4,     default: 0
-    t.string   "log_day",        limit: 255
+    t.integer  "log_day",        limit: 4,     default: 0
+    t.integer  "login_number",   limit: 4,     default: 0
+    t.boolean  "logged",                       default: false
     t.text     "extras",         limit: 65535
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   add_index "user_credit_logs", ["user_id"], name: "index_user_credit_logs_on_user_id", using: :btree
+
+  create_table "user_tokens", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "token_id",   limit: 4
+    t.float    "amount",     limit: 24
+    t.text     "extras",     limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",               limit: 255,                  null: false
@@ -296,6 +346,7 @@ ActiveRecord::Schema.define(version: 20180116123416) do
     t.boolean  "review_later",                      default: true
     t.text     "extras",              limit: 65535
     t.integer  "credits",             limit: 4,     default: 0
+    t.integer  "login_number",        limit: 4,     default: 0
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
   end

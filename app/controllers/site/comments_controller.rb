@@ -31,7 +31,16 @@ class Site::CommentsController < Site::ApplicationController
         else
           "cf-#{jump}"
         end
-        ret = { success: true, html: html, content: @comment.content, hash_tag: hash_tag }
+
+        hongbao_html = nil
+
+        if @comment.can_send_hongbao?
+          token = Token.available.sample
+          hongbao = token.send_hongbao_to(@comment.user, 'comment')
+          hongbao_html = render_to_string(partial: 'site/share/hongbao', locals: { hongbao: hongbao })
+        end
+
+        ret = { success: true, html: html, content: @comment.content, hash_tag: hash_tag, hongbao_html: hongbao_html }
       else
         ret = { success: false, error: @comment.errors.full_messages.first }
       end

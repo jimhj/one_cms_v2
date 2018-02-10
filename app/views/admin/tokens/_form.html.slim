@@ -1,0 +1,48 @@
+.row.link-form.pt-30
+  .col-lg-12
+    = render "admin/shared/errors", target: @token
+    = form_for @token, url: url, class: 'form' do |f|
+      .form-group.form-group-bordered
+        label 代币名称 *
+        = f.text_field :name, class: 'form-control', placeholder: '输入代币名称', required: true
+      .form-group.form-group-bordered
+        label 代币编码 *
+        = f.text_field :code, class: 'form-control', placeholder: '输入代币名称', required: true
+      .form-group.form-group-bordered
+        label 代币总量 *
+        = f.number_field :total, class: 'form-control', placeholder: '代币总量', required: true
+      .form-group.form-group-bordered
+        label 红包个数 *
+        = f.number_field :hongbao_number, class: 'form-control', placeholder: '红包个数', required: true
+      .form-group.form-group-bordered
+        label 剩余代币数量 *
+        = f.number_field :available_total, class: 'form-control', placeholder: '剩余数量', required: true
+      .form-group.form-group-bordered
+        label 红包金额范围 *
+        = f.text_field :hongbao_amount_range, class: 'form-control', placeholder: '红包金额范围', required: true
+        .text-muted 填写格式：10|200，表示范围为 10-200
+      .form-group.form-group-bordered
+        label 活动开始时间 *
+        = f.date_field :start_time, class: 'form-control', placeholder: '活动开始时间', required: true
+      .form-group.form-group-bordered
+        label 活动结束时间 *
+        = f.date_field :end_time, class: 'form-control', placeholder: '活动结束时间', required: true
+
+      .form-group.form-group-bordered
+        label 项目介绍 *
+        = f.text_area :token_desc, class: 'form-control', placeholder: '项目介绍', required: true
+
+      .form-group.form-group-bordered
+        label 项目 logo *
+        = f.file_field :token_logo, class: 'form-control', required: true
+
+      .form-group.form-group-bordered
+        label 官网地址 *
+        = f.text_field :official_site, class: 'form-control', required: true
+
+      .checkbox
+        label
+          = f.check_box :actived, class: 'checkbox'
+          | 生效      
+      .form-group
+        button.btn.btn-primary.btn-lg type="submit" 保存

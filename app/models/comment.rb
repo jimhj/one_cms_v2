@@ -8,7 +8,19 @@ class Comment < ActiveRecord::Base
 
   scope :approved, -> { where(approved: true) }
 
+  scope :today, -> {
+    where('created_at >= ? and created_at <= ?', 
+          Time.now.at_beginning_of_day,
+          Time.now.end_of_day)
+  }
+
   def floor_number
     article.comments.index(self).to_i + 1
+  end
+
+  def can_send_hongbao?
+    comment_hongbao_count = user.hongbaos.comment.today.count
+    (user.comments.approved.today.pluck(:article_id).uniq.size >= (comment_hongbao_count+1) * 3) \
+      && comment_hongbao_count < 3
   end
 end

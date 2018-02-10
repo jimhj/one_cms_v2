@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :comments
   has_many :credit_logs, class_name: 'UserCreditLog'
+  has_many :hongbaos, class_name: 'TokenHongbao', foreign_key: :user_id
+  has_many :tokens, class_name: 'UserToken', foreign_key: :user_id
+  has_many :token_withdraws, through: :tokens
 
   mount_uploader :avatar, AvatarUploader
   

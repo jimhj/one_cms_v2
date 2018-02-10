@@ -1,0 +1,27 @@
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2 
+          a href="#{hongbaos_path}" 我的红包
+        h2.active 
+          a href="#{url_for}" 我的资产
+        h2 
+          a href="#{withdraws_hongbaos_path}" 提现记录
+    .box-body
+      = site_notice_message
+
+      table.cf-table.cf-table-center
+        tbody
+          tr
+            td 代币名称
+            td 余额
+            td 操作
+          - @tokens.each do |token|
+            tr
+              td style="width: 120px;"= token.token.name
+              td #{token.amount} #{token.token.code}
+              td style="width: 100px;"
+                a.text-success.text-underline href="#{new_withdraw_hongbaos_path(user_token_id: token.id)}" 提现
+      .box-pagination
+        = will_paginate @tokens, inner_window: 1, class: 'pagination'

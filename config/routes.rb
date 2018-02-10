@@ -65,6 +65,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :tokens
+
     get :mip, to: 'site_config#mip', as: :mip
   end
 
@@ -123,6 +125,15 @@ Rails.application.routes.draw do
     resources :comments do
       collection do
         get :read_counts
+      end
+    end
+
+    resources :hongbaos, only: [:index, :create] do
+      collection do
+        post :open
+        get :tokens
+        get :withdraws
+        match 'tokens/withdraw', to: 'hongbaos#new_withdraw', as: :new_withdraw, via: [:get, :post]
       end
     end
 

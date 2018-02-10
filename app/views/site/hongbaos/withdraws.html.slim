@@ -1,0 +1,30 @@
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2
+          a href="#{hongbaos_path}" 我的红包
+        h2
+          a href="#{tokens_hongbaos_path}" 我的资产
+        h2.active 
+          a href="#{url_for}" 提现记录
+    .box-body
+      = site_notice_message
+
+      table.cf-table.cf-table-center
+        tbody
+          tr
+            td 提现代币
+            td 金额
+            td 时间
+            td 状态
+          - @withdraws.each do |withdraw|
+            - token = withdraw.user_token.token
+            tr
+              td style="width: 120px;"= token.name
+              td #{withdraw.amount} #{token.code}
+              td= withdraw.created_at.strftime('%F %T')
+              td style="width: 100px;"= withdraw.state
+
+      .box-pagination
+        = will_paginate @withdraws, inner_window: 1, class: 'pagination'

@@ -97,6 +97,7 @@ html
     - SiteAd.global.each do |ad|
       = raw ad.value
 
+    / = render 'site/share/hongbao'
     <a class="to-top">返回顶部 &uarr;</a>
     - if controller_name == 'articles' && action_name == 'show'
       = render 'site/share/ld_json'

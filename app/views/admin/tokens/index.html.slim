@@ -1,0 +1,32 @@
+.row.pt-30.node-list
+  .col-lg-12
+    table.table.table-hover.table-bordered.table-condensed
+      tbody
+        tr
+          td.text-center 代币名称
+          td.text-center 代币总量
+          td.text-center 红包个数
+          td.text-center 剩余数量
+          td.text-center 红包金额范围
+          td.text-center 活动时间
+          td.text-center 项目介绍
+          td.text-center 生效
+          td.text-center 操作
+
+        - @tokens.each do |token|
+          tr
+            td.text-center= token.name
+            td.text-center #{token.total} #{token.code}
+            td.text-center= token.hongbao_number
+            td.text-center #{token.available_total} #{token.code}
+            td.text-center #{token.hongbao_range_text} #{token.code}
+            td.text-center style="width: 140px;"
+              = "#{token.start_time.strftime('%F %T')} ~ #{token.end_time.strftime('%F %T')}"
+            td.text-center style="width: 200px;"
+              p
+                a href="#{token.official_site}" target="_blank"=token.official_site
+              p
+                img src="#{token.token_logo.url(:small)}" width="80" height="80"
+            td.text-center= token.actived? ? '是' : '否'
+            td.text-center
+              a href="#{edit_admin_token_path(token)}" 编辑

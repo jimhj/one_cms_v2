@@ -1,0 +1,33 @@
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2.active 
+          a href="#{url_for}" 我的红包
+        h2
+          a href="#{tokens_hongbaos_path}" 我的资产
+        h2 
+          a href="#{withdraws_hongbaos_path}" 提现记录
+    .box-body
+      = site_notice_message
+
+      table.cf-table.cf-table-center
+        tbody
+          tr
+            td 代币红包
+            td 金额
+            td 时间
+            td 操作
+          - @hongbaos.each do |hongbao|
+            tr
+              td style="width: 120px;"= hongbao.token.name
+              td #{hongbao.amount} #{hongbao.token.code}
+              td= hongbao.created_at.strftime('%F %T')
+              td style="width: 100px;"
+                - if hongbao.opened?
+                  span 已打开
+                - else
+                  a.open-hongbao-btn.text-success.text-underline.user-center data-hongbao-id="#{hongbao.id}" href="javascript:void(0);" 打开红包
+
+      .box-pagination
+        = will_paginate @hongbaos, inner_window: 1, class: 'pagination'
