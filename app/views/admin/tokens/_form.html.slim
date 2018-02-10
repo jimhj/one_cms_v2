@@ -1,7 +1,7 @@
 .row.link-form.pt-30
   .col-lg-12
     = render "admin/shared/errors", target: @token
-    = form_for @token, url: url, class: 'form' do |f|
+    = form_for @token, url: url, multipart: true, class: 'form' do |f|
       .form-group.form-group-bordered
         label 代币名称 *
         = f.text_field :name, class: 'form-control', placeholder: '输入代币名称', required: true
