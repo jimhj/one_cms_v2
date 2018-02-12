@@ -20,7 +20,11 @@ class Comment < ActiveRecord::Base
 
   def can_send_hongbao?
     comment_hongbao_count = user.hongbaos.comment.today.count
-    allow_nodes = [223, 212, 232, 233]
+    
+    allow_nodes = Node.where(id: [223, 212, 232, 233]).collect do |n|
+      n.self_and_descendants.pluck(:id)
+    end.flatten.uniq
+
     (user.comments.approved.today.select{ |c| allow_nodes.include?(c.article.node.root.id) }.map(&:article_id).uniq.size >= (comment_hongbao_count+1) * 3) \
       && comment_hongbao_count < 3
   end
