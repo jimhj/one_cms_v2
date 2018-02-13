@@ -18,7 +18,7 @@ class Comment < ActiveRecord::Base
     article.comments.index(self).to_i + 1
   end
 
-  def can_send_hongbao?
+  def can_send_hongbao?    
     comment_hongbao_count = user.hongbaos.comment.today.count
 
     allow_nodes = Node.where(id: [223, 212, 232, 233]).collect do |n|

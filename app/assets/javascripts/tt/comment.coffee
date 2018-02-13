@@ -73,7 +73,8 @@ $(document).ready ->
         $('.comments-list').append rsp.html
 
         if rsp.hongbao_html
-          $(rsp.hongbao_html).insertBefore('a.to-top')
+          $('body').append(rsp.hongbao_html)
+          # $(rsp.hongbao_html).insertBefore('a.to-top')
 
         if not $btn.hasClass('submitReply') && rsp.has_tag != "none"
           setTimeout ->

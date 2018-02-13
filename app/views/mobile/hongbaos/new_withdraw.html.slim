@@ -1,0 +1,28 @@
+.main
+  .box
+    .box-header 
+      .box-header-inner.clearfix
+        h2
+          a href="#{mobile_hongbaos_path}" 我的红包
+        h2
+          a href="#{tokens_mobile_hongbaos_path}" 我的资产
+        h2 
+          a href="#{withdraws_mobile_hongbaos_path}" 提现记录
+        h2.active 
+          a 提现
+    .box-body
+      = form_tag new_withdraw_hongbaos_path(user_token_id: @user_token.id), class: 'common-form common-form-lg' do
+        = site_notice_message
+
+        .cf-group
+          label.cf-label 提现代币 <strong>#{@user_token.token.name}</strong> *
+        .cf-group
+          label.cf-label 提现金额 *
+          input.cf-field required=true name="amount" type="number" max="#{@user_token.amount}" min=0
+          .text style="margin-top: 10px;" 可用余额 #{@user_token.amount} #{@user_token.token.code}
+        .cf-group
+          label.cf-label 钱包地址 *
+          input.cf-field required=true name="address" type="text"
+
+        .cf-group
+          button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 确认

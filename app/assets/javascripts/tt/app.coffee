@@ -33,14 +33,13 @@ $(document).ready ->
     $(this).removeClass('open')
 
   # 红包
-
   $('body').on 'click', '.open-hongbao-btn', ->
     $t = $(this)
     hongbao_id = $t.data('hongbao-id')
 
     $.post '/hongbaos/open', { hongbao_id: hongbao_id }, (rsp) ->
       if rsp.success
-        alert '红包已打开，请在个人中心-我的红包-我的资产查看'
+        alert "恭喜您获得 #{rsp.amount}，请在个人中心-我的红包-我的资产查看"
 
         if $t.is('.user-center')
           $t.text('已打开').removeClass('text-success').removeClass('text-underline')

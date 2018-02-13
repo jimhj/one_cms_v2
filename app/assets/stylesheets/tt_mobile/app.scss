@@ -8,6 +8,7 @@
 @import "components/form";
 @import "components/comment";
 @import "components/tag";
+@import "components/table";
 @import "swiper";
 
 a {
@@ -252,3 +253,79 @@ body.open-nodes-list {
   z-index: -1;
 }
 
+.hongbao {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  margin-left: -160px; 
+  z-index: 999999;
+}
+
+.hongbao-close {
+  background-image: image-url('site/close.png');
+  width: 48px;
+  height: 48px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: absolute;
+  right: -20px;
+  top: -20px; 
+}
+
+.hongbao-body {
+  width: 320px;
+  height: 568px;
+
+  background-image: image-url('site/hongbao.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hongbao-body .open-hongbao-btn {
+  display: inline-block;
+  position: absolute;
+  top: 279px;
+  left: 56px;
+  width: 200px;
+  height: 50px;
+}
+
+.hongbao-body .logo {
+  display: inline-block;
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  margin-left: -35px;
+  width: 70px;
+  height: 70px;
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.hongbao-body .token-name {
+  display: block;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 170px;
+  color: #E9B76D;
+  font-size: 24px;
+}
+
+.hongbao-body .token-desc {
+  width: 260px;
+  margin: 0 auto;
+  padding-top: 170px;
+  color: #E9B76D;
+  font-size: 13px;
+  height: 180px;
+  line-height: 23px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  overflow: hidden;
+}

@@ -143,11 +143,24 @@ class Mobile::ApplicationController < ApplicationController
       params[:return_to]
     end
 
-    current_user.init_daily_credits! if login?
+    # current_user.init_daily_credits! if login?
+
+    hongbao_html = nil
+    if login?
+      current_user.init_daily_credits!
+
+      if current_user.created_at >= '2018-02-11 00:00:00' && current_user.hongbaos.sign_up.count == 0
+        token = Token.available(current_user).sample
+        if token.present?
+          hongbao = token.send_hongbao_to(current_user, 'sign_up')
+          hongbao_html = render_to_string(partial: 'site/share/hongbao', locals: { hongbao: hongbao })
+        end
+      end
+    end
 
     login_html = render_to_string(partial: 'mobile/application/login_state', locals: { return_to: return_to })
     post_box = render_to_string(partial: 'mobile/comments/post_box', locals: { return_to: return_to })
-    render json: { login: login?, login_html: login_html, post_box: post_box }
+    render json: { login: login?, login_html: login_html, post_box: post_box, hongbao_html: hongbao_html }
   end
 
   private

@@ -101,6 +101,15 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :hongbaos, only: [:index, :create] do
+        collection do
+          post :open
+          get :tokens
+          get :withdraws
+          match 'tokens/withdraw', to: 'hongbaos#new_withdraw', as: :new_withdraw, via: [:get, :post]
+        end
+      end
+
       resources :tags,  only: [:index, :show],    trailing_slash: true
       get 'z',            to: 'channels#index',   as: :channels, trailing_slash: true
       get 'z/:slug',      to: 'channels#show',    as: :channel, trailing_slash: true
