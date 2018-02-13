@@ -21,7 +21,7 @@ class Comment < ActiveRecord::Base
   def can_send_hongbao?    
     comment_hongbao_count = user.hongbaos.comment.today.count
 
-    allow_nodes = Node.where(id: [223, 212, 232, 233]).collect do |n|
+    allow_nodes = Node.where(id: [182, 223, 212, 232, 233]).collect do |n|
       n.self_and_descendants.pluck(:id)
     end.flatten.uniq
 
