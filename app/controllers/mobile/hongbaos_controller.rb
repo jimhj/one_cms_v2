@@ -1,5 +1,6 @@
 class Mobile::HongbaosController < Mobile::ApplicationController
   before_action :login_required
+  
   def index
     @hongbaos = current_user.hongbaos.order('id DESC').paginate(page: params[:page], per_page: 20)
   end
