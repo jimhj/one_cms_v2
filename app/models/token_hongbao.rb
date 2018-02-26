@@ -33,21 +33,36 @@ class TokenHongbao < ActiveRecord::Base
   end
 
   def self.random_send
-    users = User.where("email like '%71235%'")
-    # users = User.all
-    time = (20180214..20180223).to_a
+    # users = User.where("email like '%71235%'")
+    users = User.all
 
     users.each do |u|
-      time.each do |t|
+      (20180214..20180223).to_a.each do |t|
         [1,2,3].sample.times do
           created_at = rand(t.to_s.to_datetime.at_beginning_of_day..t.to_s.to_datetime.end_of_day)
-          token = Token.available.sample
-          if token.present?
-            hongbao = token.send_hongbao_to(u, 'comment')
-            hongbao.created_at = created_at
-            hongbao.updated_at = created_at
-            hongbao.save
+
+          token = Token.all.to_a.sample
+
+          hongbao = token.hongbaos.build
+
+          amount = if token.available_total <= token.max_hongbao_number
+            [*token.min_hongbao_number..token.available_total].sample
+          else
+            [*token.min_hongbao_number..token.max_hongbao_number].sample
           end
+
+          next if (token.exceed_max_hongbao_number? or token.ranout?)
+
+          hongbao.user = u
+          hongbao.amount = amount
+          hongbao.token_snapshot = token.as_json
+          hongbao.from = 'comment'
+          hongbao.created_at = created_at
+          hongbao.updated_at = created_at
+          hongbao.save!
+
+          token.available_total = token.available_total - amount
+          token.save!
         end
       end
     end
