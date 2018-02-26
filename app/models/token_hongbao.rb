@@ -31,4 +31,25 @@ class TokenHongbao < ActiveRecord::Base
       user_token
     }
   end
+
+  def self.random_send
+    # users = User.where("email like '%71235%'")
+    users = User.all
+    time = (20180214..20180223).to_a
+
+    users.each do |u|
+      time.each do |t|
+        [1,2,3].sample.times do
+          created_at = rand(t.to_s.to_datetime.at_beginning_of_day..t.to_s.to_datetime.end_of_day)
+          token = Token.available.sample
+          if token.present?
+            hongbao = token.send_hongbao_to(u, 'comment')
+            hongbao.created_at = created_at
+            hongbao.updated_at = created_at
+            hongbao.save
+          end
+        end
+      end
+    end
+  end
 end
