@@ -38,7 +38,7 @@ class Node < ActiveRecord::Base
       current_node = nil
     end
 
-    child_nodes = child_nodes.except(:order).order('sortrank DESC')
+    child_nodes = child_nodes.where(is_shown: true).except(:order).order('sortrank DESC')
     [current_node, child_nodes].compact.flatten
   end
 end

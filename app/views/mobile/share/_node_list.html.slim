@@ -6,17 +6,17 @@
     .site-node-name
       a href="/column/" 专栏
     .site-sub-nodes
-      - Node.where(is_column: true, is_at_top: true).order('sortrank DESC').each do |n|
+      - Node.where(is_column: true, is_at_top: true, is_shown: true).order('sortrank DESC').each do |n|
         - if not n.nav_color.blank?
           a href="#{articles_path(n.slug)}" style="#{n.nav_color}"= n.short_name
         - else
           a href="#{articles_path(n.slug)}"= n.short_name
 
-  - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
+  - Node.where(is_nav: true, is_shown: true).order('sortrank DESC').each_with_index do |node, i|
     .site-node
       .site-node-name
         a href="#{articles_path(node.slug)}"= node.short_name
-        - nodes = (node.children.except(:order).order('sortrank DESC').presence || [node])
+        - nodes = (node.children.where(is_shown: true).except(:order).order('sortrank DESC').presence || [node])
       .site-sub-nodes
         - nodes.each do |n|
           - if not n.nav_color.blank?

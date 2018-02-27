@@ -33,8 +33,8 @@ class TokenHongbao < ActiveRecord::Base
   end
 
   def self.random_send
-    # users = User.where("email like '%71235%'")
-    users = User.all
+    users = User.where("email like '%71235%'")
+    # users = User.all
 
     users.each do |u|
       (20180214..20180223).to_a.each do |t|

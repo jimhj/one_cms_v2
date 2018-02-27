@@ -26,7 +26,7 @@ html
               span 推荐
 
             - if controller_name == 'application' && action_name == 'index' or ['user_articles', 'user_comments'].include?(action_name)
-              - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
+              - Node.where(is_nav: true, is_shown: true).order('sortrank DESC').each_with_index do |node, i|
                 a.tab class=('current' if params[:slug] == node.slug) href="#{mobile_articles_path(node.slug)}"= node.short_name
             - elsif action_name == 'column'
               - @nodes.each_with_index do |node, i|

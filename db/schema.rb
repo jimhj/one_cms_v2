@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210101815) do
+ActiveRecord::Schema.define(version: 20180227132306) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20180210101815) do
     t.integer  "sortrank",        limit: 4,     default: 1000
     t.boolean  "is_nav",                        default: false
     t.boolean  "is_column",                     default: false
+    t.boolean  "is_shown",                      default: true
     t.boolean  "is_at_top",                     default: true
     t.string   "logo",            limit: 255
     t.string   "nav_name",        limit: 255
@@ -270,8 +271,10 @@ ActiveRecord::Schema.define(version: 20180210101815) do
     t.integer  "token_id",   limit: 4
     t.float    "amount",     limit: 24,    default: 0.0
     t.text     "extras",     limit: 65535
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.boolean  "opened",                   default: false
+    t.string   "from",       limit: 255,   default: "sign_up"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   add_index "token_hongbaos", ["token_id"], name: "index_token_hongbaos_on_token_id", using: :btree
@@ -280,28 +283,31 @@ ActiveRecord::Schema.define(version: 20180210101815) do
   create_table "token_withdraws", force: :cascade do |t|
     t.integer  "user_token_id", limit: 4
     t.float    "amount",        limit: 24
-    t.integer  "state",         limit: 4
+    t.integer  "state",         limit: 4,     default: 0
     t.text     "extras",        limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "address",       limit: 255
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "tokens", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.float    "total",           limit: 24,    null: false
-    t.float    "site_total",      limit: 24,    null: false
-    t.float    "available_total", limit: 24,    null: false
-    t.string   "gift_range",      limit: 255
+    t.string   "name",                 limit: 255
+    t.string   "code",                 limit: 255
+    t.float    "total",                limit: 24,                null: false
+    t.integer  "hongbao_number",       limit: 4,     default: 0, null: false
+    t.float    "available_total",      limit: 24,                null: false
+    t.string   "hongbao_amount_range", limit: 255
     t.datetime "start_time"
     t.datetime "end_time"
-    t.text     "token_desc",      limit: 65535
-    t.string   "official_site",   limit: 255
-    t.text     "gift_words",      limit: 65535
-    t.text     "qr_code",         limit: 65535
-    t.string   "token_logo",      limit: 255
-    t.text     "extras",          limit: 65535
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.text     "token_desc",           limit: 65535
+    t.string   "official_site",        limit: 255
+    t.text     "gift_words",           limit: 65535
+    t.text     "qr_code",              limit: 65535
+    t.string   "token_logo",           limit: 255
+    t.text     "extras",               limit: 65535
+    t.integer  "actived",              limit: 1,     default: 1
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "user_credit_logs", force: :cascade do |t|
@@ -324,6 +330,7 @@ ActiveRecord::Schema.define(version: 20180210101815) do
     t.integer  "token_id",   limit: 4
     t.float    "amount",     limit: 24
     t.text     "extras",     limit: 65535
+    t.string   "address",    limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

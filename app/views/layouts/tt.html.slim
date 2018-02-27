@@ -29,11 +29,11 @@ html
               li.f-left class=('active' if controller_name == 'application' && action_name == 'site_index')
                 a href="#{root_path}" 首页
 
-              - Node.where(is_nav: true).order('sortrank DESC').each_with_index do |node, i|
+              - Node.where(is_nav: true, is_shown: true).order('sortrank DESC').each_with_index do |node, i|
                 - klass = 'f-left'
                 - klass << ' nav-dropdown-toggle' unless node.slug == 'whitepaper'
                 - klass << ' active' if params[:slug] == node.slug
-                - nodes = (node.children.except(:order).order('sortrank DESC').presence || [node])
+                - nodes = (node.children.where(is_shown: true).except(:order).order('sortrank DESC').presence || [node])
                 li class=(klass)
                   a href="#{articles_path(node.slug)}"= node.short_name
                   - if nodes && nodes.any?
@@ -51,7 +51,7 @@ html
                 a href="/column/" 专栏
                 .nav-dropdown
                   ul.nav-dropdown-list.clearfix
-                    - Node.where(is_column: true, is_at_top: true).order('sortrank DESC').each do |n|
+                    - Node.where(is_column: true, is_at_top: true, is_shown: true).order('sortrank DESC').each do |n|
                       li
                         - if not n.nav_color.blank?
                           a href="#{articles_path(n.slug)}" style="#{n.nav_color}"= n.short_name
