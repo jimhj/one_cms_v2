@@ -172,7 +172,7 @@ class Site::WelcomeController < Site::ApplicationController
     hongbao_html = nil
 
     if login?
-      current_user.init_daily_credits!
+      current_user.init_daily_credits! rescue nil
 
       if current_user.created_at >= '2018-02-11 00:00:00' && current_user.hongbaos.sign_up.count == 0
         token = Token.available(current_user).sample
