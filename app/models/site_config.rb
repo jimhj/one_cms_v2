@@ -42,7 +42,7 @@ class SiteConfig < ActiveRecord::Base
 
   def self.rank_update_date
     return '' if self.actived.rank_updated_at.nil?
-    (self.actived.rank_updated_at).to_datetime.yesterday.strftime('%F')
+    (self.actived.rank_updated_at).to_datetime.strftime('%F')
   end
 
   def self.clear_html_cache
