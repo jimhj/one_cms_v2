@@ -80,6 +80,10 @@ gem 'whenever', '~> 0.9.4'
 # SMS
 gem 'aliyun-sms', github: 'VICTOR-LUO-F/aliyun-sms'
 
+# Oauth
+gem 'omniauth', '~> 1.8.1'
+gem 'omniauth-oauth2', '~> 1.5.0'
+
 group :development do
   # Deployment
   gem 'capistrano', '~> 3.4.1'

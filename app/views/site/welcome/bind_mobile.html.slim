@@ -5,14 +5,14 @@
   .box
     .box-header 
       .box-header-inner.clearfix
-        h2.active 邮箱注册
+        h2.active 微信授权登录，仅需绑定一次
     .box-body      
-        = form_for @user, url: sign_up_path, html: { class: 'common-form email-regist-form' } do |f|
+        = form_for @user, url: bind_mobile_path, html: { class: 'common-form wx-bind-form' } do |f|
           - if @user.errors.any?
             .cf-alert.error= @user.errors.full_messages.first
           .cf-group
-            label.cf-label 邮箱 *
-            = f.email_field :email, class: 'cf-field', required: true, placeholder: '输入合法邮箱'
+            label.cf-label 手机号码 *
+            = f.number_field :mobile, class: 'cf-field', required: true, placeholder: '输入11位手机号码'
           .cf-group
             label.cf-label 验证码 *
             .cf-input-group.clearfix
@@ -24,14 +24,8 @@
           .cf-group
             label.cf-label 密码 *
             = f.password_field :password, class: 'cf-field', required: true, placeholder: '6-20位密码'
+            = f.hidden_field :wx_openid
+            = f.hidden_field :wx_unionid
+            = hidden_field_tag :headimgurl, @info.try(:headimgurl)
           .cf-group
-            label.cf-label 确认密码 *
-            = f.password_field :password_confirmation, class: 'cf-field', required: true, placeholder: '确认密码'
-          .cf-group
-            button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 注册
-          .text-center.footer-links
-            a.text-success.m-right20 href="#{sign_up_mobile_path}" 用手机号注册
-            a.text-success.m-right20 href="#{sign_in_path}" 已有账号登录
-            a.text-success href="/auth/wechat_web"
-              = image_tag 'icon48_wx_logo.png', size: '20x20' 
-              span.m-left2 微信账号登录
+            button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 确定注册

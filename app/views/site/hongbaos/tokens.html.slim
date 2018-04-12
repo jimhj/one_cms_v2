@@ -22,6 +22,9 @@
               td style="width: 120px;"= token.token.name
               td #{token.amount} #{token.token.code}
               td style="width: 100px;"
-                a.text-success.text-underline href="#{new_withdraw_hongbaos_path(user_token_id: token.id)}" 提现
+                - if token.token.code == 'BAI'
+                  a.text-success.text-underline href="#{new_withdraw_hongbaos_path(user_token_id: token.id)}" 提现(需绑定微信)
+                - else
+                  a.text-success.text-underline href="#{new_withdraw_hongbaos_path(user_token_id: token.id)}" 提现
       .box-pagination
         = will_paginate @tokens, inner_window: 1, class: 'pagination'

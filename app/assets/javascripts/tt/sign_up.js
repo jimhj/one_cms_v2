@@ -61,7 +61,12 @@ $(function () {
       }
 
       var req_url = "/send_active_code";
-      var params = { mobile: mobile };
+
+      if ($('#new_user').is('.wx-bind-form')) {
+        var params = { mobile: mobile, type: 'wx_auth' };
+      } else  {
+        var params = { mobile: mobile };
+      }
     }
 
     disableButton();

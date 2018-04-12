@@ -29,6 +29,9 @@
             = f.password_field :password_confirmation, class: 'cf-field', required: true, placeholder: '确认密码'
           .cf-group
             button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 注册
-          .text-center
+          .text-center.footer-links
             a.text-success.m-right20 href="#{sign_up_path}" 用邮箱注册
-            a.text-success href="#{sign_in_path}" 已有账号登录
+            a.text-success.m-right20 href="#{sign_in_path}" 已有账号登录
+            a.text-success href="/auth/wechat_web"
+              = image_tag 'icon48_wx_logo.png', size: '20x20' 
+              span.m-left2 微信账号登录

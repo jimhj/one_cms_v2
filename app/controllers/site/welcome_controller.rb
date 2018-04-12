@@ -1,9 +1,9 @@
 class Site::WelcomeController < Site::ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:sign_out]
+  skip_before_action :verify_authenticity_token, only: [:sign_out, :wechat_callback]
   before_action :no_login_required, only: [:sign_in, :sign_up]
   before_action :login_required, only: [:sign_out, :password, :profile]
-  skip_before_action :no_login_required, only: [:check_login, :activation, :users_rank]
-  skip_before_action :login_required, only: [:check_login, :activation, :users_rank]
+  skip_before_action :no_login_required, only: [:check_login, :activation, :users_rank, :wechat_callback]
+  skip_before_action :login_required, only: [:check_login, :activation, :users_rank, :wechat_callback]
 
   def sign_in
     if request.get?
@@ -69,11 +69,72 @@ class Site::WelcomeController < Site::ApplicationController
 
     begin
       ActiveToken.send_email_code(params[:email])
-
       render json: { success: true }
     rescue => e
-      raise e
       render json: { success: false, error: '出错了，请重试' }
+    end
+  end
+
+  def wechat_callback
+    @info = request.env["omniauth.auth"].extra.raw_info
+
+    if @info.blank? or @info.openid.blank?
+      flash[:error] = "授权失败，请联系客服"
+      redirect_to :back
+      return
+    end
+
+    if login?
+      current_user.wx_openid = @info.openid
+      current_user.wx_unionid = @info.unionid
+      current_user.save
+      redirect_back_or_default root_url 
+    else
+      @user = User.find_or_initialize_by(wx_openid: @info.openid)
+      @user.wx_unionid = @info.unionid
+      
+      if !@user.persisted?
+        @user.username = @info.nickname
+        # @user.remote_avatar_url = 
+      end
+
+      if @user.mobile_binded?
+        @user.save
+        login_as(@user)
+        redirect_back_or_default root_url
+      else
+        render :bind_mobile
+      end
+    end
+  end
+
+  def bind_mobile
+    if request.post?
+      @user = User.find_or_initialize_by(mobile: user_params[:mobile])
+
+      if @user.persisted?
+        User.where(wx_openid: user_params[:wx_openid]).update_all(wx_openid: nil, wx_unionid: nil)
+      end
+
+      @user.wx_openid = user_params[:wx_openid]
+      @user.wx_unionid = user_params[:wx_unionid]
+      @user.username = user_params[:username]
+      @user.password = user_params[:password]
+      @user.active_code = user_params[:active_code]
+      @user.password_confirmation = user_params[:password]
+
+      if !@user.persisted?
+        @user.remote_avatar_url = params[:headimgurl]
+      end
+
+      if @user.valid?(:mobile_regist)
+        @user.email = "__unbind__#{@user.mobile}@7234.cn"
+        @user.state = :actived
+        @user.save!
+
+        login_as(@user)
+        redirect_back_or_default root_url
+      end
     end
   end
 
@@ -98,7 +159,7 @@ class Site::WelcomeController < Site::ApplicationController
   def send_active_code
     return if params[:mobile].blank?
 
-    if User.find_by(mobile: params[:mobile])
+    if params[:type] != "wx_auth" && User.find_by(mobile: params[:mobile])
       render json: { success: false, error: '这个手机号已经被注册了' }
       return
     end
@@ -195,6 +256,6 @@ class Site::WelcomeController < Site::ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :mobile, :active_code, :username, :password, :password_confirmation)
+    params.require(:user).permit(:email, :mobile, :active_code, :username, :password, :password_confirmation, :wx_openid, :wx_unionid)
   end
 end

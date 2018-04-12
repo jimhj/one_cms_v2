@@ -133,6 +133,10 @@ class User < ActiveRecord::Base
     users.index(self).to_i + 1
   end
 
+  def mobile_binded?
+    !mobile.blank?
+  end
+
   protected
 
   def verify_active_code

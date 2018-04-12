@@ -123,6 +123,8 @@ Rails.application.routes.draw do
     root 'application#site_index'
     get 'more',         to: 'application#more'
 
+    get 'wechat/callback', to: 'welcome#wechat_callback'
+    match 'bind_mobile', to: 'welcome#bind_mobile', as: :bind_mobile,   via: [:get, :post]
     match 'sign_up',    to: 'welcome#sign_up', as: :sign_up,   via: [:get, :post]
     match 'sign_up_mobile',    to: 'welcome#sign_up_mobile', as: :sign_up_mobile,   via: [:get, :post]
     match 'send_active_code',    to: 'welcome#send_active_code', as: :send_active_code,   via: [:post]

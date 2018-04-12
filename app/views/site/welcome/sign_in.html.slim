@@ -14,5 +14,8 @@
           input.cf-field type="password" name="password" required=true
         .cf-group
           button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 登录
-        .text-center
-          a.text-success href="#{sign_up_mobile_path}" 还没有账号，点此注册
+        .text-center.footer-links
+          a.text-success.m-right15 href="#{sign_up_mobile_path}" 还没有账号，点此注册
+          a.text-success href="/auth/wechat_web"
+            = image_tag 'icon48_wx_logo.png', size: '20x20' 
+            span.m-left2 微信账号登录

@@ -50,8 +50,12 @@ class Site::HongbaosController < Site::ApplicationController
   def new_withdraw
     @user_token = current_user.tokens.find params[:user_token_id]
 
-    if request.post?
+    if @user_token.token.code == 'BAI' && current_user.wx_openid.blank?
+      redirect_to '/auth/wechat_web'
+      return
+    end
 
+    if request.post?
       if params[:amount].to_f == 0
         flash[:alert] = "提现金额必须大于0"
         render

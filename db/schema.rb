@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227132306) do
+ActiveRecord::Schema.define(version: 20180412133221) do
 
   create_table "active_tokens", force: :cascade do |t|
     t.string   "receiver",   limit: 255,               null: false
@@ -354,6 +354,8 @@ ActiveRecord::Schema.define(version: 20180227132306) do
     t.text     "extras",              limit: 65535
     t.integer  "credits",             limit: 4,     default: 0
     t.integer  "login_number",        limit: 4,     default: 0
+    t.string   "wx_openid",           limit: 255
+    t.string   "wx_unionid",          limit: 255
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
   end

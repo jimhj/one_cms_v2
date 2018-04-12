@@ -107,3 +107,10 @@ a.load-more-btn {
   -webkit-line-clamp: 8;
   overflow: hidden;
 }
+
+form .footer-links a {
+  display: inline-block;
+  img {
+    vertical-align: middle;
+  }
+}
