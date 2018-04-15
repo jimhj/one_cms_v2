@@ -22,7 +22,10 @@
           .text style="margin-top: 10px;" 可用余额 #{@user_token.amount} #{@user_token.token.code}
         .cf-group
           label.cf-label 钱包地址 *
-          input.cf-field required=true name="address" type="text"
+          - if @user_token.token.code == 'BAI'
+            input.cf-field required=true name="address" type="text" value="#{current_user.wx_unionid}"
+          - else
+            input.cf-field required=true name="address" type="text"
 
         .cf-group
           button.cf-btn.cf-btn-primary.cf-btn-lg.cf-btn-block type="submit" 确认
