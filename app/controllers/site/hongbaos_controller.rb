@@ -51,6 +51,7 @@ class Site::HongbaosController < Site::ApplicationController
     @user_token = current_user.tokens.find params[:user_token_id]
 
     if @user_token.token.code == 'BAI' && current_user.wx_openid.blank?
+      session[:return_to] = request.original_url
       redirect_to '/auth/wechat_web'
       return
     end

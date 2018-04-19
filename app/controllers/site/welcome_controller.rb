@@ -95,7 +95,6 @@ class Site::WelcomeController < Site::ApplicationController
       
       if !@user.persisted?
         @user.username = @info.nickname
-        # @user.remote_avatar_url = 
       end
 
       if @user.mobile_binded?
