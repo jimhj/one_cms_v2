@@ -72,13 +72,13 @@ gem 'settingslogic', '~> 2.0.9'
 # Caching
 gem 'dalli', '~> 2.7.6'
 gem 'actionpack-action_caching', '~> 1.1.1' 
-gem 'actionpack-page_caching', github: 'rails/actionpack-page_caching'
+gem 'actionpack-page_caching', git: 'https://github.com/rails/actionpack-page_caching.git'
 
 # Schedule
 gem 'whenever', '~> 0.9.4'
 
 # SMS
-gem 'aliyun-sms', github: 'VICTOR-LUO-F/aliyun-sms'
+gem 'aliyun-sms', git: 'https://github.com/VICTOR-LUO-F/aliyun-sms.git'
 
 # Oauth
 gem 'omniauth', '~> 1.8.1'

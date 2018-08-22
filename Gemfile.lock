@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/VICTOR-LUO-F/aliyun-sms.git
-  revision: d31ffc1280da52bf25544f4b387d29a2388e551d
+  remote: https://github.com/VICTOR-LUO-F/aliyun-sms.git
+  revision: 38fc47658a836f970eca32528f78750ddbf01f16
   specs:
-    aliyun-sms (0.1.0)
+    aliyun-sms (1.1.1)
       typhoeus
 
 GIT
-  remote: git://github.com/rails/actionpack-page_caching.git
-  revision: 19acd46b9e24c82f9358fd91578e500ca2f9ac29
+  remote: https://github.com/rails/actionpack-page_caching.git
+  revision: cfcb9521168a82741f6af9e07ebc6dac153224fc
   specs:
-    actionpack-page_caching (1.0.2)
+    actionpack-page_caching (1.1.0)
       actionpack (>= 4.0.0, < 6)
 
 GEM
@@ -124,7 +124,7 @@ GEM
     execjs (2.6.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.18)
+    ffi (1.9.25)
     font-awesome-sass (4.5.0)
       sass (>= 3.2)
     globalid (0.3.6)
