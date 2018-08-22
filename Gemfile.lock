@@ -13,7 +13,7 @@ GIT
       actionpack (>= 4.0.0, < 6)
 
 GEM
-  remote: https://gems.ruby-china.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (4.2.5)
       actionpack (= 4.2.5)
