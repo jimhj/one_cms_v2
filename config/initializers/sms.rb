@@ -7,6 +7,6 @@ Aliyun::Sms.configure do |config|
   config.sign_name = Setting.alisms.sign_name                 # 短信签名，在阿里云申请开通短信服务时申请获取
   config.signature_method = 'HMAC-SHA1'        # 加密算法，默认设置，不用修改
   config.signature_version = '1.0'             # 签名版本，默认设置，不用修改
-  config.sms_version = '2017-05-25'            # 服务版本，默认设置，不用修改
-  config.domain = 'dysmsapi.aliyuncs.com'      # 阿里云短信服务器, 默认设置，不用修改
+  config.version = '2017-05-25'            # 服务版本，默认设置，不用修改
+  # config.domain = 'dysmsapi.aliyuncs.com'      # 阿里云短信服务器, 默认设置，不用修改
 end
