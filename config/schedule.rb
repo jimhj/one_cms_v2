@@ -16,6 +16,9 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
+every 2.hours do
+  command "RAILS_ENV=production bundle exec ~/www/btc/current/bin/delayed_job -n4 restart"
+end
 
 every 12.hours do
   rake 'g:sitemap'
